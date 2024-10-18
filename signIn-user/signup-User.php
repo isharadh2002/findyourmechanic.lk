@@ -21,7 +21,7 @@ include_once("signup-User-css.php");
   
   <ul class="navigation">
     <li><a class="active" href="#signup-User.php">User Registration</a></li>
-    <li><a href="#signin-Machanic">Mechanic Registration</a></li>
+    <li><a href="../signin-machanic/signIn-mac.php ">Mechanic Registration</a></li>
   
   </ul>
   <div class="container">

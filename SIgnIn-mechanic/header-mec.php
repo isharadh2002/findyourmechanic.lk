@@ -20,6 +20,6 @@ require_once("../shared/connect.php");
 
   <ul class="navigation">
     <li><a href="../signIn-user/signup-User.php">User Registration</a></li>
-    <li><a  class="active" href="#SignIn-mec.php">Mechanic Registration</a></li>
-   
+    <li><a class="active" href="#SignIn-mec.php">Mechanic Registration</a></li>
+
   </ul>

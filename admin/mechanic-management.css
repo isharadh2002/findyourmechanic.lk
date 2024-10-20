@@ -1,0 +1,28 @@
+.user-table{
+    display: flex;
+    border: 0px solid black;
+    justify-content: space-evenly;
+    width: 80%;
+    margin: auto;
+    margin-top: 25px;
+    flex-grow: 1;
+    padding: 25px;
+    border-radius: 10px;
+    background-color: #ffdddd;
+}
+
+.table-heading, .table-data{
+    border: 2px solid black;
+    justify-content: space-between;
+    flex-grow: 1;
+    min-width: 100px;
+    width: 200px;
+}
+
+.email{
+    min-width: 200px;
+}
+
+.address{
+    min-width: 200px;
+}

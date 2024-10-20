@@ -10,11 +10,11 @@ ul {
   overflow: hidden;
   background-color: #f3f3f3;
   border-radius: 1px;
-  display: flex; 
+  display: flex;
 }
 
 .navigation li {
-  flex: 1; 
+  flex: 1;
   min-height: 8vh;
 }
 
@@ -22,7 +22,7 @@ li a {
   display: block;
   color: #666;
   text-align: center;
-  padding: 20px 0; 
+  padding: 20px 0;
   text-decoration: none;
 }
 
@@ -35,17 +35,16 @@ li a.active {
   background-color: #04aa6d;
 }
 
-
 @media screen and (max-width: 400px) {
   ul.navigation {
-    flex-direction: column; 
+    flex-direction: column;
   }
 
   ul.navigation li a {
     text-align: center;
     float: none;
-    width: 100%; 
-}
+    width: 100%;
+  }
 }
 .container {
   width: 100%;
@@ -74,15 +73,7 @@ form {
   flex-direction: column;
   flex-wrap: wrap;
 }
-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-bottom: 1px solid #333;
-  outline: none;
-  background-color: transparent;
-}
+
 
 button {
   padding: 10px;

@@ -1,7 +1,5 @@
 <?php
-require_once("../shared/connect.php");
-
-
+require_once("../../shared/connect.php");
 
 ?>
 
@@ -12,10 +10,9 @@ require_once("../shared/connect.php");
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sign In|Mechanics</title>
+  <title>Log In|Mechanic</title>
   <style>
     body {
-      background-color: bisque;
       min-width: 1165px;
       margin: 1vh;
     }
@@ -66,11 +63,9 @@ require_once("../shared/connect.php");
     }
 
     .container {
-
       width: 100%;
       margin-top: 6vh;
-      margin-right: 14vh;
-      justify-content: right;
+      justify-content: center;
       align-items: center;
       display: flex;
       float: inline-end;
@@ -78,7 +73,6 @@ require_once("../shared/connect.php");
     }
 
     .formElements {
-      background-color: aliceblue;
       width: 30%;
       height: auto;
       display: flex;
@@ -107,15 +101,14 @@ require_once("../shared/connect.php");
     }
 
     button {
-
+      padding: 10px;
       font-size: 16px;
       width: 300px;
       border-radius: 10px;
     }
 
-    input[type='submit'] {
+    .submitButton {
       background-color: #04aa6d;
-      align-items: center;
 
       color: white;
       padding: 16px 32px;
@@ -125,6 +118,14 @@ require_once("../shared/connect.php");
       border-radius: 10px;
       border: none;
     }
+    #msg{
+
+      text-align: center;
+      color: blue;
+      display: none;
+
+
+    }
   </style>
 
 </head>
@@ -132,7 +133,8 @@ require_once("../shared/connect.php");
 <body>
 
   <ul class="navigation">
-    <li><a href="../signIn-user/signup-User.php">User Registration</a></li>
-    <li><a class="active" href="#SignIn-mec.php">Mechanic Registration</a></li>
 
+    <li><a href="../User/login.php">User Login</a></li>
+    <li><a class="active" href="login.php">Mechanic Login</a></li>
+    
   </ul>

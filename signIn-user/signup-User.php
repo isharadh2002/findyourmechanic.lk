@@ -10,11 +10,22 @@ require_once("header.php");
 
 
     <form action="login.opr.php" method="post">
-      <br>
+      <div class="inputs">
+        <br>
+        <label for="username">Name:</label>
+        <input type="text" name="username" id="username" required />
+        
+      </div>
+
+
+      <br><br>
+      
       <div class="inputs">
         <label for="email">E-Mail:</label>
         <input type="text" name="email" id="email" required pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/" />
-        <br>
+        
+
+
       </div>
       <br><br>
       <div class="inputs">
@@ -22,12 +33,31 @@ require_once("header.php");
         <input type="password" name="password" id="password" required />
         <br><br>
       </div>
-     
+
+
+      <br>
+      <div class="inputs">
+        <label for="contactNumber">Contact Number:</label>
+        <input type="tele" name="contactNumber" id="contactNumber" required />
+        
+      </div>
+      <br><br>
+      <div class="inputs">
+        <label for="address">Address:</label>
+        <input type="text" name="address" id="address" required />
+        <br><br>
+      </div>
+
 
       <br><br>
 
-      <button type="submit" class="submitButton" name="submitButton">Next</button>
 
+      <br><br>
+      <div class="inputs">
+        
+        <input type="submit" class="submitButton" name="submitButton">
+      </div>
+      <br><br>
     </form>
 
 

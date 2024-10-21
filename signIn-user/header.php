@@ -14,6 +14,7 @@ require_once("../shared/connect.php");
   <title>sign In|User</title>
   <style>
     body {
+      background-color: bisque;
       min-width: 1165px;
       margin: 1vh;
     }
@@ -64,9 +65,11 @@ require_once("../shared/connect.php");
     }
 
     .container {
+
       width: 100%;
       margin-top: 6vh;
-      justify-content: center;
+      margin-right: 14vh;
+      justify-content: right;
       align-items: center;
       display: flex;
       float: inline-end;
@@ -74,6 +77,7 @@ require_once("../shared/connect.php");
     }
 
     .formElements {
+      background-color: aliceblue;
       width: 30%;
       height: auto;
       display: flex;
@@ -102,14 +106,15 @@ require_once("../shared/connect.php");
     }
 
     button {
-      padding: 10px;
+
       font-size: 16px;
       width: 300px;
       border-radius: 10px;
     }
 
-    .submitButton {
+    input[type='submit'] {
       background-color: #04aa6d;
+      align-items: center;
 
       color: white;
       padding: 16px 32px;

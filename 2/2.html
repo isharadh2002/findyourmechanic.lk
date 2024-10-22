@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Selection</title>
+    <link rel="stylesheet" href="2.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Choose any Service You need!</h2>
+
+        <div class="services-grid">
+            <div class="service-box" id="Profile" onclick="selectService(this)">
+                <img src="profile.png" alt="Pe">
+                <p>Profile</p>
+            </div>
+            <div class="service-box" id="Appointment" onclick="selectService(this)">
+                <img src="Images/appointment.png" alt="Appointment">
+                <p>Appointment</p>
+            </div>
+            <div class="service-box" id="repair" onclick="selectService(this)">
+                <img src="C:\xampp\htdocs\web\project NW\Images\repair.png" alt="Repair">
+                <p>Repair</p>
+            </div>
+            <div class="service-box" id="Payments" onclick="selectService(this)">
+                <img src="Images/payment.png" alt="Payments">
+                <p>Payments</p>
+            </div>
+        </div>
+
+        <button class="continue-btn">Continue</button>
+    </div>
+
+    <script>
+        function selectService(serviceElement) {
+            // Deselect previously selected service
+            let selected = document.querySelector('.service-box.selected');
+            if (selected) {
+                selected.classList.remove('selected');
+            }
+
+            // Select the clicked service
+            serviceElement.classList.add('selected');
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+    align-items: center;
+    background-color: bisque;
+}
+
+.logo-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-section img {
+    width: 80px;
+    height: 80px;
+}
+
+.logo-section span {
+    font-size: 30;
+    margin-left: 25px;
+}
+
+.login-section button {
+    font-size: large;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 10px;
+}
+
+.login-section button:hover{
+    background-color: #a00;
+    color: aqua;
+}

@@ -10,6 +10,7 @@ require "../shared/connect.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/FindYourMechanic_Circle.png">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="monitor-appointments.css">
     <style>
         #monitor-appointments {
             font-weight: bold;
@@ -49,30 +50,30 @@ require "../shared/connect.php";
         echo "<h3>No pending appointments</h3>";
     else:
     ?>
-        <table>
-            <tr>
-                <th>Appointment ID</th>
-                <th>User ID</th>
-                <th>Mechanic ID</th>
-                <th>Vehicle ID</th>
-                <th>Appointment Date</th>
-                <th>Service Type</th>
-                <th>Location</th>
-                <th>Status</th>
+        <table class="user-table">
+            <tr class="table-heading-tr">
+                <th class="table-heading">Appointment ID</th>
+                <th class="table-heading">User ID</th>
+                <th class="table-heading">Mechanic ID</th>
+                <th class="table-heading">Vehicle ID</th>
+                <th class="table-heading">Appointment Date</th>
+                <th class="table-heading">Service Type</th>
+                <th class="table-heading">Location</th>
+                <th class="table-heading">Status</th>
             </tr>
             <?php
             foreach ($appointments as $appointment) {
                 if ($appointment['Status'] == 'Pending' || $appointment['Status'] == 'Scheduled'):
             ?>
-                    <tr>
-                        <td><?php echo $appointment['AppointmentID']; ?></td>
-                        <td><?php echo $appointment['UserID']; ?></td>
-                        <td><?php echo $appointment['MechanicID']; ?></td>
-                        <td><?php echo $appointment['VehicleID']; ?></td>
-                        <td><?php echo $appointment['AppointmentDate']; ?></td>
-                        <td><?php echo $appointment['ServiceType']; ?></td>
-                        <td><?php echo $appointment['Location']; ?></td>
-                        <td><?php echo $appointment['Status']; ?></td>
+                    <tr class="table-data-tr">
+                        <td class="table-data"><?php echo $appointment['AppointmentID']; ?></td>
+                        <td class="table-data"><?php echo $appointment['UserID']; ?></td>
+                        <td class="table-data"><?php echo $appointment['MechanicID']; ?></td>
+                        <td class="table-data"><?php echo $appointment['VehicleID']; ?></td>
+                        <td class="table-data"><?php echo $appointment['AppointmentDate']; ?></td>
+                        <td class="table-data"><?php echo $appointment['ServiceType']; ?></td>
+                        <td class="table-data"><?php echo $appointment['Location']; ?></td>
+                        <td class="table-data"><?php echo $appointment['Status']; ?></td>
                     </tr>
             <?php
                 endif;
@@ -83,36 +84,36 @@ require "../shared/connect.php";
     endif;
     ?>
 
-    <h2>Pending Appointments</h2>
+    <h2>Finished Appointments</h2>
     <?php
     if ($finished == 0):
         echo "<h3>No finished appointments</h3>";
     else:
     ?>
-        <table>
-            <tr>
-                <th>Appointment ID</th>
-                <th>User ID</th>
-                <th>Mechanic ID</th>
-                <th>Vehicle ID</th>
-                <th>Appointment Date</th>
-                <th>Service Type</th>
-                <th>Location</th>
-                <th>Status</th>
+        <table class="user-table">
+            <tr class="table-heading-tr">
+                <th class="table-heading">Appointment ID</th>
+                <th class="table-heading">User ID</th>
+                <th class="table-heading">Mechanic ID</th>
+                <th class="table-heading">Vehicle ID</th>
+                <th class="table-heading">Appointment Date</th>
+                <th class="table-heading">Service Type</th>
+                <th class="table-heading">Location</th>
+                <th class="table-heading">Status</th>
             </tr>
             <?php
             foreach ($appointments as $appointment) {
                 if ($appointment['Status'] == 'Finished' || $appointment['Status'] == 'Completed'):
             ?>
-                    <tr>
-                        <td><?php echo $appointment['AppointmentID']; ?></td>
-                        <td><?php echo $appointment['UserID']; ?></td>
-                        <td><?php echo $appointment['MechanicID']; ?></td>
-                        <td><?php echo $appointment['VehicleID']; ?></td>
-                        <td><?php echo $appointment['AppointmentDate']; ?></td>
-                        <td><?php echo $appointment['ServiceType']; ?></td>
-                        <td><?php echo $appointment['Location']; ?></td>
-                        <td><?php echo $appointment['Status']; ?></td>
+                    <tr class="table-data-tr">
+                        <td class="table-data"><?php echo $appointment['AppointmentID']; ?></td>
+                        <td class="table-data"><?php echo $appointment['UserID']; ?></td>
+                        <td class="table-data"><?php echo $appointment['MechanicID']; ?></td>
+                        <td class="table-data"><?php echo $appointment['VehicleID']; ?></td>
+                        <td class="table-data"><?php echo $appointment['AppointmentDate']; ?></td>
+                        <td class="table-data"><?php echo $appointment['ServiceType']; ?></td>
+                        <td class="table-data"><?php echo $appointment['Location']; ?></td>
+                        <td class="table-data"><?php echo $appointment['Status']; ?></td>
                     </tr>
             <?php
                 endif;

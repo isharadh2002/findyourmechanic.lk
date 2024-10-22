@@ -21,8 +21,8 @@ function SearchLogin($email, $password)
         echo "<script> console.log('Login sucess'); </script>";
     } else {
 
-        require_once("script.js");
-        //have to fill
-        echo "";
+        
+        header('Location:login.php');
+        exit(1);
     }
 }

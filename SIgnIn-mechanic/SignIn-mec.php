@@ -49,15 +49,23 @@ require_once("header-mec.php");
         <input type="text" name="address" id="address" required />
         <br><br>
       </div>
+      <div id="msg">
+        <label for="Qulification">Qulifications:</label>
+        <input type="file" name="Qulification" id="Qulification" required />
+        <br><br>
+
+        <p id="msg">Insert a Zip file, including softcopy of<br>
+          NIC, Certificates You Gain!</p>
+      </div>
 
 
-      <br><br>
+
 
 
       <br><br>
       <div class="inputs">
 
-        <input type="submit" class="submitButton" name="submitButton">
+        <input type="submit" class="submitButton" name="submitButton" value="Sign In">
       </div>
       <br><br>
     </form>

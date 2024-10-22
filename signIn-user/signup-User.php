@@ -55,7 +55,7 @@ require_once("header.php");
       <br><br>
       <div class="inputs">
         
-        <input type="submit" class="submitButton" name="submitButton">
+        <input type="submit" class="submitButton" name="submitButton" value="SignIn">
       </div>
       <br><br>
     </form>

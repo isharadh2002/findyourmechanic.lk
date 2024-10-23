@@ -12,6 +12,8 @@ require __DIR__ . "/shared/connect.php";
     <link rel="stylesheet" href="stylesheets/homepage-images.css">
     <link rel="stylesheet" href="stylesheets/homepage-about.css">
     <link rel="stylesheet" href="stylesheets/homepage-services.css">
+    <link rel="stylesheet" href="stylesheets/footer.css">
+    <link rel="icon" href="assets/FindYourMechanic_Circle.png">
 </head>
 
 <body>
@@ -60,7 +62,6 @@ require __DIR__ . "/shared/connect.php";
         // Set the interval for changing images every 3 seconds
         setInterval(showNextSlide, 3000);
     </script>
-    <br><br>
     <div class="about-container">
         <h1>About Us</h1>
         <p>Welcome to <strong>Find Your Mechanic</strong>, your reliable solution
@@ -76,7 +77,6 @@ require __DIR__ . "/shared/connect.php";
             trustworthy, and transparent services. Our mission is to take the hassle out
             of finding quality mechanics, ensuring you can get back on the road safely and confidently.</p>
     </div>
-    <br><br>
 
     <!-- Services Section -->
     <div id="services" class="section">
@@ -121,6 +121,48 @@ require __DIR__ . "/shared/connect.php";
 
         </div>
     </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h2>About Us</h2>
+                <p>We help you find nearby vehicle mechanics quickly and easily, ensuring your vehicle gets the attention it needs wherever you are.</p>
+            </div>
+
+            <div class="footer-section links">
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Mechanic Login</a></li>
+                    <li><a href="#">Customer Login</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section contact">
+                <h2>Contact Us</h2>
+                <ul>
+                    <li>Email: support@findyourmechanic.lk</li>
+                    <li>Phone: +94 71 386 3592</li>
+                    <li>Address: No.315, Negombo Road, Kurunegala</li>
+                </ul>
+            </div>
+
+            <div class="footer-section social">
+                <h2>Follow Us</h2>
+                <ul class="social-icons">
+                    <li><a href="#"><img src="assets/SocialMediaIcons/YouTube.png" class="fa fa-facebook"></a></li>
+                    <li><a href="#"><img src="assets/SocialMediaIcons/Facebook.png" class="fa fa-twitter"></a></li>
+                    <li><a href="#"><img src="assets/SocialMediaIcons/Instagram.png" class="fa fa-instagram"></a></li>
+                    <li><a href="#"><img src="assets/SocialMediaIcons/X.png" class="fa fa-linkedin"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FindYourMechanic.lk</p>
+        </div>
+    </footer>
+
 </body>
 
 </html>

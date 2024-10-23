@@ -1,0 +1,86 @@
+footer {
+    background:linear-gradient(to right, #003396, #3373C4);
+    color: white;
+    padding: 40px 0;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.footer-section {
+    width: 25%;
+    padding: 0 20px;
+}
+
+.footer-section h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ffcc00; /* You can change this to your preferred accent color */
+}
+
+.footer-section p, .footer-section ul {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    text-decoration: underline;
+}
+
+.social-icons {
+    display: flex;
+}
+
+.social-icons li {
+    list-style: none;
+    margin-right: 10px;
+}
+
+.social-icons li a {
+    color: white;
+    font-size: 18px;
+    display: inline-block;
+    padding: 4px;
+    background-color: #555;
+    border-radius: 50%;
+}
+
+.social-icons li a:hover {
+    background-color: #ffcc00; /* Change hover effect color */
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.fa{
+    width: 30px;
+    height: 30px;
+}

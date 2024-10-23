@@ -21,7 +21,7 @@ require __DIR__ . "/shared/connect.php";
             </div>
             <div class="login-section">
                 <button onclick="window.location.href='login.php'">Log In</button>
-                <button onclick="window.location.href='login.php'">Sign Up</button>
+                <button onclick="window.location.href='siignup.php'">Sign Up</button>
             </div>
         </div>
     </header>
@@ -58,6 +58,8 @@ require __DIR__ . "/shared/connect.php";
         // Set the interval for changing images every 3 seconds
         setInterval(showNextSlide, 3000);
     </script>
+
+
 
 </body>
 

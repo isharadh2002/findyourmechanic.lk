@@ -17,6 +17,7 @@ require_once("../shared/connect.php");
       background-color: bisque;
       min-width: 1165px;
       margin: 1vh;
+      opacity: 1;
     }
 
     ul {
@@ -74,6 +75,7 @@ require_once("../shared/connect.php");
       display: flex;
       float: inline-end;
       margin-left: auto;
+
     }
 
     .formElements {
@@ -123,6 +125,18 @@ require_once("../shared/connect.php");
       cursor: pointer;
       border-radius: 10px;
       border: none;
+    }
+
+    .center-message {
+
+      text-align: center;
+      font-size: 24px;
+      background-color: white;
+      color: green;
+      padding: 20px;
+      border-radius: 10px;
+      opacity: 0;
+
     }
   </style>
 

@@ -7,23 +7,23 @@ require_once("function.php");
 
 if (isset($_POST['submitButton'])) {
 
-    $name = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $contactNumber = $_POST['contactNumber'];
-    $address = $_POST['address'];
+    $name = getValues('username');
+    $email = getValues('email');
+    $password = getValues('password');
+    $contactNumber = getValues('contactNumber');
+    $address = getValues('address');
     $usertype = 'customer';
+    if (isValuesSet($name) && isValuesSet($email) && isValuesSet($password) && isValuesSet($contactNumber) && isValuesSet($address)) {
 
-    $qry = 'INSERT INTO users (Username, Password, UserType, Email, PhoneNumber, Address) VALUES ({$name},{$password},{$usertype},{$email},{$contactNumber},{$address})';
-    $stmt = mysqli_prepare($con, $qry);
-    mysqli_stmt_bind_param($stmt, "ssssss", $name, $password, $usertype, $email, $contactNumber, $address);
-    if (mysqli_stmt_execute($stmt)) {
-        //LOcation
-        echo "<h1>The SignIn is Sucess Full</h1>";
+        $qry = qrySetting($name, $email, $password, $contactNumber, $address);
+
+        executeQry($qry, $con);
     } else {
-        //location next page
-        echo "<h1>The SignIn is Not Sucess</h1>";
-        //location pre page
+
+
+        header("Location:signup-User.php");
+        echo "sacess";
+        exit(1);
     }
 }
 mysqli_stmt_close($stmt);

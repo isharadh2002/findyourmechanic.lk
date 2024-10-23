@@ -9,21 +9,21 @@ require_once("header.php");
     <hr>
 
 
-    <form action="login.opr.php" method="post">
+    <form action="Signin.opr.php" method="post" enctype="multipart/form-data" onsubmit="refresh(event);">
       <div class="inputs">
         <br>
         <label for="username">Name:</label>
         <input type="text" name="username" id="username" required />
-        
+
       </div>
 
 
       <br><br>
-      
+
       <div class="inputs">
         <label for="email">E-Mail:</label>
-        <input type="text" name="email" id="email" required pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/" />
-        
+        <input type="text" name="email" id="email" required />
+
 
 
       </div>
@@ -38,30 +38,36 @@ require_once("header.php");
       <br>
       <div class="inputs">
         <label for="contactNumber">Contact Number:</label>
-        <input type="tele" name="contactNumber" id="contactNumber" required />
-        
+        <input type="tele" name="contactNumber" id="contactNumber" required pattern="^(\+94|0)?[1-9]\d{8}$" />
+
       </div>
       <br><br>
       <div class="inputs">
         <label for="address">Address:</label>
         <input type="text" name="address" id="address" required />
+
         <br><br>
       </div>
 
 
       <br><br>
+      <div class="center-message">
+        <h1 id="afterSigninMsg"></h1>
+      </div>
 
 
       <br><br>
       <div class="inputs">
-        
-        <input type="submit" class="submitButton" name="submitButton" value="SignIn">
+
+        <input type="submit" class="submitButton" name="submitButton" value="SignIn" onclick="submitValues();">
       </div>
       <br><br>
     </form>
 
 
   </div>
+
+  <script src="s.js"></script>
   </body>
 
   </html>

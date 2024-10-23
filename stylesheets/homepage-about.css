@@ -1,0 +1,21 @@
+.about-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #86CEFA, #5494DA);
+
+}
+
+.about-container h1 {
+    color: #111;
+}
+
+.about-container p {
+    color: #222;
+    max-width: 1200px;
+    margin: 20px auto;
+    font-size: 18px;
+    line-height: 1.6;
+}

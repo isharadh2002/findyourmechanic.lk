@@ -13,6 +13,7 @@ require __DIR__ . "/shared/connect.php";
     <link rel="stylesheet" href="stylesheets/homepage-about.css">
     <link rel="stylesheet" href="stylesheets/homepage-services.css">
     <link rel="stylesheet" href="stylesheets/footer.css">
+    <link rel="stylesheet" href="stylesheets/user-reviews.css">
     <link rel="icon" href="assets/FindYourMechanic_Circle.png">
 </head>
 
@@ -121,6 +122,86 @@ require __DIR__ . "/shared/connect.php";
 
         </div>
     </div>
+
+    <div class="reviews-section">
+        <h2>User Reviews</h2>
+        <div class="reviews-slider">
+            <div class="reviews-container">
+                <!-- Review Tiles -->
+                <div class="review-tile">
+                    <p>"Great service! The mechanic arrived quickly and solved my problem in no time!"</p>
+                    <span>- John Doe</span>
+                </div>
+                <div class="review-tile">
+                    <p>"Amazing experience. I will definitely recommend this to others."</p>
+                    <span>- Jane Smith</span>
+                </div>
+                <div class="review-tile">
+                    <p>"Very professional mechanics and excellent customer support."</p>
+                    <span>- Emily Johnson</span>
+                </div>
+                <div class="review-tile">
+                    <p>"Easy to use and very reliable service."</p>
+                    <span>- Mark Wilson</span>
+                </div>
+                <div class="review-tile">
+                    <p>"Saved me in the middle of nowhere. Awesome app!"</p>
+                    <span>- Sarah Brown</span>
+                </div>
+                <div class="review-tile">
+                    <p>"Quick and affordable repair services. Highly recommended."</p>
+                    <span>- Alex Green</span>
+                </div>
+                <!-- Add more review tiles as necessary -->
+            </div>
+        </div>
+        <!-- Navigation buttons -->
+        <button class="prev-slide" onclick="prevSlide()">&#10094;</button>
+        <button class="next-slide" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalTiles = document.querySelectorAll('.review-tile').length; // Count the total number of review tiles
+        const tilesPerView = 4; // Number of tiles visible at a time
+        const slideWidth = 250 + 20; // Width of each tile (250px) + margin (20px)
+        const reviewsContainer = document.querySelector('.reviews-container');
+
+        function updateSliderPosition() {
+            const maxSlide = totalTiles - tilesPerView; // Max number of slides before resetting to the beginning
+            if (currentSlide > maxSlide) {
+                currentSlide = 0; // Reset to the first slide after the last set
+            }
+            reviewsContainer.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+        }
+
+        function nextSlide() {
+            const maxSlide = totalTiles - tilesPerView; // Max number of slides
+            if (currentSlide < maxSlide) {
+                currentSlide++;
+            } else {
+                currentSlide = 0; // Reset to first slide when reaching the end
+            }
+            updateSliderPosition();
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+            } else {
+                currentSlide = totalTiles - tilesPerView; // Go to the last set of slides when at the beginning
+            }
+            updateSliderPosition();
+        }
+
+        // Automatically slide every 3 seconds
+        let slideInterval = setInterval(nextSlide, 3000);
+
+        // Pause sliding when hovering over the review section
+        const reviewsSection = document.querySelector('.reviews-section');
+        reviewsSection.addEventListener('mouseenter', () => clearInterval(slideInterval));
+        reviewsSection.addEventListener('mouseleave', () => slideInterval = setInterval(nextSlide, 3000));
+    </script>
 
     <footer>
         <div class="footer-container">

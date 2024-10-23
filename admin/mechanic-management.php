@@ -24,7 +24,7 @@
     <?php
     $query = "SELECT * FROM `mechanic`";
     $result = mysqli_query($con,  $query);
-    $mechanics = [];
+    $mechanics = array();
     $approved = 0;
     $nonapproved = 0;
     $disqualified = 0;

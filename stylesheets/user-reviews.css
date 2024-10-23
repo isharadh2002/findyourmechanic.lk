@@ -1,0 +1,86 @@
+/* Review Section */
+.reviews-section {
+    text-align: center;
+    padding: 40px 0;
+    position: relative;
+    width: 100%;
+}
+
+.reviews-slider {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+    /* Hides overflow of tiles */
+}
+
+.reviews-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    /* Smooth transition for sliding */
+    width: max-content;
+    /* Automatically adjust based on number of review tiles */
+}
+
+/* Review Tile */
+.review-tile {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    width: 250px;
+    flex-shrink: 0;
+    /* Prevent shrinking */
+    text-align: left;
+}
+
+.review-tile p {
+    font-size: 1rem;
+    color: #333;
+}
+
+.review-tile span {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #007BFF;
+}
+
+/* Navigation Buttons */
+.prev-slide,
+.next-slide {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 24px;
+    z-index: 10;
+    /* Ensure buttons are on top */
+}
+
+.prev-slide {
+    left: 0;
+}
+
+.next-slide {
+    right: 0;
+}
+
+.prev-slide:hover,
+.next-slide:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .reviews-slider {
+        width: 90%;
+    }
+}

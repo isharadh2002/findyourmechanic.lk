@@ -1,5 +1,5 @@
 .user-table{
-    justify-content: center;
+    justify-content: space-evenly;
     width: 80%;
     margin: auto;
     margin-top: 25px;
@@ -9,9 +9,6 @@
 }
 
 .table-heading, .table-data{
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     min-width: 100px;
     width: 200px;
 }

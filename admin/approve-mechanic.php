@@ -12,9 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if (mysqli_num_rows($result) == 1) {
                 $updateQuery = "UPDATE `mechanic` SET `IsApproved` = 1 WHERE `MechanicID` = '" . $mechanicID . "'";
                 $result = mysqli_query($con, $updateQuery);
+                echo "<script>window.alert(\"Updated Successfully. \");
+                window.location.href=\"mechanic-management.php\";</script>";
             } else {
-                echo "<script>window.alert(\"Invalid Request\");</script>";
-                header("location:mechanic-management.php");
+                echo "<script>window.alert(\"Invalid Request\");
+                window.location.href=\"mechanic-management.php\";</script>";
             }
         }
 
@@ -25,14 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if (mysqli_num_rows($result) == 1) {
                 $updateQuery = "UPDATE `mechanic` SET `IsApproved` = 0 WHERE `MechanicID` = '" . $mechanicID . "'";
                 $result = mysqli_query($con, $updateQuery);
+                echo "<script>window.alert(\"Updated Successfully\");
+                window.location.href=\"mechanic-management.php\";</script>";
             } else {
-                echo "<script>window.alert(\"Invalid Request\");</script>";
-                header("location:mechanic-management.php");
+                echo "<script>window.alert(\"Invalid Request\");
+                window.location.href=\"mechanic-management.php\";</script>";
             }
         }
         else{
-            echo "<script>window.alert(\"Invalid Request\");</script>";
-            header("location:mechanic-management.php");
+            echo "<script>window.alert(\"Invalid Request\");
+            window.location.href=\"mechanic-management.php\";</script>";
         }
     }
     else{

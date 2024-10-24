@@ -1,4 +1,14 @@
-/* General Styles */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Your Appointment</title>
+    <link rel="stylesheet" href="1.css">
+</head>
+<body>
+    <style>
+        /* General Styles */
 body, html {
     margin: 0;
     padding: 0;
@@ -47,3 +57,15 @@ body, html {
 .btn:hover {
     background-color: #009d74;
 }
+
+    </style>
+    <!-- Banner Section -->
+    <div class="banner-container">
+        <div class="banner-content">
+            <h1>Schedule Your Appointment Today</h1>
+            <p>Your Automotive Repair & Maintenance Service Specialist</p>
+            <a href="appointment.php" class="btn">SCHEDULE APPOINTMENT</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -13,19 +13,19 @@
 
         <div class="services-grid">
             <div class="service-box" id="Profile" >
-                <img src="/findyourmechanic.lk/Images/profile.png" alt="Pe">
+                <img src="/findyourmechanic.lk/Images/profile.png" alt="Profile" onclick="window.location.href='/findyourmechanic.lk/3/profile.php';">
                 <p>Profile</p>
             </div>
             <div class="service-box" id="Appointment" >
-                <img src="/findyourmechanic.lk/Images/appointment.png" alt="Appointment" onclick="window.location.href='3\appointment.php';">
+                <img src="/findyourmechanic.lk/Images/appointment.png" alt="Appointment" onclick="window.location.href='/findyourmechanic.lk/3/appointment.php';">
                 <p>Appointment</p>
             </div>
-            <div class="service-box" id="repair" onclick="selectService(this)">
-                <img src="/findyourmechanic.lk/Images/repair.png" alt="Repair">
+            <div class="service-box" id="repair" >
+                <img src="/findyourmechanic.lk/Images/repair.png" alt="Repair"  onclick="window.location.href='/findyourmechanic.lk/3/service.php';">
                 <p>Repair</p>
             </div>
-            <div class="service-box" id="Payments" onclick="selectService(this)">
-                <img src="/findyourmechanic.lk/Images/payment.png" alt="Payments">
+            <div class="service-box" id="Payments" >
+                <img src="/findyourmechanic.lk/Images/payment.png" alt="Payments" onclick="window.location.href='/findyourmechanic.lk/3/payment.php';">
                 <p>Payments</p>
             </div>
         </div>

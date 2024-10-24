@@ -15,9 +15,10 @@ require_once("../shared/connect.php");
   <style>
     body {
       background-color: bisque;
-      min-width: 1165px;
       margin: 1vh;
       opacity: 1;
+      max-width: 100%;
+      min-width: 300px;
     }
 
     ul {
@@ -26,8 +27,9 @@ require_once("../shared/connect.php");
       padding: 0;
       overflow: hidden;
       background-color: #f3f3f3;
-      border-radius: 1px;
       display: flex;
+      border-radius: 5px;
+      width: 100%;
     }
 
     .navigation li {
@@ -41,6 +43,7 @@ require_once("../shared/connect.php");
       text-align: center;
       padding: 20px 0;
       text-decoration: none;
+      font-size: 18px;
     }
 
     li a:hover:not(.active) {
@@ -52,7 +55,6 @@ require_once("../shared/connect.php");
       background-color: #04aa6d;
     }
 
-
     @media screen and (max-width: 400px) {
       ul.navigation {
         flex-direction: column;
@@ -60,83 +62,86 @@ require_once("../shared/connect.php");
 
       ul.navigation li a {
         text-align: center;
-        float: none;
         width: 100%;
       }
     }
 
     .container {
-
-      width: 100%;
+      width: 90%;
       margin-top: 6vh;
-      margin-right: 14vh;
-      justify-content: right;
-      align-items: center;
       display: flex;
-      float: inline-end;
+      justify-content: center;
+      align-items: center;
       margin-left: auto;
-
+      margin-right: auto;
     }
 
     .formElements {
       background-color: aliceblue;
-      width: 30%;
-      height: auto;
+      width: 100%;
+      max-width: 600px;
+      padding: 40px 20px;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      box-shadow: 2vh;
-      border-style: outset;
-      border-radius: 36px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      border: 1px solid #ccc;
     }
 
     form {
+      width: 100%;
       display: flex;
       flex-direction: column;
-      flex-wrap: wrap;
     }
 
     input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       font-size: 16px;
       border: none;
       border-bottom: 1px solid #333;
-      outline: none;
+      margin-bottom: 20px;
       background-color: transparent;
+      outline: none;
+    }
+
+    input[type='submit'] {
+      background-color: #04aa6d;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 10px;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type='submit']:hover {
+      background-color: #037a56;
     }
 
     button {
-
       font-size: 16px;
       width: 300px;
       border-radius: 10px;
     }
 
-    input[type='submit'] {
-      background-color: #04aa6d;
-      align-items: center;
-
-      color: white;
-      padding: 16px 32px;
-      text-decoration: none;
-      margin: 4px 2px;
-      cursor: pointer;
-      border-radius: 10px;
-      border: none;
-    }
-
     .center-message {
-
       text-align: center;
-      font-size: 24px;
+      font-size: 20px;
       background-color: white;
       color: green;
       padding: 20px;
       border-radius: 10px;
       opacity: 0;
+      transition: opacity 0.3s ease;
+    }
 
+    .center-message.visible {
+      opacity: 1;
     }
   </style>
 

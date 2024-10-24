@@ -1,10 +1,6 @@
 <?php
-
-
 require_once("../shared/connect.php");
 require_once("function.php");
-
-
 if (isset($_POST['submitButton'])) {
 
     $name = getValues('username');
@@ -13,18 +9,18 @@ if (isset($_POST['submitButton'])) {
     $contactNumber = getValues('contactNumber');
     $address = getValues('address');
     $usertype = 'customer';
-    if (isValuesSet($name) && isValuesSet($email) && isValuesSet($password) && isValuesSet($contactNumber) && isValuesSet($address)) {
-
-        $qry = qrySetting($name, $email, $password, $contactNumber, $address);
-
-        executeQry($qry, $con);
-    } else {
+    if (beforeSignin($email, $con)) {
 
 
-        header("Location:signup-User.php");
-        echo "sacess";
-        exit(1);
+        if (isValuesSet($name) && isValuesSet($email) && isValuesSet($password) && isValuesSet($contactNumber) && isValuesSet($address)) {
+
+            $qry = qrySetting();
+
+            executeQry($qry, $con, $name, $password, $usertype, $email, $contactNumber, $address);
+        } else {
+            echo "<script>console.log('The value is not set!');</script>";
+            header("Location: signup-User.php");
+            exit();
+        }
     }
 }
-mysqli_stmt_close($stmt);
-mysqli_close($con);

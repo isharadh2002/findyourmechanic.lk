@@ -17,10 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             } else {
                 echo "<script>window.alert(\"Invalid Request\");
                 window.location.href=\"mechanic-management.php\";</script>";
+                echo "<script>window.alert(\"mechanic-management.php\");</script>";
             }
-        }
-
-        else if ($_GET['function'] == 'disqualify') {
+        } else if ($_GET['function'] == 'disqualify') {
             $query = "SELECT * FROM `mechanic` WHERE  `mechanicid` = '" . $mechanicID . "'";
             $result = mysqli_query($con, $query);
 
@@ -33,13 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 echo "<script>window.alert(\"Invalid Request\");
                 window.location.href=\"mechanic-management.php\";</script>";
             }
-        }
-        else{
+        } else {
             echo "<script>window.alert(\"Invalid Request\");
             window.location.href=\"mechanic-management.php\";</script>";
         }
-    }
-    else{
+    } else {
         echo "<script>window.prompt(\"Invalid Request\");</script>";
     }
 }

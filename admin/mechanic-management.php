@@ -73,7 +73,7 @@
                         <td class="table-data"><?php echo $mechanic['Specification']; ?></td>
                         <td class="table-data"><?php echo ($mechanic['IsApproved']) ? "Approved" : "Not Approved"; ?></td>
                         <td class="table-data approve-btn"><a href="approve-mechanic.php?mechanicid=<?php echo $mechanic['MechanicID']; ?>&function=approve">Approve</a></td>
-                        <td class="table-data approve-btn"><a href="approve-mechanic.php?mechanicid=<?php echo $mechanic['MechanicID']; ?>&function=disqualify">Disqualify</a></td>
+                        <td class="table-data disapprove-btn"><a href="approve-mechanic.php?mechanicid=<?php echo $mechanic['MechanicID']; ?>&function=disqualify">Disqualify</a></td>
                     </tr>
             <?php
                 endif;

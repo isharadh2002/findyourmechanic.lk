@@ -11,7 +11,7 @@ require_once("header-mec.php");
     <h1><u><b>Mechanics Details</b></u></h1>
     <hr>
 
-    <form action="login.opr.php" method="post">
+    <form action="Signin.opr.php" method="post" enctype="multipart/form-data">
       <div class="inputs">
         <br>
         <label for="username">Name:</label>

@@ -1,109 +1,141 @@
+<?php
 
+require 'autoload.php'; // Stripe SDK
+
+\Stripe\Stripe::setApiKey('your-secret-key-here'); // Replace with your Stripe secret key
+
+// Read the request payload.
+$input = json_decode(file_get_contents("php://input"), true);
+$paymentMethodId = $input['payment_method_id'];
+$amount = $input['amount'];
+$currency = $input['currency'];
+
+try {
+    // Create a PaymentIntent with the payment method.
+    $paymentIntent = \Stripe\PaymentIntent::create([
+        'amount' => $amount, // Amount in cents
+        'currency' => $currency,
+        'payment_method' => $paymentMethodId,
+        'confirmation_method' => 'manual',
+        'confirm' => true,
+    ]);
+
+    if ($paymentIntent->status == 'requires_action' && $paymentIntent->next_action->type == 'use_stripe_sdk') {
+        // Card action required (e.g., 3D Secure)
+        echo json_encode([
+            'requires_action' => true,
+            'payment_intent_client_secret' => $paymentIntent->client_secret
+        ]);
+    } else if ($paymentIntent->status == 'succeeded') {
+        // Payment was successful
+        echo json_encode(['success' => true]);
+    } else {
+        // Other status
+        echo json_encode(['error' => 'Invalid PaymentIntent status']);
+    }
+} catch (Exception $e) {
+    echo json_encode(['error' => $e->getMessage()]);
+}
+
+    
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Service</title>
+    <title>Secure Payment with Stripe</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #B7E0FF;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            background: #f4f4f4;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #4379F2;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 7px;
-            color: #4379F2;
-        }
-        input, #card-element {
-            width: 100%;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #4379F2;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #5A9BFF;
-        }
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
+        /* CSS from previous example */
     </style>
-    <script src="https://js.stripe.com/v3/"></script> <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script> <!-- Stripe JS Library -->
 </head>
 <body>
-    <div class="container">
-        <h1><u>Payment Service</u></h1>
-        <form id="paymentForm" method="POST" action="process_payment.php">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required />
+    <div class="payment-container">
+        <div class="header">Enter Card Details</div>
+        <form id="paymentForm">
+            <!-- Cardholder's name and email (non-sensitive) -->
+            <div class="input-field">
+                <label for="cardholder-name">Cardholder's Name</label>
+                <input type="text" id="cardholder-name" placeholder="Cardholder’s Name" required>
             </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required />
+            <div class="input-field">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Email" required>
             </div>
-            <div class="form-group">
-                <label for="amount">Amount (USD):</label>
-                <input type="number" id="amount" name="amount" required min="1" />
-            </div>
-            <div class="form-group">
-                <label>Card Details:</label>
-                <div id="card-element"><!-- Stripe card element goes here --></div>
-            </div>
-            <button type="submit">Pay Now</button>
-        </form>
-        <div id="errorMessages" class="error"></div>
-    </div>
-    <script>
-        const stripe = Stripe("your-publishable-key"); // Replace with your Stripe publishable key
-        const elements = stripe.elements();
-        const card = elements.create("card");
-        card.mount("#card-element");
 
-        document.getElementById("paymentForm").addEventListener("submit", async function (event) {
+            <!-- Stripe Elements Card Element -->
+            <div id="card-element" class="input-field">
+                <!-- A Stripe Element will be inserted here. -->
+            </div>
+            
+            <div class="order-summary">
+                <div class="item">
+                    <span>Items Cost</span>
+                    <span>Rs. 7,500.00</span>
+                </div>
+                <div class="item">
+                    <span>Shipping Cost</span>
+                    <span>Rs. 500.00</span>
+                </div>
+                <div class="item total">
+                    <span>Total</span>
+                    <span>Rs. 8,000.00</span>
+                </div>
+            </div>
+
+            <button type="submit" class="pay-now">Pay Now</button>
+        </form>
+    </div>
+
+    <script>
+        const stripe = Stripe('your-publishable-key-here'); // Replace with your Stripe publishable key
+        const elements = stripe.elements();
+
+        // Create an instance of the card Element.
+        const card = elements.create('card');
+        card.mount('#card-element');
+
+        // Handle form submission.
+        const form = document.getElementById('paymentForm');
+        form.addEventListener('submit', async (event) => {
             event.preventDefault();
-            const { error, token } = await stripe.createToken(card);
-            const errorMessages = document.getElementById("errorMessages");
-            errorMessages.innerHTML = "";
+
+            const cardholderName = document.getElementById('cardholder-name').value;
+            const email = document.getElementById('email').value;
+
+            const { paymentMethod, error } = await stripe.createPaymentMethod({
+                type: 'card',
+                card: card,
+                billing_details: {
+                    name: cardholderName,
+                    email: email,
+                },
+            });
 
             if (error) {
-                errorMessages.textContent = error.message;
+                // Display error.message in the UI.
+                alert(error.message);
             } else {
-                const form = document.getElementById("paymentForm");
-                const hiddenToken = document.createElement("input");
-                hiddenToken.setAttribute("type", "hidden");
-                hiddenToken.setAttribute("name", "stripeToken");
-                hiddenToken.setAttribute("value", token.id);
-                form.appendChild(hiddenToken);
-                form.submit(); // Submit the form to the PHP back-end with the token
+                // Send the paymentMethod.id to your server.
+                fetch('/process_payment.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        payment_method_id: paymentMethod.id,
+                        amount: 8000, // The amount in cents
+                        currency: 'inr'
+                    }),
+                }).then((response) => {
+                    if (response.ok) {
+                        alert("Payment successful!");
+                    } else {
+                        alert("Payment failed. Please try again.");
+                    }
+                });
             }
         });
     </script>

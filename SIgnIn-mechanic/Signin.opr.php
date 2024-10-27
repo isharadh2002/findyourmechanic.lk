@@ -40,7 +40,7 @@
         
         
        
-        }
+        
         $userId=getUserIDUserTable($con,$email);
         $qry = "INSERT INTO mechanic(UserID,WorkAddress,WorkPhoneNumber,Specification,IsApproved,ProfilePicture,CoverPhoto,Description) VALUES (?,?,?,?,?,?,?,?);";
        
@@ -88,6 +88,10 @@
                 } else {
                     header("Location:../msg.php?error=Error");
                 }
+                mysqli_close($con);
+            }
+            
+
                 
 
 

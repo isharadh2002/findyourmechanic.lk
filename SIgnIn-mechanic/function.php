@@ -100,7 +100,7 @@ function updateMechanicTable($con,$email){
 
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
-    //then you have to update the mechanic table
+   
 
 
 

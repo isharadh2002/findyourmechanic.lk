@@ -25,7 +25,7 @@ require "../shared/connect.php";
     ?>
     <?php
     $appointments = array();
-    $query = "SELECT * FROM `appointment`";
+    $query = "SELECT * FROM `appointment` INNER JOIN `user` ON `appointment`.`UserID` = `user`.`UserID` INNER JOIN `mechanic` ON `appointment`.`UserID` = ";
     $results = mysqli_query($con, $query);
     $pending = 0;
     $finished = 0;

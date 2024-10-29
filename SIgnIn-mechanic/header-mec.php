@@ -127,6 +127,16 @@ require_once("../shared/connect.php");
       border: none;
     }
 
+    p.requiredMsg {
+      text-align: center;
+      color: green;
+
+
+
+
+    }
+
+    
     input[type='file'] {
 
       background-color: #C4E1F6;
@@ -140,6 +150,7 @@ require_once("../shared/connect.php");
       border-radius: 10px;
       border: none;
     }
+
 
     #msg {
 

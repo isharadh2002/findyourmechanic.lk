@@ -1,76 +1,101 @@
-
-
 <?php
 
 
-
-function beforeSignin($email, $con)
+function isInputsEmpty($name, $email, $password, $contactNumber, $address, $specification, $description)
 {
-    $qry = "SELECT * FROM user WHERE Email = ?";
+    return empty($name) || empty($email) || empty($password) || empty($contactNumber) || empty($address) || empty($specification) || empty($description);
+}
 
-    $stmt = mysqli_prepare($con, $qry);
+function inValidResponse($name, $email, $contactNumber)
+{
+    return invalidUsername($name) || invalidEmail($email) || invalidContactNumber($contactNumber);
+}
 
-    mysqli_stmt_bind_param($stmt, 's', $email);
+function invalidUsername($name)
+{
+    return !preg_match('/^[a-zA-Z0-9_]*$/', $name);
+}
 
-    mysqli_stmt_execute($stmt);
+function invalidEmail($email)
+{
+    return !preg_match('/^[^\s@]+@[^\s@]+\.[^\s@]+$/', $email);
+}
 
-    $result = mysqli_stmt_get_result($stmt);
+function invalidContactNumber($contactNumber)
+{
+    return !preg_match('/^\+?[0-9]{0,11}$/', $contactNumber);
+}
 
-    if (mysqli_num_rows($result) > 0) {
-        echo '<script>
-                    document.getElementById("afterSigninMsg").innerHTML = "";
-
-            document.getElementById("afterSigninMsg").innerHTML = "Account already exists,So go to User login!";
-document.getElementById("afterSigninMsg").classList.add("visible");
-        </script>';
-
-        header('Location: signup-User.php');
+function emailExists($con, $email, $name)
+{
+    $qry = "SELECT UserID FROM (SELECT * FROM user WHERE UserType='mechanic') a WHERE a.Username=? OR a.Email=?;";
+    $stmt = mysqli_stmt_init($con);
+    if (!mysqli_stmt_prepare($stmt, $qry)) {
+        header("Location: Signin-mec.php?error=dberror");
         exit();
     }
 
-
-    return true;
+    mysqli_stmt_bind_param($stmt, 'ss', $name, $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+    return  mysqli_num_rows($result);
 }
 
-
-
-function getValues($name)
+function insertDataUserTable($con, $name, $password, $usertype, $email, $contactNumber, $address)
 {
-    return isset($_POST[$name]) ? $_POST[$name] : null;
-}
-
-function isValuesSet($value)
-{
-    if (empty($value)) {
-        return false;
+    $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
+    $qry = "INSERT INTO user (Username, Password, UserType, Email, PhoneNumber, Address) VALUES (?, ?, ?, ?, ?, ?);";
+    $stmt = mysqli_stmt_init($con);
+    if (!mysqli_stmt_prepare($stmt, $qry)) {
+        header("Location: Signin-mec.php?error=dbsterror");
+        exit();
     }
 
-    echo "<script>console.log('The value is set!');</script>";
-    return true;
+    mysqli_stmt_bind_param($stmt, 'ssssss', $name, $hashedPwd, $usertype, $email, $contactNumber, $address);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
 }
 
-function qrySetting()
+function getUserIDUserTable($con, $email)
 {
-    return "INSERT INTO user (Username, Password, UserType, Email, PhoneNumber, Address) VALUES (?, ?, ?, ?, ?, ?)";
-}
-function msg($message)
-{
-    $escapedMessage = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
-    echo "<script>console.log('{$escapedMessage}');</script>";
-}
+    $qry = "SELECT UserID FROM user WHERE Email=?;";
+    $stmt = mysqli_stmt_init($con);
+    if (!mysqli_stmt_prepare($stmt, $qry)) {
+        header("Location: Signin-mec.php?error=dberror");
+        exit();
+    }
 
-function executeQry($qry, $con, $name, $password, $usertype, $email, $contactNumber, $address)
-{
-    $stmt = mysqli_prepare($con, $qry);
-    mysqli_stmt_bind_param($stmt, "ssssss", $name, $password, $usertype, $email, $contactNumber, $address);
+    mysqli_stmt_bind_param($stmt, 's', $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-    if (mysqli_stmt_execute($stmt)) {
-        msg("The Sign-In is Successful");
-    } else {
-        msg("The Sign-In Failed");
-        exit(1);
+    if ($result && mysqli_num_rows($result) !== 0) {
+        $user = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+        return $user['UserID'];
     }
 
     mysqli_stmt_close($stmt);
-    mysqli_close($con);
+    return false;
+}
+
+function updateCustomerable($con, $userId, $address, $contactNumber, $specification, $isApproved, $profilePicturePath, $coverPhotoPath, $description)
+{
+    $qry = "INSERT INTO customer (UserID, WorkAddress, WorkPhoneNumber, Specification, IsApproved, ProfilePicture, CoverPhoto, Description) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    $stmt = mysqli_stmt_init($con);
+
+    if (!mysqli_stmt_prepare($stmt, $qry)) {
+        header("Location: Signin-mec.php?error=dbsterrorMechanic");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, 'isssisss', $userId, $address, $contactNumber, $specification, $isApproved, $profilePicturePath, $coverPhotoPath, $description);
+    if (!mysqli_stmt_execute($stmt)) {
+        header("Location: Signin-mec.php?error=executionerror");
+        exit();
+    }
+
+    mysqli_stmt_close($stmt);
+    return true;
 }

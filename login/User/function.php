@@ -1,28 +1,40 @@
 <?php
 
-function emptyInputs($email, $password)
+
+
+
+function isInputsEmpty( $email,$password)
 {
-
-    if (isset($email) && isset($password)) {
-
-
-        return true;
-    }
+    return empty($email) || empty($password) ;
 }
 
-function SearchLogin($email, $password)
+function inValidResponse( $email )
 {
-
-    $searchQry = "SELECT {MechanicID} FROM {user} WHERE {Email}={$email}  AND  {Password}={$password}";
-    if ($searchQry) {
-
-        //have to fill this one
-        // header("Location:");
-        echo "<script> console.log('Login sucess'); </script>";
-    } else {
-
-        
-        header('Location:login.php');
-        exit(1);
-    }
+    return  invalidEmail($email) ;
 }
+
+
+
+function invalidEmail($email)
+{
+    return !preg_match('/^[^\s@]+@[^\s@]+\.[^\s@]+$/', $email);
+}
+
+
+
+function emailExists($con, $email,$password)
+{
+    $qry = "SELECT UserID FROM (SELECT * FROM user WHERE UserType='mechanic') a WHERE  a.Email=? OR a.Password=?;";
+    $stmt = mysqli_stmt_init($con);
+    if (!mysqli_stmt_prepare($stmt, $qry)) {
+        header("Location: Signin-mec.php?error=dberror");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, 'ss', $email,$password);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+    return  mysqli_num_rows($result);
+}
+

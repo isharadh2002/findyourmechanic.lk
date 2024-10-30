@@ -6,16 +6,26 @@ require_once("function.php");
 
 
 if (isset($_POST['submitButton'])) {
+    // Gather POST data
+    
     $email = $_POST['email'];
     $password = $_POST['password'];
+    
 
-    if (emptyInputs($email && $password) !== false) {
 
-        exit(1);
+    if (isInputsEmpty( $email, $password)) 
+        header("Location: Signin-mec.php?error=emptyInputs");
+        exit();
     }
-    searchLogin($email, $password);
-} else {
 
-    header('Location:signup-User.php');
-    exit(1);
-}
+    if (inValidResponse( $email )) {
+        header("Location: Signin-mec.php?error=invalidInputs");
+        exit();
+    }
+
+    if (emailExists($con, $email, $name) > 0) {
+        header("Location: Signin-mec.php?error=UserEmailExists");
+        exit();
+    }
+
+

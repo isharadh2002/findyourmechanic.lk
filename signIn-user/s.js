@@ -2,7 +2,7 @@ function refresh(event) {
     
 
     event.preventDefault();
-    location.reload();
+    location.reload();//
 
 
 

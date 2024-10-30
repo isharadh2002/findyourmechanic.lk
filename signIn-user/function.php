@@ -1,9 +1,9 @@
 <?php
 
 
-function isInputsEmpty($name, $email, $password, $contactNumber, $address, $specification, $description)
-{
-    return empty($name) || empty($email) || empty($password) || empty($contactNumber) || empty($address) || empty($specification) || empty($description);
+function isInputsEmpty($name, $email, $password, $contactNumber, $address,$registrationNumber,$brandName,$modelName)
+{  
+return empty($name) || empty($email) || empty($password) || empty($contactNumber) || empty($address) || empty($registrationNumber) || empty($brandName) || empty($modelName);
 }
 
 function inValidResponse($name, $email, $contactNumber)
@@ -28,7 +28,7 @@ function invalidContactNumber($contactNumber)
 
 function emailExists($con, $email, $name)
 {
-    $qry = "SELECT UserID FROM (SELECT * FROM user WHERE UserType='mechanic') a WHERE a.Username=? OR a.Email=?;";
+    $qry = "SELECT UserID FROM (SELECT * FROM user WHERE UserType='user') a WHERE a.Username=? OR a.Email=?;";
     $stmt = mysqli_stmt_init($con);
     if (!mysqli_stmt_prepare($stmt, $qry)) {
         header("Location: Signin-mec.php?error=dberror");
@@ -80,7 +80,7 @@ function getUserIDUserTable($con, $email)
     return false;
 }
 
-function updateCustomerable($con, $userId, $address, $contactNumber, $specification, $isApproved, $profilePicturePath, $coverPhotoPath, $description)
+function updateCustomerTable($con, $userId, $address, $contactNumber, $specification, $isApproved, $profilePicturePath, $coverPhotoPath, $description)
 {
     $qry = "INSERT INTO customer (UserID, WorkAddress, WorkPhoneNumber, Specification, IsApproved, ProfilePicture, CoverPhoto, Description) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($con);
@@ -91,6 +91,25 @@ function updateCustomerable($con, $userId, $address, $contactNumber, $specificat
     }
 
     mysqli_stmt_bind_param($stmt, 'isssisss', $userId, $address, $contactNumber, $specification, $isApproved, $profilePicturePath, $coverPhotoPath, $description);
+    if (!mysqli_stmt_execute($stmt)) {
+        header("Location: Signin-mec.php?error=executionerror");
+        exit();
+    }
+
+    mysqli_stmt_close($stmt);
+    return true;
+}
+function updateVehecleTable($con, $userId, $registrationNumber, $brandName, $modelName)
+{
+    $qry = "INSERT INTO vehicle (UserID, RegistrationNUmber, Brand,Model) VALUES (?, ?, ?);";
+    $stmt = mysqli_stmt_init($con);
+
+    if (!mysqli_stmt_prepare($stmt, $qry)) {
+        header("Location: Signin-mec.php?error=dbsterrorMechanic");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, 'issss', $userId, $registrationNumber,$brandName,$modelName);
     if (!mysqli_stmt_execute($stmt)) {
         header("Location: Signin-mec.php?error=executionerror");
         exit();

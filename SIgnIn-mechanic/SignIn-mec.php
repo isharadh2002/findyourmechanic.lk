@@ -15,7 +15,7 @@ require_once("header-mec.php");
       <div class="inputs">
         <br>
         <label for="username">Name:</label>
-        <input type="text" name="username" id="username" required />
+        <input type="text" name="username" id="username" onblur="inputsRequire();" />
         <span id="name_msg" class="requiredMsg"></span>
       </div>
 
@@ -24,7 +24,7 @@ require_once("header-mec.php");
 
       <div class="inputs">
         <label for="email">E-Mail:</label>
-        <input type="text" name="email" id="email" required pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/" />
+        <input type="text" name="email" id="email" onblur="inputsRequire();" pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/" />
         <span id="email_msg" class="requiredMsg"></span>
 
 
@@ -32,7 +32,7 @@ require_once("header-mec.php");
       <br><br>
       <div class="inputs">
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required />
+        <input type="password" name="password" id="password" onblur="inputsRequire();" />
         <span id="password_msg" class="requiredMsg"></span><br><br>
       </div>
 
@@ -40,26 +40,26 @@ require_once("header-mec.php");
       <br>
       <div class="inputs">
         <label for="contactNumber">Contact Number:</label>
-        <input type="tel" name="contactNumber" id="contactNumber" required />
+        <input type="tel" name="contactNumber" id="contactNumber" onblur="inputsRequire();" />
         <span id="number_msg" class="requiredMsg"></span>
       </div>
 
       <br><br>
       <div class="inputs">
         <label for="address">Address:</label>
-        <input type="text" name="address" id="address" required />
+        <input type="text" name="address" id="address" onblur="inputsRequire();" />
         <span id="address_msg" class="requiredMsg"></span> <br><br>
       </div>
       <div class="inputs">
         <label for="specification">Specification:</label>
-        <input type="text" name="specification" id="specification" required />
+        <input type="text" name="specification" id="specification" onblur="inputsRequire();" />
         <br><span>(Ex:-EV system Specialist,Cae engine specialist,.....)</span><br>
         <span id="specification_msg" class="requiredMsg"></span>
       </div>
       <br><br>
       <div id="msg">
         <label for="Qulification">Qulifications:</label>
-        <input type="file" name="Qulification" id="Qulification" required />
+        <input type="file" name="Qulification" id="Qulification" onblur="inputsRequire();" required />
 
 
         <p id="msg">Insert a Zip file, including softcopy of<br>
@@ -95,7 +95,7 @@ require_once("header-mec.php");
       <br><br>
       <div class="inputs">
 
-        <input type="submit" class="submitButton" name="submitButton" value="Sign In" onclick="inputsRequire();">
+        <input type="submit" class="submitButton" name="submitButton" value="Sign In">
       </div>
       <br><br>
     </form>
@@ -104,38 +104,47 @@ require_once("header-mec.php");
 </div>
 <script>
   function inputsRequire() {
-    if (!document.getElementById("name")) {
-
+    // Check if the "name" input is empty
+    if (document.getElementById("name").value.trim() === "") {
       document.getElementById("name_msg").innerHTML = 'Name is required!';
-
-      if (!document.getElementById("email")) {
-
-        document.getElementById("email_msg").innerHTML = 'Email is required!';
-        if (!document.getElementById("password")) {
-
-          document.getElementById("password_msg").innerHTML = 'Password is required!';
-          if (!document.getElementById("contactNumber")) {
-
-            document.getElementById("number_msg").innerHTML = 'Number is required!';
-
-            if (!document.getElementById("address")) {
-
-              document.getElementById("address_msg").innerHTML = 'Address is required!';
-              if (!document.getElementById("Qualificaton")) {
-
-                document.getElementById("qualification_msg").innerHTML = 'Qualifications are required!';
-
-              }
-
-
-            }
-          }
-        }
-      }
+      return;
     }
-  }
 
-  
+    // Check if the "email" input is empty
+    if (document.getElementById("email").value.trim() === "") {
+      document.getElementById("email_msg").innerHTML = 'Email is required!';
+      return;
+    }
+
+    // Check if the "password" input is empty
+    if (document.getElementById("password").value.trim() === "") {
+      document.getElementById("password_msg").innerHTML = 'Password is required!';
+      return;
+    }
+
+    // Check if the "contactNumber" input is empty
+    if (document.getElementById("contactNumber").value.trim() === "") {
+      document.getElementById("number_msg").innerHTML = 'Number is required!';
+      return;
+    }
+
+    // Check if the "address" input is empty
+    if (document.getElementById("address").value.trim() === "") {
+      document.getElementById("address_msg").innerHTML = 'Address is required!';
+      return;
+    }
+
+    // Check if the "qualification" input is empty
+    if (document.getElementById("qualification").value.trim() === "") {
+      document.getElementById("qualification_msg").innerHTML = 'Qualifications are required!';
+      return;
+    }
+
+
+
+
+
+  }
 </script>
 </body>
 

@@ -22,7 +22,7 @@
         <!-- Header with Add Appointment Button -->
         <div class="header">
             <h2>Appointments</h2>
-            <button class="btn-add" onclick="window.location.href='add_appointment.html'">Add New Appointment</button>
+            <button class="btn-add" onclick="window.location.href='add-appointment.php'">Add New Appointment</button>
         </div>
 
         <!-- Pending Appointments Table -->

@@ -4,7 +4,7 @@ if (isset($_SESSION['UserID'])) {
     $UserID = $_SESSION['UserID'];
     print_r($UserID);
 } else {
-    echo "<script>window.prompt(\"You are not logged in\");
+    echo "<script>window.alert(\"You are not logged in\");
     window.location.href='../';</script>";
 }
 ?>

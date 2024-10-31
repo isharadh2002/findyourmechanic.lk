@@ -49,11 +49,11 @@ $stmt->close();
             <h2>Schedule Your Appointment</h2>
             <p class="mechanic-info">Mechanic: <strong><?php echo htmlspecialchars($mechanicName); ?></strong></p>
 
-            <form id="appointmentForm" action="submit-appointment.php" method="GET">
-                <input type="hidden" name="mechanic-id" value="<?php echo htmlspecialchars($mechanicId); ?>">
+            <form id="appointmentForm" action="process/submit-appointment.php" method="GET">
+                <input type="hidden" name="mechanic_id" value="<?php echo htmlspecialchars($mechanicId); ?>">
 
                 <label for="vehicle_id">Select Your Vehicle:</label>
-                <select id="vehicle_id" name="vehicle_id" required>
+                <select id="vehicle_id" name="vehicle_id">
 
                     <?php
                     //$userId = $_SESSION['user_id'];
@@ -63,7 +63,7 @@ $stmt->close();
                     if (mysqli_num_rows($result) > 0) {
                         echo "<option value = '' disabled selected>Select a vehicle</option>";
                         while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<option value=\"{$row['VehicleID']}\">{$row['RegistrationNumber']} - {$row['Brand']} {$row['Model']}</option>";
+                            echo "<option value=\"{$row['VehicleID']}\">{$row['RegistrationNumber']} - {$row['Brand']} {$row['Model']} {$row['Year']}</option>";
                             //print_r($row);
                         }
                     } else {
@@ -73,8 +73,9 @@ $stmt->close();
                 </select>
 
                 <label for="service_type">Service Type</label>
-                <select id="service_type" name="service_type" required>
+                <select id="service_type" name="service_type">
                     <option disabled selected value="">Select a Service</option>
+                    <option value="Emergency Breakdown">Emergency Breakdown</option>
                     <option value="Oil Change">Oil Change</option>
                     <option value="Wheel Alignment">Wheel Alignment</option>
                     <option value="Brake Inspection">Brake Inspection</option>
@@ -93,13 +94,17 @@ $stmt->close();
                 </select>
 
                 <label for="appointment_date">Date:</label>
-                <input type="date" id="appointment_date" name="appointment_date" required min="<?php echo date('Y-m-d'); ?>">
+                <input type="date" id="appointment_date" name="appointment_date" min="<?php echo date('Y-m-d'); ?>">
 
                 <label for="appointment_time">Time:</label>
-                <input type="time" id="appointment_time" name="appointment_time" required>
+                <input type="time" id="appointment_time" name="appointment_time">
+
+                <label for="location">Location:</label>
+                <input type="text" name="location" id="location" placeholder="Enter your current location">
 
                 <label for="issue_description">Describe the Issue:</label>
-                <textarea id="issue_description" name="issue_description" rows="4" placeholder="Describe the issue in detail" required></textarea>
+                <textarea id="issue_description" name="issue_description" rows="4" maxlength="1000" placeholder="Describe the issue in detail"></textarea>
+                <p id="charCount">0/1000</p>
 
                 <button type="submit" id="submitBtn">Confirm Appointment</button>
             </form>
@@ -137,7 +142,15 @@ $stmt->close();
         const serviceTypeSelect = document.getElementById("service_type");
         const appointmentDate = document.getElementById("appointment_date");
         const appointmentTime = document.getElementById("appointment_time");
+        const locationInput = document.getElementById("location");
         const issueDescription = document.getElementById("issue_description");
+        const charCount = document.getElementById("charCount");
+        const maxLength = 1000;
+
+        issueDescription.addEventListener("input", () => {
+            const currentLength = issueDescription.value.length;
+            charCount.textContent = `${currentLength}/${maxLength}`;
+        });
 
         submitBtn.addEventListener("click", function(event) {
             // Check if a vehicle is selected
@@ -157,9 +170,9 @@ $stmt->close();
             }
 
             // Check if the date, time, and issue description are filled
-            if (!appointmentDate.value || !appointmentTime.value || !issueDescription.value) {
+            if (!appointmentDate.value || !appointmentTime.value || !issueDescription.value || !locationInput.value) {
                 event.preventDefault();
-                warningModal.querySelector("p").textContent = "Please fill in all fields (Date, Time, and Description) to continue.";
+                warningModal.querySelector("p").textContent = "Please fill in all fields (Date, Time, Location, and Description) to continue.";
                 warningModal.style.display = "flex"; // Show warning modal
                 return;
             }

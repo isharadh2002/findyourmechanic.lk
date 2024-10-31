@@ -30,6 +30,7 @@ table {
     border-spacing: 0; /* Removes spacing between cells */
     border-radius: 20px; /* Adjust this value as needed */
     overflow: hidden; /* Ensures the border-radius is applied to the entire table */
+    margin-bottom: 25px;
 }
 
 .vehicle-table {

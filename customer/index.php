@@ -99,9 +99,9 @@
         <section class="feedback">
             <h2>Provide Feedback</h2>
             <p>We value your input! Please share your feedback on your latest experience.</p>
-            <form>
+            <form method="get" action="index.php">
                 <br><label for="feedback">Your Feedback</label><br>
-                <textarea id="feedback" rows="4" placeholder="Share your experience..."></textarea><br>
+                <textarea name="user-feedback" id="feedback" rows="4" placeholder="Share your experience..."></textarea><br>
                 <button type="submit">Submit Feedback</button>
             </form>
         </section>

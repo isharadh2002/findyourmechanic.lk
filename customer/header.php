@@ -8,7 +8,7 @@
                 <li><a href="#" id="servicehistory">Service History</a></li>
                 <li><a href="#" id="feedback">Feedback</a></li>
                 <li><a href="settings.php" id="settings">Account Settings</a></li>
-                <li><a href="#" id="logout">Logout</a></li>
+                <li><a href="logout.php" id="logout">Logout</a></li>
             </ul>
         </nav>
 </header>

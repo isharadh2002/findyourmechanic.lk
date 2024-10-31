@@ -10,6 +10,13 @@ footer {
     justify-content: space-between;
     max-width: 1400px;
     margin: auto;
+    flex-wrap: wrap;
+}
+
+.footer-container div{
+    min-width: 300px;
+    margin: auto;
+    margin-top: 0px;
 }
 
 .footer-section {

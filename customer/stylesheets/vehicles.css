@@ -1,0 +1,69 @@
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    text-align: center;
+    padding-top: 120px;
+}
+
+h1 {
+    color: #333;
+}
+
+.add-vehicle-btn {
+    margin: 15px 0;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.add-vehicle-btn:hover {
+    background-color: #218838;
+}
+
+table {
+    border-collapse: separate; /* Ensures the border-radius works */
+    border-spacing: 0; /* Removes spacing between cells */
+    border-radius: 20px; /* Adjust this value as needed */
+    overflow: hidden; /* Ensures the border-radius is applied to the entire table */
+}
+
+.vehicle-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.vehicle-table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+.vehicle-table th, .vehicle-table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.vehicle-table th {
+    font-weight: bold;
+}
+
+.vehicle-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.vehicle-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.vehicle-table td {
+    color: #555;
+}

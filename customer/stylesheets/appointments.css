@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9fb;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    width: 85%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 120px;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+
+  .header h2 {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+  }
+
+  .btn-add {
+    padding: 12px 24px;
+    background-color: #5494da;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.25s;
+  }
+
+  .btn-add:hover {
+    background-color: #1750ac;
+  }
+
+  /* Table Styles */
+  .table-container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+
+  .table-title {
+    background-color: #5494da;
+    color: #fff;
+    padding: 15px;
+    font-size: 18px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+  }
+
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+
+  /* Status and Action Buttons */
+  .status-pending {
+    color: #e67e22;
+    font-weight: bold;
+  }
+
+  .status-completed {
+    color: #2ecc71;
+    font-weight: bold;
+  }
+
+  .view-btn {
+    padding: 8px 15px;
+    background-color: #5494da;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.25s;
+  }
+
+  .view-btn:hover {
+    background-color: #1750ac;
+  }

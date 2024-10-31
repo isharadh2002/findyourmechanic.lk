@@ -25,11 +25,12 @@ require __DIR__ . "/shared/connect.php";
                 <span>Find Your Mechanic</span>
             </div>
             <div class="login-section">
-                <button onclick="window.location.href='login.php'">Log In</button>
-                <button onclick="window.location.href='signup.php'">Sign Up</button>
+                <button onclick="window.location.href='login.php'">Sign In</button>
+                <button onclick="window.location.href='signup.php'">Register</button>
             </div>
         </div>
     </header>
+
     <br>
 
     <div class="slide-container">
@@ -124,7 +125,7 @@ require __DIR__ . "/shared/connect.php";
     </div>
 
     <div class="reviews-section">
-        <h2>User Reviews</h2>
+        <h1>User Reviews</h1>
         <div class="reviews-slider">
             <div class="reviews-container">
                 <!-- Review Tiles -->
@@ -209,7 +210,7 @@ require __DIR__ . "/shared/connect.php";
                 <h2>About Us</h2>
                 <p>We help you find nearby vehicle mechanics quickly and easily, ensuring your vehicle gets the attention it needs wherever you are.</p>
             </div>
-
+            <!--
             <div class="footer-section links">
                 <h2>Quick Links</h2>
                 <ul>
@@ -219,7 +220,7 @@ require __DIR__ . "/shared/connect.php";
                     <li><a href="#">Customer Login</a></li>
                 </ul>
             </div>
-
+            -->
             <div class="footer-section contact">
                 <h2>Contact Us</h2>
                 <ul>

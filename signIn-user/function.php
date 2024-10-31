@@ -1,9 +1,8 @@
 <?php
 
-
-function isInputsEmpty($name, $email, $password, $contactNumber, $address,$registrationNumber,$brandName,$modelName)
+function isInputsEmpty($name, $email, $password, $contactNumber, $address, $registrationNumber, $brandName, $modelName)
 {  
-return empty($name) || empty($email) || empty($password) || empty($contactNumber) || empty($address) || empty($registrationNumber) || empty($brandName) || empty($modelName);
+    return empty($name) || empty($email) || empty($password) || empty($contactNumber) || empty($address) || empty($registrationNumber) || empty($brandName) || empty($modelName);
 }
 
 function inValidResponse($name, $email, $contactNumber)
@@ -39,7 +38,7 @@ function emailExists($con, $email, $name)
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     mysqli_stmt_close($stmt);
-    return  mysqli_num_rows($result);
+    return mysqli_num_rows($result);
 }
 
 function insertDataUserTable($con, $name, $password, $usertype, $email, $contactNumber, $address)
@@ -80,7 +79,7 @@ function getUserIDUserTable($con, $email)
     return false;
 }
 
-function updateCustomerTable($con, $userId, $address, $contactNumber, $specification, $isApproved, $profilePicturePath, $coverPhotoPath, $description)
+function updateCustomerTable($con, $userId, $address, $contactNumber, )
 {
     $qry = "INSERT INTO customer (UserID, WorkAddress, WorkPhoneNumber, Specification, IsApproved, ProfilePicture, CoverPhoto, Description) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($con);
@@ -99,17 +98,18 @@ function updateCustomerTable($con, $userId, $address, $contactNumber, $specifica
     mysqli_stmt_close($stmt);
     return true;
 }
-function updateVehecleTable($con, $userId, $registrationNumber, $brandName, $modelName)
+
+function updateVehicleTable($con, $userId, $registrationNumber, $brandName, $modelName)
 {
-    $qry = "INSERT INTO vehicle (UserID, RegistrationNUmber, Brand,Model) VALUES (?, ?, ?);";
+    $qry = "INSERT INTO vehicle (UserID, RegistrationNumber, Brand, Model) VALUES (?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($con);
 
     if (!mysqli_stmt_prepare($stmt, $qry)) {
-        header("Location: Signin-mec.php?error=dbsterrorMechanic");
+        header("Location: Signin-mec.php?error=dbsterrorVehicle");
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, 'issss', $userId, $registrationNumber,$brandName,$modelName);
+    mysqli_stmt_bind_param($stmt, 'isss', $userId, $registrationNumber, $brandName, $modelName);
     if (!mysqli_stmt_execute($stmt)) {
         header("Location: Signin-mec.php?error=executionerror");
         exit();
@@ -118,3 +118,4 @@ function updateVehecleTable($con, $userId, $registrationNumber, $brandName, $mod
     mysqli_stmt_close($stmt);
     return true;
 }
+?>

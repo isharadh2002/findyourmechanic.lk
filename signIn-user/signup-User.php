@@ -40,34 +40,22 @@
         <input type="text" name="address" id="address" required />
       </div>
       <br><br>
-      <hr style="border: 3px solid #ccc; margin: 15px 60px;">
-      <p style="text-align: center; color:blue;">It is require to fill folowwing detail correctly!</p><br>
+      <div class="inputs">
+        <label for="profilePicture">Profile Picture:</label>
+        <input type="text" name="profilePicture" id="profilePicture" required />
+      </div>
+      
       <div class="inputs">
         <label for="numberOfVehicles">Number Of Vehicles:</label>
         <input type="number" name="numberOfVehicles" id="numberOfVehicles" required />
       </div>
       <br>
-      <hr style="border: 3px solid #ccc; margin: 15px 60px;"><br>
-      <?php $noOfVehicles = $_POST['numberOfVehicles'];
-      for ($i = 0; $i <= $noOfVehicles; $i++) {
-        echo '<div id="vehicleDetails">
-        <div class="inputs">
-          <label for="registrationNumber">RegistrationNumber:</label>
-          <input type="text" name="registrationNumber" id="registrationNumber" required />
-        </div>
-        <br><br>
-        <div class="inputs">
-          <label for="brandName">Brand Name:</label>
-          <input type="text" name="brandName" id="brandName" required />
-        </div>
-        <br><br>
-        <div class="inputs">
-          <label for="modelName">Model Name:</label>
-          <input type="text" name="modelName" id="modelName" required />
-        </div>
-      </div>
-      <hr style="border: 3px solid #ccc; margin: 15px 60px;"><br>';
-      } ?>
+      
+      
+     
+       
+   
+    
 
       <br><br>
       <div class="center-message">

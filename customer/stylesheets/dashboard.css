@@ -141,14 +141,6 @@
     cursor: pointer;
 }
 
-footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #f9fafc;
-    color: #666;
-    font-size: 0.875rem;
-}
-
 .feedback button:hover {
     background-color: #155cb0;
 }

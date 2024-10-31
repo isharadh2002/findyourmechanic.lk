@@ -7,6 +7,7 @@
     <title>Appointments</title>
     <link rel="stylesheet" href="stylesheets/appointments.css">
     <link rel="stylesheet" href="stylesheets/header.css">
+    <link rel="stylesheet" href="../stylesheets/footer.css">
     <style>
         #appointments {
             text-decoration: underline;
@@ -46,7 +47,7 @@
                         <td>John's Auto Repair</td>
                         <td>Honda Civic - ABC1234</td>
                         <td><span class="status-pending">Pending</span></td>
-                        <td><button class="view-btn">View</button></td>
+                        <td><button class="view-btn" onclick="redirectToDetails(3)">View</button></td>
                     </tr>
                     <!-- Add more pending appointments here -->
                 </tbody>
@@ -74,13 +75,22 @@
                         <td>Quick Fix Garage</td>
                         <td>Toyota Corolla - XYZ5678</td>
                         <td><span class="status-completed">Completed</span></td>
-                        <td><button class="view-btn">View</button></td>
+                        <td><button class="view-btn" onclick="redirectToDetails(2)">View</button></td>
                     </tr>
                     <!-- Add more past appointments here -->
                 </tbody>
             </table>
         </div>
     </div>
+    <?php
+        require "../shared/footer.php";
+    ?>
+    <script>
+        let AppointmentID;
+        function redirectToDetails(AppointmentID){
+            window.location.href = 'appointment-details?appointment_id='+AppointmentID;
+        }
+    </script>
 </body>
 
 </html>

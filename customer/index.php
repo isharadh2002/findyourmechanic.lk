@@ -27,6 +27,7 @@ $_SESSION['UserID'] = $userID;
     <title>Customer Dashboard - Find Your Mechanic</title>
     <link rel="stylesheet" href="stylesheets/dashboard.css">
     <link rel="stylesheet" href="stylesheets/header.css">
+    <link rel="stylesheet" href="../stylesheets/footer.css">
     <style>
         #dashboard {
             text-decoration: underline;
@@ -127,9 +128,9 @@ $_SESSION['UserID'] = $userID;
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Vehicle Mechanic App. All rights reserved.</p>
-    </footer>
+    <?php
+        require "../shared/footer.php";
+    ?>
 </body>
 
 </html>

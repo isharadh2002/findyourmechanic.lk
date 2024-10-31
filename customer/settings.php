@@ -7,6 +7,7 @@
     <title>Account Settings</title>
     <link rel="stylesheet" href="stylesheets/header.css">
     <link rel="stylesheet" href="stylesheets/settings.css">
+    <link rel="stylesheet" href="../stylesheets/footer.css">
     <script defer src="script.js"></script>
     <style>
         #settings {
@@ -113,6 +114,10 @@
             }
         });
     </script>
+    <br>
+    <?php
+        require "../shared/footer.php";
+    ?>
 </body>
 
 </html>

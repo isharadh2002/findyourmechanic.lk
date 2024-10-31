@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     endif; ?>
     <script>
         function redirectToAddVehicle() {
-            window.location.href = '../add-vehicle.php';
+            window.location.href = '../vehicles.php';
         }
     </script>
 </body>

@@ -244,7 +244,6 @@ require __DIR__ . "/shared/connect.php";
             <p>&copy; 2024 FindYourMechanic.lk</p>
         </div>
     </footer>
-
 </body>
 
 </html>

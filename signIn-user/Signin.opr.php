@@ -59,31 +59,9 @@ if (isset($_POST['submitButton'])) {
     } else {
         header("Location: Signin-mec.php?error=fileUploadError");
     }
-    /* session_start();
+     session_start();
 
-    // Check if the file was uploaded
-    if (isset($_FILES['Qulification'])) {
-        $file = $_FILES['Qulification'];
-
-        // Check for upload errors
-        if ($file['error'] === UPLOAD_ERR_OK) {
-            // Move the uploaded file to a directory (optional)
-            $uploadDir = 'uploads/'; // Make sure this directory exists and is writable
-            $uploadFilePath = $uploadDir . basename($file['name']);
-
-            if (move_uploaded_file($file['tmp_name'], $uploadFilePath)) {
-                // Store the filename in session
-                $_SESSION['uploaded_file'] = $file['name'];
-                header("Location:../msg.php?error=sucessFileUploading");
-            } else {
-                header("Location:../msg.php?error=FailedUploadingFile");
-            }
-        } else {
-            header("Location:../msg.php?error=ErrorDuringUpload");
-        }
-    } else {
-        header("Location:../msg.php?error=Error");
-    }*/
+    
     mysqli_close($con);
 
 

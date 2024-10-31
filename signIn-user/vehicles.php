@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flexbox with Hover Effect</title>
+    <title>Document</title>
     <style>
         /* Basic reset */
         * {
@@ -74,6 +74,7 @@
 
 <body>
     <div class="flex-container">
+        hello
         <input type="text" placeholder="Enter your name">
         <input type="email" placeholder="Enter your email">
         <input type="password" placeholder="Enter your password">

@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(isset($_SESSION['UserID'])){
+    $UserID = $_SESSION['UserID'];
+    print_r($UserID);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

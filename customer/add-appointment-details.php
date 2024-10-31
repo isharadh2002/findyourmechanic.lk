@@ -54,20 +54,42 @@ $stmt->close();
 
                 <label for="vehicle_id">Select Your Vehicle:</label>
                 <select id="vehicle_id" name="vehicle_id" required>
+
                     <?php
                     //$userId = $_SESSION['user_id'];
                     $userID = 3;
                     $sql = "SELECT * FROM vehicle WHERE UserID = $userID";
                     $result = mysqli_query($conn, $sql);
                     if (mysqli_num_rows($result) > 0) {
+                        echo "<option value = '' disabled selected>Select a vehicle</option>";
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<option value=\"{$row['VehicleID']}\">{$row['RegistrationNumber']} - {$row['Brand']} {$row['Model']}</option>";
                             //print_r($row);
                         }
                     } else {
-                        echo "<option>No Vehicles Found</option>";
+                        echo "<option disabled selected value=\"\">No Vehicles Found</option>";
                     }
                     ?>
+                </select>
+
+                <label for="service_type">Service Type</label>
+                <select id="service_type" name="service_type" required>
+                    <option disabled selected value="">Select a Service</option>
+                    <option value="Oil Change">Oil Change</option>
+                    <option value="Wheel Alignment">Wheel Alignment</option>
+                    <option value="Brake Inspection">Brake Inspection</option>
+                    <option value="Battery Replacement">Battery Replacement</option>
+                    <option value="Engine Tune-Up">Engine Tune-Up</option>
+                    <option value="Transmission Service">Transmission Service</option>
+                    <option value="Suspension Repair">Suspension Repair</option>
+                    <option value="Alignment Service">Alignment Service</option>
+                    <option value="Cooling System Flush">Cooling System Flush</option>
+                    <option value="Electrical System Diagnosis">Electrical System Diagnosis</option>
+                    <option value="Fluid Leak Repair">Fluid Leak Repair</option>
+                    <option value="Windshield Wiper Replacement">Windshield Wiper Replacement</option>
+                    <option value="AC Recharge">AC Recharge</option>
+                    <option value="Exhaust System Repair">Exhaust System Repair</option>
+                    <option value="Preventive Maintenance Check">Preventive Maintenance Check</option>
                 </select>
 
                 <label for="appointment_date">Date:</label>
@@ -106,23 +128,45 @@ $stmt->close();
     <script>
         const form = document.getElementById("appointmentForm");
         const modal = document.getElementById("confirmationModal");
-        const warningModal = document.getElementById("warningModal"); // New warning modal
+        const warningModal = document.getElementById("warningModal"); // Warning modal for missing fields
         const submitBtn = document.getElementById("submitBtn");
         const confirmYes = document.getElementById("confirmYes");
         const confirmNo = document.getElementById("confirmNo");
         const warningOk = document.getElementById("warningOk"); // OK button for warning modal
         const vehicleSelect = document.getElementById("vehicle_id");
+        const serviceTypeSelect = document.getElementById("service_type");
+        const appointmentDate = document.getElementById("appointment_date");
+        const appointmentTime = document.getElementById("appointment_time");
+        const issueDescription = document.getElementById("issue_description");
 
         submitBtn.addEventListener("click", function(event) {
             // Check if a vehicle is selected
             if (vehicleSelect.value === "" || vehicleSelect.value === "No Vehicles Found") {
                 event.preventDefault();
+                warningModal.querySelector("p").textContent = "Please select a vehicle to continue.";
                 warningModal.style.display = "flex"; // Show warning modal
-            } else {
-                // Show confirmation modal if a vehicle is selected
-                event.preventDefault();
-                modal.style.display = "flex"; // Use flex to center modal content
+                return;
             }
+
+            //Checking if service type is selected
+            if (serviceTypeSelect.value === "" || serviceTypeSelect.value === "Select a Service") {
+                event.preventDefault();
+                warningModal.querySelector("p").textContent = "Please select a service type to continue.";
+                warningModal.style.display = "flex"; // Show warning modal
+                return;
+            }
+
+            // Check if the date, time, and issue description are filled
+            if (!appointmentDate.value || !appointmentTime.value || !issueDescription.value) {
+                event.preventDefault();
+                warningModal.querySelector("p").textContent = "Please fill in all fields (Date, Time, and Description) to continue.";
+                warningModal.style.display = "flex"; // Show warning modal
+                return;
+            }
+
+            // Show confirmation modal if all validations pass
+            event.preventDefault();
+            modal.style.display = "flex"; // Use flex to center modal content
         });
 
         confirmYes.addEventListener("click", function() {

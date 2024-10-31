@@ -69,7 +69,7 @@ $redirectAfter = 5;
     </script>
 </head>
 <body>
-    <div class="logout-container">
+    <div class="logout-container"> 
         <h1>You've Logged Out</h1>
         <p>You have been successfully logged out.</p>
         <p>Redirecting to the homepage in <span id="countdown"><?= $redirectAfter ?></span> seconds...</p>

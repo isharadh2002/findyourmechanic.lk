@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mechanic Dashboard</title>
+    <link rel="stylesheet" href="../stylesheets/header.css">
     <link rel="stylesheet" href="../stylesheets/footer.css">
     <style>
         /* General Reset and Layout */
@@ -113,10 +114,10 @@
     <div class="navbar">
         <h1>Mechanic Dashboard</h1>
         <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Analytics</a>
-            <a href="#">Appointments</a>
-            <a href="#">Inventory</a>
+            <a href="/findyourmechanic/mechanic/appointment.php">Appointments</a>
+            <a href="../payment.php">Payments</a>
+            <a href='../service.php'>Services</a>
+            <a href="../profile.php">Profile</a>
         </div>
     </div>
 
@@ -180,6 +181,8 @@
     </div>
 <?php
 require "../shared/footer.php"
+
 ?>
+
 </body>
 </html>

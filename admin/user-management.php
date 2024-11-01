@@ -24,7 +24,7 @@
     <?php
     $query = "SELECT * FROM `user`";
     $result = mysqli_query($con,  $query);
-    $users = [];
+    $users = array();
     if (mysqli_num_rows($result) > 0):
     ?>
         <table class="user-table">

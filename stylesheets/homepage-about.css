@@ -1,0 +1,23 @@
+.about-container {
+    padding: 10px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #86CEFA, #3373C4);
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.about-container h1 {
+    font-size: 40px;
+    margin: 30px auto;
+}
+
+.about-container p {
+    max-width: 1200px;
+    margin: 20px auto;
+    font-size: 20px;
+    line-height: 1.6;
+}

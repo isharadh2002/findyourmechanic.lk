@@ -30,7 +30,7 @@ function emailExists($con, $email, $name)
     $qry = "SELECT UserID FROM (SELECT * FROM user WHERE UserType='customer') a WHERE a.Username=? OR a.Email=?;";
     $stmt = mysqli_stmt_init($con);
     if (!mysqli_stmt_prepare($stmt, $qry)) {
-        header("Location: Signin-mec.php?error=dberror");
+        header("Location:../msg.php?error=db_error");
         exit();
     }
 
@@ -47,11 +47,12 @@ function insertDataUserTable($con, $name, $password, $usertype, $email, $contact
     $qry = "INSERT INTO user (Username, Password, UserType, Email, PhoneNumber, Address) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($con);
     if (!mysqli_stmt_prepare($stmt, $qry)) {
-        header("Location: Signin-mec.php?error=dbsterror");
+        header("Location:../msg.php?error=db_st_error");
         exit();
     }
-
-    mysqli_stmt_bind_param($stmt, 'ssssss', $name, $hashedPwd, $usertype, $email, $contactNumber, $address);
+_
+   
+//mysqli_stmt_bind-param($stmt, 'ssssss', $name, $hashedPwd, $usertype, $email, $contactNumber, $address);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 }
@@ -61,7 +62,7 @@ function getUserIDUserTable($con, $email)
     $qry = "SELECT UserID FROM user WHERE Email=?;";
     $stmt = mysqli_stmt_init($con);
     if (!mysqli_stmt_prepare($stmt, $qry)) {
-        header("Location: Signin-mec.php?error=dberror");
+        header("Location:../msg.php?error=db_error");
         exit();
     }
 
@@ -79,19 +80,19 @@ function getUserIDUserTable($con, $email)
     return false;
 }
 
-function updateCustomerTable($con, $userId, $address, $contactNumber,)
+function updateCustomerTable($con, $userId, $noOfVehicle, $profilePicture)
 {
-    $qry = "INSERT INTO customer (UserID, WorkAddress, WorkPhoneNumber, Specification, IsApproved, ProfilePicture, CoverPhoto, Description) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    $qry = "INSERT INTO customer (UserID, NoOfVehicles,ProfilePicture) VALUES (?, ?, ?);";
     $stmt = mysqli_stmt_init($con);
 
     if (!mysqli_stmt_prepare($stmt, $qry)) {
-        header("Location: Signin-mec.php?error=dbsterrorMechanic");
+        header("Location: ../msg.php?error=db_st_error_Mechanic");
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, 'isssisss', $userId, $address, $contactNumber, $specification, $isApproved, $profilePicturePath, $coverPhotoPath, $description);
+    mysqli_stmt_bind_param($stmt, 'iis', $userId, $noOfVehicle, $profilePicture);
     if (!mysqli_stmt_execute($stmt)) {
-        header("Location: Signin-mec.php?error=executionerror");
+        header("Location: ../msg.php?error=execution_error");
         exit();
     }
 
@@ -105,13 +106,13 @@ function updateVehicleTable($con, $userId, $registrationNumber, $brandName, $mod
     $stmt = mysqli_stmt_init($con);
 
     if (!mysqli_stmt_prepare($stmt, $qry)) {
-        header("Location: Signin-mec.php?error=dbsterrorVehicle");
+        header("Location:../msg.php?error=db_st_errorVehicle");
         exit();
     }
 
     mysqli_stmt_bind_param($stmt, 'isss', $userId, $registrationNumber, $brandName, $modelName);
     if (!mysqli_stmt_execute($stmt)) {
-        header("Location: Signin-mec.php?error=executionerror");
+        header("Location:../msg.php?error=execution_error");
         exit();
     }
 

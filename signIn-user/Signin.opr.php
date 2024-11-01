@@ -16,9 +16,9 @@ if (isset($_POST['submitButton'])) {
 
     // Upload profile picture and cover photo
     $uploadDir = 'uploads/'; // Ensure this directory exists and is writable
-    
 
-    $profilePicturePath =  $uploadDir . basename($profilePicture['name']) ;
+
+    $profilePicturePath =  $uploadDir . basename($profilePicture['name']);
 
 
     if (isInputsEmpty($name, $email, $password, $contactNumber, $address, $profilePicture)) {
@@ -52,8 +52,13 @@ if (isset($_POST['submitButton'])) {
     }
 
     if (updateVehicleTable($con, $userId, $registrationNumber, $brandName, $modelName)) {
+        session_start();
+        $_SESSION['userId'] = $userId;
+
         header("Location: Signin-mec.php?success=mechanicRegistrationSuccess");
     }
+    session_start();
+    $_SESSION['userId'] = $userId;
     mysqli_close($con);
     exit();
 }

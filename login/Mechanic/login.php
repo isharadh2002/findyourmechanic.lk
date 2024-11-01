@@ -9,7 +9,7 @@ require_once("header.php");
     <hr>
 
 
-    <form action="login.opr.php" method="post">
+    <form action="Login.opr.php" method="post">
       <br>
       <div class="inputs">
         <label for="email">E-Mail:</label>
@@ -21,14 +21,14 @@ require_once("header.php");
       <br><br>
       <div class="inputs">
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" onclick="onclic('email','password');"   required />
+        <input type="password" name="password" id="password" required />
         <br><br>
       </div>
 
 
       <br>
-      
-      <p  id="msg">The Value is empty</p>
+
+      <p id="msg">The Value is empty</p>
       <br>
 
       <button type="submit" class="submitButton" name="submitButton">LogIn</button>

@@ -1,34 +1,36 @@
 <?php
 
-
 require_once("../../shared/connect.php");
 require_once("function.php");
 
-
 if (isset($_POST['submitButton'])) {
     // Gather POST data
-    
     $email = $_POST['email'];
     $password = $_POST['password'];
-    
 
-
-    if (isInputsEmpty( $email, $password)) 
-        header("Location: Signin-mec.php?error=emptyInputs");
+    // Check if inputs are empty
+    if (isInputsEmpty($email, $password)) {
+        header("Location:../../msg.php?error=emptyInputs");
         exit();
     }
 
-    if (inValidResponse( $email )) {
-        header("Location: Signin-mec.php?error=invalidInputs");
+    // Validate email
+    if (inValidResponse($email)) {
+        header("Location:../../msg.php?error=invalidInputs");
         exit();
     }
-    $userId=emailExists($con, $email, $name);
-    if ($userId > 0) {
-        header("Location: Signin-mec.php?error=UserEmailExists");
+
+    // Check if email already exists
+    $userId = emailExists($con, $email);
+    if (!$userId) {
+        header("Location:../../msg.php?error=UserEmailNOTExists");
         exit();
     }
+
+    // If no error, start session and store user ID
     session_start();
-    $_SESSION['mechanicId']=$mechanicId;
+    $_SESSION['userId'] = $userId;
+
+    header("Location:../../msg.php?error=success");
     mysqli_close($con);
-
-
+}

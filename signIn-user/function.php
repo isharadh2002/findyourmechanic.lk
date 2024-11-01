@@ -1,7 +1,7 @@
 <?php
 
 function isInputsEmpty($name, $email, $password, $contactNumber, $address, $registrationNumber, $brandName, $modelName)
-{  
+{
     return empty($name) || empty($email) || empty($password) || empty($contactNumber) || empty($address) || empty($registrationNumber) || empty($brandName) || empty($modelName);
 }
 
@@ -27,7 +27,7 @@ function invalidContactNumber($contactNumber)
 
 function emailExists($con, $email, $name)
 {
-    $qry = "SELECT UserID FROM (SELECT * FROM user WHERE UserType='user') a WHERE a.Username=? OR a.Email=?;";
+    $qry = "SELECT UserID FROM (SELECT * FROM user WHERE UserType='customer') a WHERE a.Username=? OR a.Email=?;";
     $stmt = mysqli_stmt_init($con);
     if (!mysqli_stmt_prepare($stmt, $qry)) {
         header("Location: Signin-mec.php?error=dberror");
@@ -79,7 +79,7 @@ function getUserIDUserTable($con, $email)
     return false;
 }
 
-function updateCustomerTable($con, $userId, $address, $contactNumber, )
+function updateCustomerTable($con, $userId, $address, $contactNumber,)
 {
     $qry = "INSERT INTO customer (UserID, WorkAddress, WorkPhoneNumber, Specification, IsApproved, ProfilePicture, CoverPhoto, Description) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($con);
@@ -118,4 +118,3 @@ function updateVehicleTable($con, $userId, $registrationNumber, $brandName, $mod
     mysqli_stmt_close($stmt);
     return true;
 }
-?>

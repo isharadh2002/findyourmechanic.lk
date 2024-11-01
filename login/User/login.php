@@ -10,7 +10,7 @@ require_once("login.opr.php");
     <hr>
 
 
-    <form action="login.opr.php" method="post">
+    <form action="Login.opr.php" method="post">
       <br>
       <div class="inputs">
         <label for="email">E-Mail:</label>
@@ -32,7 +32,7 @@ require_once("login.opr.php");
       <p id="msg">The Value is empty</p>
       <br>
 
-      <button type="submit" class="submitButton" name="submitButton" onclick="onclic('email','password');" >LogIn</button>
+      <button type="submit" class="submitButton" name="submitButton" onclick="onclic('email','password');">LogIn</button>
 
     </form>
 

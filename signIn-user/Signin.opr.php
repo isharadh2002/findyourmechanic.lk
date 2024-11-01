@@ -9,7 +9,7 @@ if (isset($_POST['submitButton'])) {
     $password = $_POST['password'];
     $contactNumber = $_POST['contactNumber'];
     $address = $_POST['address'];
-    $usertype = 'user';
+    $usertype = 'customer';
     $profilePicture = $_FILES['profilePicture'];
 
 

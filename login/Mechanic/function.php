@@ -19,11 +19,11 @@ function emailExists($con, $email)
 {
     $qry = "SELECT UserID FROM (SELECT * FROM user WHERE UserType='mechanic') a WHERE a.Email=?;";
     $stmt = mysqli_stmt_init($con);
-   
-   
-   
-   
-   
+
+
+
+
+
     if (!mysqli_stmt_prepare($stmt, $qry)) {
         header("Location: ../../msg.php?error=db_error");
         exit();

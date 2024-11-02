@@ -6,21 +6,14 @@
     <title>Mechanic Dashboard</title>
     
     <?php
-require "../admin/header.php"
+   require "../admin/header.php";
 ?>
+
 <link rel="stylesheet" href="../stylesheets/header.css">
- 
  <link rel="stylesheet" href="../stylesheets/footer.css">
     
     <style>
-       
-    
-   
-   
-      
 
-
-        
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;

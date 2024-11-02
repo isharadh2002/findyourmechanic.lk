@@ -1,15 +1,9 @@
 <?php
 
-function isInputsEmpty($name, $email, $password, $contactNumber, $address, $registrationNumber, $brandName, $modelName)
+function isInputsEmpty($name, $email, $password, $contactNumber, $address)
 {
-    return empty($name) || empty($email) || empty($password) || empty($contactNumber) || empty($address) || empty($registrationNumber) || empty($brandName) || empty($modelName);
+    return empty($name) || empty($email) || empty($password) || empty($contactNumber) || empty($address);
 }
-
-function inValidResponse($name, $email, $contactNumber)
-{
-    return invalidUsername($name) || invalidEmail($email) || invalidContactNumber($contactNumber);
-}
-
 function invalidUsername($name)
 {
     return !preg_match('/^[a-zA-Z0-9_]*$/', $name);
@@ -24,6 +18,12 @@ function invalidContactNumber($contactNumber)
 {
     return !preg_match('/^\+?[0-9]{0,11}$/', $contactNumber);
 }
+
+function inValidResponse($name, $email, $contactNumber)
+{
+    return invalidUsername($name) || invalidEmail($email) || invalidContactNumber($contactNumber);
+}
+
 
 function emailExists($con, $email, $name)
 {
@@ -80,7 +80,7 @@ function getUserIDUserTable($con, $email)
     return false;
 }
 
-function updateCustomerTable($con, $userId, $noOfVehicle, $profilePicture)
+function updateCustomerTable($con, $userId, $noOfVehicle, $profilePicturePath)
 {
     $qry = "INSERT INTO customer (UserID, NoOfVehicles,ProfilePicture) VALUES (?, ?, ?);";
     $stmt = mysqli_stmt_init($con);
@@ -90,8 +90,9 @@ function updateCustomerTable($con, $userId, $noOfVehicle, $profilePicture)
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, 'iis', $userId, $noOfVehicle, $profilePicture);
+    mysqli_stmt_bind_param($stmt, 'iis', $userId, $noOfVehicle, $profilePicturePath);
     if (!mysqli_stmt_execute($stmt)) {
+        error_log("Execution failed: " . mysqli_stmt_error($stmt));
         header("Location: ../msg.php?error=execution_error");
         exit();
     }

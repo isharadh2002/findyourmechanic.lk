@@ -11,7 +11,7 @@ if (isset($_POST['submitButton'])) {
     $address = $_POST['address'];
     $usertype = 'customer';
     $profilePicture = $_FILES['profilePicture'];
-    $noOfVehicle = $_POST['noOfVehicles'];
+    $noOfVehicle = $_POST['numberOfVehicles'];
 
 
 
@@ -46,21 +46,20 @@ if (isset($_POST['submitButton'])) {
     }
 
     if ($profilePicture && move_uploaded_file($profilePicture['tmp_name'], $profilePicturePath)) {
-        updateCustomerTable($con, $userId, $noOfVehicle, $profilePicture);
+        updateCustomerTable($con, $userId, $noOfVehicle, $profilePicturePath);
     } else {
         header("Location: ../msg.php?error=fileUploadError");
         exit();
     }
 
-    if (updateVehicleTable($con, $userId, $registrationNumber, $brandName, $modelName)) {
-        session_start();
-        $_SESSION['userId'] = $userId;
-
+    /*if (!updateVehicleTable($con, $userId, $registrationNumber, $brandName, $modelName)) {
+        
         header("Location: ../msg.php?success=mechanicRegistrationSuccess");
-    }
+    }*/
     session_start();
     $_SESSION['noOfVehicles'] = $noOfVehicle;
     $_SESSION['userId'] = $userId;
     mysqli_close($con);
+    header('Location:vehicles.php?userid=.$userid.$noof=.$noOfVehicles');
     exit();
 }

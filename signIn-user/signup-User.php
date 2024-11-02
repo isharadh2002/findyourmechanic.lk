@@ -42,20 +42,20 @@
       <br><br>
       <div class="inputs">
         <label for="profilePicture">Profile Picture:</label>
-        <input type="text" name="profilePicture" id="profilePicture" required />
+        <input type="file" name="profilePicture" id="profilePicture" />
       </div>
-      
+
       <div class="inputs">
         <label for="numberOfVehicles">Number Of Vehicles:</label>
         <input type="number" name="numberOfVehicles" id="numberOfVehicles" required />
       </div>
       <br>
-      
-      
-     
-       
-   
-    
+
+
+
+
+
+
 
       <br><br>
       <div class="center-message">

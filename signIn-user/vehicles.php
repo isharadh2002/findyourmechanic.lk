@@ -1,18 +1,14 @@
-<?php 
-if(isset($_SESSION['userId'])){
+<?php
+session_start();
 
-$userId=$_SESSION['userId'];
-
-
-
-
+if (isset($_SESSION['userId']) && isset($_SESSION['noOfVehicles'])) {
+  $userId = $_SESSION['userId'];
+  $noOfVehicles = $_SESSION['noOfVehicles'];
+} else {
+  header('Location:../msg.php?error=filenotset');
+  exit();
 }
-
-
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,52 +18,33 @@ $userId=$_SESSION['userId'];
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vehicle Details</title>
 
-
   <style>
+    /* Your CSS styling */
     body {
       display: flex;
       justify-content: center;
       align-items: center;
       background-color: #a3e7f036;
-
-
     }
-
 
     .container {
       display: flex;
       justify-content: center;
       align-items: center;
-
       margin: 2vh;
-
       flex-direction: column;
       flex-wrap: wrap;
-
-
-
-
     }
 
-    .upperSection {
+    .upperSection,
+    .beforeFooter {
+
       display: flex;
       justify-content: center;
       align-items: center;
-
       margin: 2vh;
-      display: flex;
       flex-wrap: wrap;
       flex-direction: column;
-
-
-
-
-    }
-
-    .centered-flex {
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
     .loverSection {
@@ -76,12 +53,12 @@ $userId=$_SESSION['userId'];
       align-items: center;
       margin: 2vh;
       flex-wrap: wrap;
+      align-content: space-around;
     }
 
     .vehicles {
       width: auto;
       height: auto;
-
       margin: 1vh;
       padding: 2vh;
       background-color: #90bfdc4f;
@@ -103,10 +80,7 @@ $userId=$_SESSION['userId'];
       flex-direction: column;
     }
 
-
     p {
-
-
       margin-bottom: 4.6vh;
       font-weight: 200;
       font-size: x-large;
@@ -118,8 +92,23 @@ $userId=$_SESSION['userId'];
       padding: 2.5vh;
       border: none;
       border-radius: 10px;
+    }
 
+    .beforeFooter input[type='submit'] {
+      background-color: #0295f161;
+      color: #30629b;
+      padding: 24px 48px;
+      font-size: 24px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 10px;
+      border: none;
+      transition: background-color 0.3s ease;
 
+    }
+
+    .beforeFooter[type='submit']:hover {
+      background-color: #0295f1e6;
     }
 
     h1,
@@ -135,39 +124,41 @@ $userId=$_SESSION['userId'];
 
   <div class="container">
     <div class="upperSection">
-      <h1>Fill Your Vehicles Details Here....</h1>
-      <h2>No Of Vehicles:Number</h2>
+      <h1>Fill Your Vehicle Details Here....</h1>
 
-
-
-
-
+      <h2>No Of Vehicles: <?= $noOfVehicles ?></h2>
     </div>
-
-
-
 
     <div class="loverSection">
-      <div class="vehicles">
-        <div id="vehicleDetails">
-          <p>Vehicle 01</p>
-          <div class="inputs">
-
-            <input type="text" name="registrationNumber" id="registrationNumber" required placeholder="Registration Number" />
+      <?php for ($i = 1; $i <= $noOfVehicles; $i++): ?>
+        <div class="vehicles">
+          <div id="vehicleDetails">
+            <p>Vehicle <?= $i ?></p>
+            <div class="inputs">
+              <input type="text" name="registrationNumber_<?= $i ?>" id="registrationNumber_<?= $i ?>" required placeholder="Registration Number" />
+            </div>
+            <br><br>
+            <div class="inputs">
+              <input type="text" name="brandName_<?= $i ?>" id="brandName_<?= $i ?>" required placeholder="Brand Name" />
+            </div>
+            <br><br>
+            <div class="inputs">
+              <input type="text" name="modelName_<?= $i ?>" id="modelName_<?= $i ?>" required placeholder="Model Name" />
+            </div>
           </div>
-          <br><br>
-          <div class="inputs">
-            <input type="text" name="brandName" id="brandName" required placeholder="Brand Name" />
-          </div>
-          <br><br>
-          <div class="inputs">
-            <input type="text" name="modelName" id="modelName" required placeholder="Model Name" />
-          </div>
-
         </div>
-      </div>
+
+      <?php endfor; ?>
+    </div>
+    <div class="beforeFooter">
+
+      <input type="submit" class="submitButton" name="submitButton" value="Sign In">
     </div>
   </div>
+
+
+
+
 </body>
 
 </html>

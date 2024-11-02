@@ -136,6 +136,20 @@ require_once("../shared/connect.php");
       border-radius: 10px;
     }
 
+    input[type='file'] {
+
+      background-color: #C4E1F6;
+      align-items: center;
+
+      color: white;
+      padding: 16px 32px;
+      text-decoration: none;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 10px;
+      border: none;
+    }
+
     .center-message {
       text-align: center;
       font-size: 20px;

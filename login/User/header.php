@@ -46,7 +46,7 @@ require_once("../../shared/connect.php");
 
     li a.active {
       color: white;
-      background-color: #04aa6d;
+      background-color: #0295f1bd;
     }
 
 
@@ -84,6 +84,12 @@ require_once("../../shared/connect.php");
       border-radius: 36px;
     }
 
+    .formElements h1 {
+
+      color: #0295f1bd;
+
+    }
+
     form {
       display: flex;
       flex-direction: column;
@@ -108,7 +114,7 @@ require_once("../../shared/connect.php");
     }
 
     .submitButton {
-      background-color: #04aa6d;
+      background-color: #0295f1bd;
 
       color: white;
       padding: 16px 32px;
@@ -126,6 +132,10 @@ require_once("../../shared/connect.php");
       display: none;
 
 
+    }
+
+    .submitButton:hover {
+      background-color: #0295f1e6;
     }
   </style>
 

@@ -14,7 +14,7 @@ require_once("../shared/connect.php");
   <title>sign In|User</title>
   <style>
     body {
-      background-color: bisque;
+      background-color: white;
       margin: 1vh;
       opacity: 1;
       max-width: 100%;
@@ -52,7 +52,7 @@ require_once("../shared/connect.php");
 
     li a.active {
       color: white;
-      background-color: #04aa6d;
+      background-color: #0295f1bd;
     }
 
     @media screen and (max-width: 400px) {
@@ -77,17 +77,24 @@ require_once("../shared/connect.php");
     }
 
     .formElements {
-      background-color: aliceblue;
-      width: 100%;
+      background-color: white;
+      width: 30%;
       max-width: 600px;
       padding: 40px 20px;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      ;
       border-radius: 20px;
       border: 1px solid #ccc;
+    }
+
+    .formElements h1 {
+
+      color: #0295f1bd;
+
     }
 
     form {
@@ -108,7 +115,7 @@ require_once("../shared/connect.php");
     }
 
     input[type='submit'] {
-      background-color: #04aa6d;
+      background-color: #0295f1bd;
       color: white;
       padding: 16px;
       font-size: 16px;
@@ -120,7 +127,7 @@ require_once("../shared/connect.php");
     }
 
     input[type='submit']:hover {
-      background-color: #037a56;
+      background-color: #0295f1e6;
     }
 
     button {

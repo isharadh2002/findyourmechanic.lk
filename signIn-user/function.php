@@ -50,9 +50,9 @@ function insertDataUserTable($con, $name, $password, $usertype, $email, $contact
         header("Location:../msg.php?error=db_st_error");
         exit();
     }
-_
-   
-//mysqli_stmt_bind-param($stmt, 'ssssss', $name, $hashedPwd, $usertype, $email, $contactNumber, $address);
+
+
+    mysqli_stmt_bind_param($stmt, 'ssssss', $name, $hashedPwd, $usertype, $email, $contactNumber, $address);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 }

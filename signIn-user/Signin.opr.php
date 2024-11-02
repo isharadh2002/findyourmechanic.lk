@@ -11,6 +11,7 @@ if (isset($_POST['submitButton'])) {
     $address = $_POST['address'];
     $usertype = 'customer';
     $profilePicture = $_FILES['profilePicture'];
+    $noOfVehicle = $_POST['noOfVehicles'];
 
 
 
@@ -22,17 +23,17 @@ if (isset($_POST['submitButton'])) {
 
 
     if (isInputsEmpty($name, $email, $password, $contactNumber, $address, $profilePicture)) {
-        header("Location: Signin-mec.php?error=emptyInputs");
+        header("Location: ../msg.php?error=emptyInputs");
         exit();
     }
 
     if (inValidResponse($name, $email, $contactNumber)) {
-        header("Location: Signin-mec.php?error=invalidInputs");
+        header("Location: ../msg.php?error=invalidInputs");
         exit();
     }
 
     if (emailExists($con, $email, $name) > 0) {
-        header("Location: Signin-mec.php?error=UserEmailExists");
+        header("Location: ../msg.php?error=UserEmailExists");
         exit();
     }
 
@@ -40,14 +41,14 @@ if (isset($_POST['submitButton'])) {
 
     $userId = getUserIDUserTable($con, $email);
     if (!$userId) {
-        header("Location: Signin-mec.php?error=userRetrievalError");
+        header("Location: ../msg.php?error=userRetrievalError");
         exit();
     }
 
     if ($profilePicture && move_uploaded_file($profilePicture['tmp_name'], $profilePicturePath)) {
-        updateCustomerTable($con, $userId, $address, $contactNumber,);
+        updateCustomerTable($con, $userId, $noOfVehicle, $profilePicture);
     } else {
-        header("Location: Signin-mec.php?error=fileUploadError");
+        header("Location: ../msg.php?error=fileUploadError");
         exit();
     }
 
@@ -55,9 +56,10 @@ if (isset($_POST['submitButton'])) {
         session_start();
         $_SESSION['userId'] = $userId;
 
-        header("Location: Signin-mec.php?success=mechanicRegistrationSuccess");
+        header("Location: ../msg.php?success=mechanicRegistrationSuccess");
     }
     session_start();
+    $_SESSION['noOfVehicles'] = $noOfVehicle;
     $_SESSION['userId'] = $userId;
     mysqli_close($con);
     exit();

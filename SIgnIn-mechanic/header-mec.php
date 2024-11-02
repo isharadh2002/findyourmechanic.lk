@@ -15,7 +15,7 @@ require_once("../shared/connect.php");
   <title>sign In|Mechanics</title>
   <style>
     body {
-      background-color: bisque;
+      background-color: white;
       min-width: 1165px;
       margin: 1vh;
     }
@@ -49,7 +49,7 @@ require_once("../shared/connect.php");
 
     li a.active {
       color: white;
-      background-color: #04aa6d;
+      background-color: #0295f1bd;
     }
 
 
@@ -78,17 +78,23 @@ require_once("../shared/connect.php");
     }
 
     .formElements {
-      background-color: aliceblue;
+      background-color: white;
+      
       width: 30%;
       height: auto;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      box-shadow: 2vh;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);;
       border-style: outset;
       border-radius: 36px;
     }
+    .formElements h1{
+      color: #0295f1bd;
+    }
+
+    
 
     form input[type='file'] {
       display: flex;
@@ -106,6 +112,10 @@ require_once("../shared/connect.php");
       background-color: transparent;
     }
 
+    input[type='submit']:hover {
+      background-color: #0295f1e6;
+    }
+
     button {
 
       font-size: 16px;
@@ -115,7 +125,7 @@ require_once("../shared/connect.php");
 
     input[type='submit'],
     [type='file'] {
-      background-color: #04aa6d;
+      background-color: #0295f1bd ;
       align-items: center;
 
       color: white;
@@ -136,7 +146,7 @@ require_once("../shared/connect.php");
 
     }
 
-    
+
     input[type='file'] {
 
       background-color: #C4E1F6;

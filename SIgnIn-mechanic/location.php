@@ -14,9 +14,9 @@ if (isset($_POST["latitude"]) && isset($_POST["longitude"])) {
     fclose($file);
 
     // Send a JSON response back to the client
-    echo json_encode(["status" => "success", "latitude" => $latitude, "longitude" => $longitude]);
+    json_encode(["status" => "success", "latitude" => $latitude, "longitude" => $longitude]);
 } else {
-    echo json_encode(["status" => "error", "message" => "Invalid location data"]);
+    json_encode(["status" => "error", "message" => "Invalid location data"]);
 }
 ?>
 
@@ -28,15 +28,115 @@ if (isset($_POST["latitude"]) && isset($_POST["longitude"])) {
     <title>Real-Time Location Tracking</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        body {
+            display: flex;
+
+
+
+
+        }
+
+        .container {
+            margin: 5vh;
+            display: flex;
+            height: 100vh;
+            flex-wrap: nowrap;
+            justify-content: space-evenly;
+        }
+
+        .left {
+
+
+            display: flex;
+            background-color: #0295f1bd;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+            border-radius: 45px;
+            color: white;
+
+
+
+        }
+
+        .left h1 {
+            margin: 0 19vh;
+            text-decoration-style: wavy;
+            font-family: cursive;
+            font-weight: bolder;
+            font-size: 6vh;
+        }
+
+        .right {
+            background-color: whitesmoke;
+            border-radius: 45px;
+
+
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            margin: 0vh 10vh;
+
+
+
+
+
+        }
+
+        .button {
+            justify-content: space-evenly;
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin: 5vh 15vh;
+
+
+        }
+
+
+        button:hover {
+            background-color: #0295f1e6;
+
+        }
+
+        button {
+            background-color: #0295f1bd;
+            align-items: center;
+            color: white;
+            padding: 24px 51px;
+            text-decoration: none;
+            margin: 7vh 1vh;
+            cursor: pointer;
+            border-radius: 10px;
+            border: none;
+            font-size: xx-large;
+            font-weight: 700;
+            font-family: system-ui;
+
+        }
+    </style>
 </head>
 
-<body>
-    <h1>Real-Time Location Tracking</h1>
-    <button onclick="startTracking()">Start Tracking</button>
-    <button onclick="stopTracking()">Stop Tracking</button>
-    <p id="status"></p>
-    <div id="map" style="width: 600px; height: 400px;"></div>
 
+<body>
+    <div class="container">
+        <div class="left">
+            <h1>Real-Time <br>Location<br>Tracking</h1>
+        </div>
+        <div class="right">
+            <div class="button">
+                <button onclick="startTracking()">Start Tracking</button>
+                <button onclick="stopTracking()">Stop Tracking</button>
+            </div>
+            <p id="status"></p>
+            <div id="map" style="width: 600px; height: 400px;"></div>
+        </div>
+    </div>
     <script>
         let map;
         let marker;

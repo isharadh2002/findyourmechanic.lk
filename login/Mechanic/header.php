@@ -11,6 +11,11 @@ require_once("../../shared/connect.php");
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Log In|Mechanic</title>
+
+
+
+
+
   <style>
     body {
       min-width: 1165px;
@@ -46,7 +51,7 @@ require_once("../../shared/connect.php");
 
     li a.active {
       color: white;
-      background-color: #04aa6d;
+      background-color: #0295f1bd;
     }
 
 
@@ -84,6 +89,12 @@ require_once("../../shared/connect.php");
       border-radius: 36px;
     }
 
+    .formElements h1 {
+
+      color: #0295f1bd;
+
+    }
+
     form {
       display: flex;
       flex-direction: column;
@@ -108,7 +119,7 @@ require_once("../../shared/connect.php");
     }
 
     .submitButton {
-      background-color: #04aa6d;
+      background-color: #0295f1bd;
 
       color: white;
       padding: 16px 32px;
@@ -118,7 +129,8 @@ require_once("../../shared/connect.php");
       border-radius: 10px;
       border: none;
     }
-    #msg{
+
+    #msg {
 
       text-align: center;
       color: blue;
@@ -126,8 +138,15 @@ require_once("../../shared/connect.php");
 
 
     }
+
+    .submitButton:hover {
+      background-color: #0295f1e6;
+    }
   </style>
 
+
+
+  </ul>
 </head>
 
 <body>
@@ -136,5 +155,5 @@ require_once("../../shared/connect.php");
 
     <li><a href="../User/login.php">User Login</a></li>
     <li><a class="active" href="login.php">Mechanic Login</a></li>
-    
+
   </ul>

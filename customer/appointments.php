@@ -29,10 +29,11 @@ if (isset($_SESSION['UserID'])) {
     window.location.href='../';</script>";
 }
 
-function convertTimeTo12H($time24) {
+function convertTimeTo12H($time24)
+{
     // Create a DateTime object from the 24-hour format time
     $dateTime = DateTime::createFromFormat('H:i:s', $time24);
-    
+
     // Format the time to 12-hour format with AM/PM
     return $dateTime->format('h:i A');
 }
@@ -82,6 +83,7 @@ function convertTimeTo12H($time24) {
                     </tr>
                 </thead>
                 <tbody>
+                    <!--Template Row
                     <tr>
                         <td>2024-11-05</td>
                         <td>10:00 AM</td>
@@ -89,7 +91,7 @@ function convertTimeTo12H($time24) {
                         <td>Honda Civic - ABC1234</td>
                         <td><span class="status-pending">Pending</span></td>
                         <td><button class="view-btn" onclick="redirectToDetails(3)">View</button></td>
-                    </tr>
+                    </tr>-->
                     <?php
                     foreach ($pendingAppointments as $pendingAppointment):
                     ?>
@@ -99,7 +101,7 @@ function convertTimeTo12H($time24) {
                             <td><?php echo $pendingAppointment['Username'] ?></td>
                             <td><?php echo $pendingAppointment['Brand'] . " " . $pendingAppointment['Model'] . " - " . $pendingAppointment['RegistrationNumber'] ?></td>
                             <td><span class="status-pending"><?php echo $pendingAppointment['Status'] ?></span></td>
-                            <td><button class="view-btn" onclick="redirectToDetails(3)">View</button></td>
+                            <td><button class="view-btn" onclick="redirectToDetails(<?php echo $pendingAppointment['AppointmentID'] ?>)">View</button></td>
                         </tr>
                     <?php
                     endforeach;
@@ -124,6 +126,7 @@ function convertTimeTo12H($time24) {
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Template Row
                     <tr>
                         <td>2024-10-15</td>
                         <td>2:00 PM</td>
@@ -131,7 +134,7 @@ function convertTimeTo12H($time24) {
                         <td>Toyota Corolla - XYZ5678</td>
                         <td><span class="status-completed">Completed</span></td>
                         <td><button class="view-btn" onclick="redirectToDetails(2)">View</button></td>
-                    </tr>
+                    </tr>-->
                     <!-- Add more past appointments here -->
                     <?php
                     foreach ($finishedAppointments as $finishedAppointment):
@@ -142,7 +145,7 @@ function convertTimeTo12H($time24) {
                             <td><?php echo $finishedAppointment['Username'] ?></td>
                             <td><?php echo $finishedAppointment['Brand'] . " " . $finishedAppointment['Model'] . " - " . $finishedAppointment['RegistrationNumber'] ?></td>
                             <td><span class="status-completed"><?php echo $finishedAppointment['Status'] ?></span></td>
-                            <td><button class="view-btn" onclick="redirectToDetails(3)">View</button></td>
+                            <td><button class="view-btn" onclick="redirectToDetails(<?php echo $finishedAppointment['AppointmentID'] ?>)">View</button></td>
                         </tr>
                     <?php
                     endforeach;

@@ -1,3 +1,36 @@
+<?php
+function convertToSentenceCase($text)
+{
+    // Convert the entire string to lowercase
+    $text = strtolower($text);
+
+    // Capitalize the first letter of the entire string
+    $text = ucfirst($text);
+
+    return $text;
+}
+
+require "../shared/connect.php";
+session_start();
+if (isset($_SESSION['UserID'])) {
+    $UserID = $_SESSION['UserID'];
+
+    $query = "SELECT * FROM `user` WHERE `user`.`UserID`=$UserID";
+    $result = mysqli_query($con, $query);
+    $userDetails = "";
+
+    if (mysqli_num_rows($result) == 1) {
+        $userDetails = mysqli_fetch_assoc($result);
+    } else {
+        echo "<script>window.alert(\"Something went wrong when retrieving data. Please try again. \");
+    window.location.href='../';</script>";
+    }
+} else {
+    echo "<script>window.alert(\"You are not logged in\");
+    window.location.href='../';</script>";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,24 +58,28 @@
     <main class="settings-container">
         <!-- Profile Section -->
         <section class="profile-section">
-            <img src="profile.jpg" alt="Profile Picture" class="profile-picture">
-            <button class="upload-btn">Upload New</button>
-            <h2>John Doe</h2>
-            <p>Customer</p>
+            <div class="profile-logo">
+                <img src="../assets/FindYourMechanic_Circle.png" alt="Profile Picture" class="profile-picture">
+                <button class="upload-btn">Upload New</button>
+            </div>
+            <h2><?php echo convertToSentenceCase($userDetails['Username']); ?></h2>
+            <p><?php echo convertToSentenceCase($userDetails['UserType']); ?></p>
         </section>
 
         <!-- Account Information Section -->
         <section class="settings-card">
             <h3>Personal Details</h3>
-            <form id="personal-details-form">
+            <form id="personal-details-form" method="get" action="process/submit-settings.php">
+                <input type="hidden" name="form_type" value="personal_details">
+
                 <label for="name">Name</label>
-                <input type="text" id="name" value="John Doe">
+                <input type="text" id="name" value="<?php echo $userDetails['Username']; ?>">
 
                 <label for="email">Email</label>
-                <input type="email" id="email" value="johndoe@example.com">
+                <input type="email" id="email" value="<?php echo $userDetails['Email']; ?>">
 
                 <label for="contact">Contact Number</label>
-                <input type="tel" id="contact" value="+1234567890">
+                <input type="tel" id="contact" value="<?php echo $userDetails['PhoneNumber']; ?>">
 
                 <button type="submit" class="save-btn">Save</button>
             </form>
@@ -50,7 +87,10 @@
 
         <section class="settings-card">
             <h3>Password Change</h3>
-            <form id="password-change-form">
+            <form id="password-change-form" method="get" action="process/submit-settings.php">
+
+                <input type="hidden" name="form_type" value="change_password">
+
                 <label for="old-password">Old Password</label>
                 <input type="password" id="old-password">
 
@@ -65,7 +105,7 @@
                 <button type="submit" class="save-btn">Update Password</button>
             </form>
         </section>
-
+        <!--
         <section class="settings-card">
             <h3>Notifications</h3>
             <label class="toggle-switch">
@@ -78,7 +118,8 @@
                 <span class="slider"></span>
                 SMS Notifications
             </label>
-        </section>
+        </section> -->
+
     </main>
     <script>
         const newPassword = document.getElementById("new-password");
@@ -116,7 +157,8 @@
     </script>
     <br>
     <?php
-        require "../shared/footer.php";
+    print_r($userDetails);
+    require "../shared/footer.php";
     ?>
 </body>
 

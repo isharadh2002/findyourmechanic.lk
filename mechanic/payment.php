@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<link rel="stylesheet" href="../stylesheets/footer.css">
+
 <div class="dashboard-container">
     <h2 class="section-title">Payments</h2>
     <form id="filter-form" method="GET" action="get_payments.php">
@@ -10,31 +20,23 @@
         <!-- Payment data will be dynamically loaded here -->
     </div>
 </div>
-
-
+    
+</body>
+</html>
 
 
 
 
 <?php
-$start_date = $_GET['start_date'];
-$end_date = $_GET['end_date'];
+require "../shared/footer.php"
 
-// Database connection
-$conn = new mysqli("localhost", "username", "password", "mechanic_db");
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$sql = "SELECT * FROM payments WHERE mechanic_id = 1 AND payment_date BETWEEN '$start_date' AND '$end_date'";
-$result = $conn->query($sql);
-
-echo "<ul>";
-while($row = $result->fetch_assoc()) {
-    echo "<li>Customer: " . $row['customer_name'] . " - Amount: $" . $row['amount'] . "</li>";
-}
-echo "</ul>";
-
-$conn->close();
 ?>
+
+
+
+
+
+
+
+

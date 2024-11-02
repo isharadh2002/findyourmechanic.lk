@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-
+<link rel="stylesheet" href="../stylesheets/footer.css">
 <div class="dashboard-container">
     <h2 class="section-title">Appointment Management</h2>
     <div id="appointment-list">
@@ -92,7 +92,10 @@ echo json_encode($appointments);
 $conn->close();
 */
 ?>
+<?php
+require "../shared/footer.php"
 
+?>
 
 </body>
 </html>

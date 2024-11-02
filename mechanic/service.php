@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+   
 </head>
 <body>
+<link rel="stylesheet" href="../stylesheets/footer.css">
 <div class="dashboard-container">
     <h2 class="section-title">Service Management</h2>
     <form id="service-form" method="POST" action="add_service.php">
@@ -51,6 +53,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
+<?php
+require "../shared/footer.php"
 
+?>
 </body>
 </html>

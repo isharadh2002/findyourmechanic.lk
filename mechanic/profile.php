@@ -4,7 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mechanic Dashboard</title>
+    
+    <?php
+require "../admin/header.php"
+?>
+<link rel="stylesheet" href="../stylesheets/header.css">
+ 
+ <link rel="stylesheet" href="../stylesheets/footer.css">
+    
     <style>
+       
+    
+   
+   
+      
+
+
+        
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -86,7 +102,10 @@
 </div>
 
 
+<?php
+require "../shared/footer.php"
 
+?>
 
 
 

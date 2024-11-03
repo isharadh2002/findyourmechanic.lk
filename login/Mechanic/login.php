@@ -37,6 +37,21 @@ require_once("header.php");
 
 
   </div>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const msg = document.getElementById('msg');
+
+    // Check if fields are empty
+    if (!email || !password) {
+      event.preventDefault(); // Prevent form submission
+      msg.style.display = 'block'; // Show error message
+    } else {
+      msg.style.display = 'none'; // Hide error message
+    }
+  });
+  </script>
   </body>
 
   </html>

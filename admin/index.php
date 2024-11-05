@@ -13,28 +13,20 @@ if (!isset($_SESSION['admin_logged_in'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="stylesheets/dashboard.css">
+    <title>Admin Dashboard - Find Your Mechanic</title>
+    <link rel="icon" href="../assets/FindYourMechanic_Circle.png">
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <link rel="stylesheet" href="stylesheets/sidebar.css">
     <style>
         
     </style>
 </head>
 
 <body>
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-        <h2>FindYourMechanic</h2>
-        <nav>
-            <ul>
-                <li><a href="#overview">Dashboard</a></li>
-                <li><a href="#mechanics">Mechanics</a></li>
-                <li><a href="#users">Users</a></li>
-                <li><a href="#appointments">Appointments</a></li>
-                <li><a href="logout.php">Logout</a></li>
-            </ul>
-        </nav>
-    </aside>
-
+    
+    <?php
+        require "sidebar.php";
+    ?>
     <!-- Main Dashboard Content -->
     <main class="main-content">
         <header class="header">

@@ -13,16 +13,20 @@ $offsetPending = ($pagePending - 1) * $limit;
 $offsetCompleted = ($pageCompleted - 1) * $limit;
 
 // Fetch pending appointments
-$sqlPending = "SELECT * FROM appointment WHERE status = 'Pending' or status = 'Scheduled' LIMIT $offsetPending, $limit";
+$sqlPending = "SELECT * FROM appointment inner join user on appointment.UserID = user.UserID inner join vehicle on vehicle.VehicleID = appointment.VehicleID WHERE  status = 'Pending' or status = 'Scheduled' order by appointment.AppointmentID ASC LIMIT $offsetPending, $limit";
+$sqlPendingMechanicDetails = "SELECT * FROM appointment inner join mechanic on appointment.MechanicID = mechanic.MechanicID inner join user on mechanic.UserID = user.UserID WHERE status = 'Pending' or status = 'Scheduled' order by appointment.AppointmentID ASC LIMIT $offsetPending, $limit";
 $resultPending = $con->query($sqlPending);
+$resultPendingMechanicDetails = $con->query($sqlPendingMechanicDetails);
 
 // Fetch completed appointments
-$sqlCompleted = "SELECT * FROM appointment WHERE status = 'Completed' LIMIT $offsetCompleted, $limit";
+$sqlCompleted = "SELECT * FROM appointment inner join user on appointment.UserID = user.UserID inner join vehicle on vehicle.VehicleID = appointment.VehicleID WHERE status = 'Completed' order by appointment.AppointmentID ASC LIMIT $offsetCompleted, $limit";
+$sqlCompletedMechanicDetails = "SELECT * FROM appointment inner join mechanic on appointment.MechanicID = mechanic.MechanicID inner join user on mechanic.UserID = user.UserID WHERE status = 'Pending' or status = 'Scheduled' ORDER BY appointment.AppointmentID ASC LIMIT $offsetPending, $limit";
 $resultCompleted = $con->query($sqlCompleted);
+$resultCompletedMechanicDetails = $con->query($sqlCompletedMechanicDetails);
 
 // Get total count of pending and completed records for pagination
-$totalPending = $con->query("SELECT COUNT(*) AS total FROM appointment WHERE status = 'Pending' or status = 'Scheduled'")->fetch_assoc()['total'];
-$totalCompleted = $con->query("SELECT COUNT(*) AS total FROM appointment WHERE status = 'Completed'")->fetch_assoc()['total'];
+$totalPending = $con->query("SELECT COUNT(*) AS total FROM appointment inner join user on appointment.UserID = user.UserID inner join vehicle on vehicle.VehicleID = appointment.VehicleID WHERE status = 'Pending' or status = 'Scheduled'")->fetch_assoc()['total'];
+$totalCompleted = $con->query("SELECT COUNT(*) AS total FROM appointment inner join user on appointment.UserID = user.UserID inner join vehicle on vehicle.VehicleID = appointment.VehicleID WHERE status = 'Completed'")->fetch_assoc()['total'];
 
 $totalPagesPending = ceil($totalPending / $limit);
 $totalPagesCompleted = ceil($totalCompleted / $limit);
@@ -64,13 +68,19 @@ $totalPagesCompleted = ceil($totalCompleted / $limit);
             <?php if ($resultPending->num_rows > 0): ?>
                 <?php while ($row = $resultPending->fetch_assoc()): ?>
                     <tr>
-                        <?php print_r($row); ?>
+                        <?php
+                        $rowMechanicDetails = $resultPendingMechanicDetails->fetch_assoc();
+                        print_r($row); 
+                        echo "<br><br>";
+                        print_r(($rowMechanicDetails));
+                        echo "<br><br>";
+                        ?>
                         <td><?= $row['AppointmentID'] ?></td>
-                        <td><?= $row['customer_name'] ?></td>
-                        <td><?= $row['mechanic_name'] ?></td>
-                        <td><?= $row['vehicle_model'] ?></td>
-                        <td><?= $row['appointment_date'] ?></td>
-                        <td><?= $row['status'] ?></td>
+                        <td><?= $row['Username'] ?></td>
+                        <td><?= $rowMechanicDetails['Username'] ?></td>
+                        <td><?php echo $row['RegistrationNumber'] . " - " . $row['Brand'] . " " . $row['Model'] . " " . $row['Year'];?></td>
+                        <td><?= explode(" ", $row['ScheduleDate'])[0] ?></td>
+                        <td><?= $row['Status'] ?></td>
                         <td>
                             <a href="view_appointment.php?id=<?= $row['id'] ?>" class="btn btn-view">View</a>
                             <a href="edit_appointment.php?id=<?= $row['id'] ?>" class="btn btn-edit">Edit</a>

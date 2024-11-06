@@ -6,56 +6,12 @@
     <title>Mechanic Dashboard</title>
     
     <?php
-   require "../admin/header.php";
-?>
+   require "../mechanic/headerMechanic.php";
+    ?>
 
-<link rel="stylesheet" href="../stylesheets/header.css">
+
  <link rel="stylesheet" href="../stylesheets/footer.css">
-    
-    <style>
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .dashboard-container {
-            width: 80%;
-            margin: 20px auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px #ccc;
-        }
-        .section-title {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            font-weight: bold;
-        }
-        input[type="text"], input[type="email"], input[type="file"], input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        button {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-    </style>
+ <link rel="stylesheet" href="profile.css">
 </head>
 <body>
 

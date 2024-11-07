@@ -1,71 +1,175 @@
+<?php
+session_start();
+// Check if admin is logged in; redirect if not
+if (!isset($_SESSION['admin_logged_in'])) {
+    //header("Location: ../login.php");
+    //exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - FindYourMechanic</title>
+    <title>Admin Dashboard - Find Your Mechanic</title>
     <link rel="icon" href="../assets/FindYourMechanic_Circle.png">
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <link rel="stylesheet" href="stylesheets/sidebar.css">
     <style>
-        #dashboard {
-            font-weight: bold;
-            color: #b30000;
-        }
+        
     </style>
 </head>
 
 <body>
+    
     <?php
-    require "header.php";
-    require "../shared/connect.php"
+        require "sidebar.php";
     ?>
-    <h2>Recently Registered Users</h2>
-    <?php
-    $query = "SELECT  * FROM `user` ORDER BY `UserID` DESC LIMIT 10";
-    $result = mysqli_query($con, $query);
-    $recentUsers = array();
+    <!-- Main Dashboard Content -->
+    <main class="main-content">
+        <header class="header">
+            <h1>Admin Dashboard</h1>
+        </header>
 
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $recentUsers[] = $row;
-            //print_r($row);
-            //echo "<br>";
-        }
-    }
+        <section id="overview" class="dashboard-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Mechanics</h3>
+                    <p>45</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Users</h3>
+                    <p>150</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Appointments</h3>
+                    <p>30</p>
+                </div>
+            </div>
+        </section>
 
-    if (count($recentUsers) == 0):
-        echo "No recent user registrations";
-    else:
-    ?>
-    <table class="user-table">
-            <tr class="table-heading-tr">
-                <th class="table-heading userid">UserID</th>
-                <th class="table-heading username">Username</th>
-                <th class="table-heading email">Email</th>
-                <th class="table-heading phone">Phone Number</th>
-                <th class="table-heading address">Address</th>
-                <th class="table-heading usertype">UserType</th>
-            </tr>
-            <?php
-            foreach ($recentUsers as $user):
-            ?>
-                <tr class="table-data-tr">
-                    <td class="table-data"><?php echo $user['UserID'] ?></td>
-                    <td class="table-data"><?php echo $user['Username'] ?></td>
-                    <td class="table-data"><?php echo $user['Email'] ?></td>
-                    <td class="table-data"><?php echo $user['PhoneNumber'] ?></td>
-                    <td class="table-data"><?php echo $user['Address'] ?></td>
-                    <td class="table-data"><?php echo $user['UserType'] ?></td>
-                </tr>
-            <?php
-            endforeach;
-            ?>
-        </table>
-    <?php
-    endif;
-    ?>
+        <section id="mechanics" class="dashboard-section">
+            <div class="section-header">
+                <h2>Manage Mechanics</h2>
+                <button class="action-button" onclick="openAddMechanic()">+ Add Mechanic</button>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>New York</td>
+                            <td><button class="action-button">Edit</button> <button class="action-button">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jane Smith</td>
+                            <td>Los Angeles</td>
+                            <td><button class="action-button">Edit</button> <button class="action-button">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Michael Johnson</td>
+                            <td>Chicago</td>
+                            <td><button class="action-button">Edit</button> <button class="action-button">Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="users" class="dashboard-section">
+            <div class="section-header">
+                <h2>Manage Users</h2>
+                <button class="action-button" onclick="openAddUser()">+ Add User</button>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Alice Brown</td>
+                            <td>alice@example.com</td>
+                            <td><button class="action-button">Edit</button> <button class="action-button">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Bob White</td>
+                            <td>bob@example.com</td>
+                            <td><button class="action-button">Edit</button> <button class="action-button">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Charlie Green</td>
+                            <td>charlie@example.com</td>
+                            <td><button class="action-button">Edit</button> <button class="action-button">Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="appointments" class="dashboard-section">
+            <h2>Appointments Management</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Mechanic</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Alice Brown</td>
+                            <td>John Doe</td>
+                            <td>Pending</td>
+                            <td><button class="action-button">View</button> <button class="action-button">Cancel</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Bob White</td>
+                            <td>Jane Smith</td>
+                            <td>Completed</td>
+                            <td><button class="action-button">View</button> <button class="action-button">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Charlie Green</td>
+                            <td>Michael Johnson</td>
+                            <td>Pending</td>
+                            <td><button class="action-button">View</button> <button class="action-button">Cancel</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="admin_dashboard.js"></script>
 </body>
 
 </html>

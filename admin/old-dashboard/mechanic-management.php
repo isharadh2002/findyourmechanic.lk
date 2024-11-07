@@ -67,7 +67,7 @@
                     <tr class="table-data-tr">
                         <td class="table-data"><?php echo $mechanic['MechanicID']; ?></td>
                         <td class="table-data"><?php echo $mechanic['UserID']; ?></td>
-                        <td class="table-data"><?php echo $mechanic['Name']; ?></td>
+                        <td class="table-data"><?php /* echo $mechanic['Name'];*/ ?></td>
                         <td class="table-data"><?php echo $mechanic['WorkAddress']; ?></td>
                         <td class="table-data"><?php echo $mechanic['WorkPhoneNumber']; ?></td>
                         <td class="table-data"><?php echo $mechanic['Specification']; ?></td>
@@ -107,7 +107,7 @@
                     <tr class="table-data-tr">
                         <td class="table-data"><?php echo $mechanic['MechanicID']; ?></td>
                         <td class="table-data"><?php echo $mechanic['UserID']; ?></td>
-                        <td class="table-data"><?php echo $mechanic['Name']; ?></td>
+                        <td class="table-data"><?php /*echo $mechanic['Name'];*/ ?></td>
                         <td class="table-data"><?php echo $mechanic['WorkAddress']; ?></td>
                         <td class="table-data"><?php echo $mechanic['WorkPhoneNumber']; ?></td>
                         <td class="table-data"><?php echo $mechanic['Specification']; ?></td>

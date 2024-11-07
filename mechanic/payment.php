@@ -13,7 +13,7 @@
 
 <div class="dashboard-container">
     <h2 class="section-title">Payments</h2>
-    <form id="filter-form" method="GET" action="get_payments.php">
+    <form id="filter-form" method="GET" action="getpayment.php">
         <label for="date-range">Date Range</label>
         <input type="date" id="start-date" name="start_date"> to
         <input type="date" id="end-date" name="end_date">

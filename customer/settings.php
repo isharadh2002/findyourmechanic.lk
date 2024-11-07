@@ -60,7 +60,7 @@ if (isset($_SESSION['UserID'])) {
         <section class="profile-section">
             <div class="profile-logo">
                 <img src="../assets/FindYourMechanic_Circle.png" alt="Profile Picture" class="profile-picture">
-                <button class="upload-btn">Upload New</button>
+                <button class="upload-btn" onclick="window.location.href='upload-profilepicture.php'">Upload New</button>
             </div>
             <h2><?php echo convertToSentenceCase($userDetails['Username']); ?></h2>
             <p><?php echo convertToSentenceCase($userDetails['UserType']); ?></p>

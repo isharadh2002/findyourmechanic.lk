@@ -7,7 +7,7 @@ if (isset($_SESSION['UserID'])) {
 
     $query = "SELECT * FROM `appointment` INNER JOIN `vehicle` ON `vehicle`.`VehicleID` = `appointment`.`VehicleID` 
     INNER JOIN `mechanic` ON `mechanic`.`MechanicID` = `appointment`.`MechanicID` INNER JOIN `user`
-    ON `mechanic`.`UserID` = `user`.`UserID` WHERE `appointment`.`UserID`= $UserID;";
+    ON `mechanic`.`UserID` = `user`.`UserID` WHERE `appointment`.`UserID`= $UserID ORDER BY AppointmentID DESC;";
     $result = mysqli_query($con, $query);
 
     $pendingAppointments = array();
@@ -93,17 +93,21 @@ function convertTimeTo12H($time24)
                         <td><button class="view-btn" onclick="redirectToDetails(3)">View</button></td>
                     </tr>-->
                     <?php
+                    $count = 0;
                     foreach ($pendingAppointments as $pendingAppointment):
+                        if ($count < 10):
+                            $count++;
                     ?>
-                        <tr>
-                            <td><?php echo explode(" ", $pendingAppointment['ScheduleDate'])[0] ?></td>
-                            <td><?php echo convertTimeTo12H(explode(" ", $pendingAppointment['ScheduleDate'])[1]) ?></td>
-                            <td><?php echo $pendingAppointment['Username'] ?></td>
-                            <td><?php echo $pendingAppointment['Brand'] . " " . $pendingAppointment['Model'] . " - " . $pendingAppointment['RegistrationNumber'] ?></td>
-                            <td><span class="status-pending"><?php echo $pendingAppointment['Status'] ?></span></td>
-                            <td><button class="view-btn" onclick="redirectToDetails(<?php echo $pendingAppointment['AppointmentID'] ?>)">View</button></td>
-                        </tr>
+                            <tr>
+                                <td><?php echo explode(" ", $pendingAppointment['ScheduleDate'])[0] ?></td>
+                                <td><?php echo convertTimeTo12H(explode(" ", $pendingAppointment['ScheduleDate'])[1]) ?></td>
+                                <td><?php echo $pendingAppointment['Username'] ?></td>
+                                <td><?php echo $pendingAppointment['Brand'] . " " . $pendingAppointment['Model'] . " - " . $pendingAppointment['RegistrationNumber'] ?></td>
+                                <td><span class="status-pending"><?php echo $pendingAppointment['Status'] ?></span></td>
+                                <td><button class="view-btn" onclick="redirectToDetails(<?php echo $pendingAppointment['AppointmentID'] ?>)">View</button></td>
+                            </tr>
                     <?php
+                        endif;
                     endforeach;
                     ?>
                     <!-- Add more pending appointments here -->
@@ -137,17 +141,21 @@ function convertTimeTo12H($time24)
                     </tr>-->
                     <!-- Add more past appointments here -->
                     <?php
+                    $count = 0;
                     foreach ($finishedAppointments as $finishedAppointment):
+                        if ($count < 10):
+                            $count++;
                     ?>
-                        <tr>
-                            <td><?php echo explode(" ", $finishedAppointment['ScheduleDate'])[0] ?></td>
-                            <td><?php echo convertTimeTo12H(explode(" ", $finishedAppointment['ScheduleDate'])[1]) ?></td>
-                            <td><?php echo $finishedAppointment['Username'] ?></td>
-                            <td><?php echo $finishedAppointment['Brand'] . " " . $finishedAppointment['Model'] . " - " . $finishedAppointment['RegistrationNumber'] ?></td>
-                            <td><span class="status-completed"><?php echo $finishedAppointment['Status'] ?></span></td>
-                            <td><button class="view-btn" onclick="redirectToDetails(<?php echo $finishedAppointment['AppointmentID'] ?>)">View</button></td>
-                        </tr>
+                            <tr>
+                                <td><?php echo explode(" ", $finishedAppointment['ScheduleDate'])[0] ?></td>
+                                <td><?php echo convertTimeTo12H(explode(" ", $finishedAppointment['ScheduleDate'])[1]) ?></td>
+                                <td><?php echo $finishedAppointment['Username'] ?></td>
+                                <td><?php echo $finishedAppointment['Brand'] . " " . $finishedAppointment['Model'] . " - " . $finishedAppointment['RegistrationNumber'] ?></td>
+                                <td><span class="status-completed"><?php echo $finishedAppointment['Status'] ?></span></td>
+                                <td><button class="view-btn" onclick="redirectToDetails(<?php echo $finishedAppointment['AppointmentID'] ?>)">View</button></td>
+                            </tr>
                     <?php
+                        endif;
                     endforeach;
                     ?>
                 </tbody>

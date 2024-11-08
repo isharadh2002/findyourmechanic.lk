@@ -25,6 +25,20 @@ if (isset($_SESSION['UserID'])) {
         echo "<script>window.alert(\"Something went wrong when retrieving data. Please try again. \");
     window.location.href='../';</script>";
     }
+
+    //Retrieving Profile Picture Information
+    $queryCustomerTable = "SELECT ProfilePicture FROM customer WHERE UserID = $UserID;";
+    $result = mysqli_query($con, $queryCustomerTable);
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        if (!empty($row['ProfilePicture'])) {
+            $profilePicture = "../" . $row['ProfilePicture'];
+        } else {
+            $profilePicture = "../assets/DefaultProfilePicture.png";
+        }
+    } else {
+        $profilePicture = "../assets/DefaultProfilePicture.png";
+    }
 } else {
     echo "<script>window.alert(\"You are not logged in\");
     window.location.href='../';</script>";
@@ -53,13 +67,13 @@ if (isset($_SESSION['UserID'])) {
     <?php
     require "header.php";
     ?>
-
+    
     <!-- Main Content -->
     <main class="settings-container">
         <!-- Profile Section -->
         <section class="profile-section">
             <div class="profile-logo">
-                <img src="../assets/FindYourMechanic_Circle.png" alt="Profile Picture" class="profile-picture">
+                <img src="<?php echo $profilePicture ?>" alt="Profile Picture" class="profile-picture">
                 <button class="upload-btn" onclick="window.location.href='upload-profilepicture.php'">Upload New</button>
             </div>
             <h2><?php echo convertToSentenceCase($userDetails['Username']); ?></h2>
@@ -69,17 +83,20 @@ if (isset($_SESSION['UserID'])) {
         <!-- Account Information Section -->
         <section class="settings-card">
             <h3>Personal Details</h3>
-            <form id="personal-details-form" method="get" action="process/submit-settings.php">
+            <form id="personal-details-form" method="post" action="process/submit-settings.php">
                 <input type="hidden" name="form_type" value="personal_details">
 
                 <label for="name">Name</label>
-                <input type="text" id="name" value="<?php echo $userDetails['Username']; ?>">
+                <input type="text" id="name" name="name" value="<?php echo $userDetails['Username']; ?>">
 
                 <label for="email">Email</label>
-                <input type="email" id="email" value="<?php echo $userDetails['Email']; ?>">
+                <input type="email" id="email" name="email" value="<?php echo $userDetails['Email']; ?>">
 
                 <label for="contact">Contact Number</label>
-                <input type="tel" id="contact" value="<?php echo $userDetails['PhoneNumber']; ?>">
+                <input type="tel" id="contact" name="contact" value="<?php echo $userDetails['PhoneNumber']; ?>">
+
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" value="<?php echo $userDetails['Address']; ?>">
 
                 <button type="submit" class="save-btn">Save</button>
             </form>
@@ -87,24 +104,32 @@ if (isset($_SESSION['UserID'])) {
 
         <section class="settings-card">
             <h3>Password Change</h3>
-            <form id="password-change-form" method="get" action="process/submit-settings.php">
+            <form id="password-change-form" method="post" action="process/submit-settings.php">
 
                 <input type="hidden" name="form_type" value="change_password">
 
                 <label for="old-password">Old Password</label>
-                <input type="password" id="old-password">
+                <input type="password" id="old-password" name="old-password" required>
 
                 <label for="new-password">New Password</label>
-                <input type="password" id="new-password">
+                <input type="password" id="new-password" name="new-password" minlength="6" required>
 
                 <label for="confirm-password">Confirm New Password</label>
-                <input type="password" id="confirm-password">
+                <input type="password" id="confirm-password" name="confirm-password" minlength="6" required>
 
                 <p id="password-error-message" class="error-message"></p>
 
                 <button type="submit" class="save-btn">Update Password</button>
             </form>
         </section>
+
+        <!-- Popup Box for Messages -->
+        <div id="popup-box" class="popup-box">
+            <div class="popup-content">
+                <span id="popup-message"></span>
+                <button id="popup-close-btn" class="popup-btn">OK</button>
+            </div>
+        </div>
         <!--
         <section class="settings-card">
             <h3>Notifications</h3>
@@ -122,42 +147,84 @@ if (isset($_SESSION['UserID'])) {
 
     </main>
     <script>
+        const oldPassword = document.getElementById("old-password");
         const newPassword = document.getElementById("new-password");
         const confirmPassword = document.getElementById("confirm-password");
         const errorMessage = document.getElementById("password-error-message");
+        const form = document.getElementById("password-change-form");
+        const popupBox = document.getElementById("popup-box");
+        const popupMessage = document.getElementById("popup-message");
+        const popupCloseBtn = document.getElementById("popup-close-btn");
 
-        // Real-time validation on confirm password input
-        confirmPassword.addEventListener("input", function() {
-            if (confirmPassword.value === newPassword.value) {
-                // Passwords match: apply success styles, hide error message
-                newPassword.classList.add("input-success");
-                confirmPassword.classList.add("input-success");
-                newPassword.classList.remove("input-error");
-                confirmPassword.classList.remove("input-error");
-                errorMessage.textContent = ""; // Clear error message
-            } else {
-                // Passwords do not match: apply error styles, show error message
-                newPassword.classList.remove("input-success");
-                confirmPassword.classList.remove("input-success");
-                newPassword.classList.add("input-error");
-                confirmPassword.classList.add("input-error");
-                errorMessage.textContent = "Passwords do not match."; // Display error message
+        // Real-time validation for confirm password input
+        function validatePasswords() {
+            if (newPassword.value.length < 6) {
+                errorMessage.textContent = "New password must be at least 6 characters long.";
+                setErrorStyles();
+                return false;
             }
+
+            if (newPassword.value !== confirmPassword.value) {
+                errorMessage.textContent = "Passwords do not match.";
+                setErrorStyles();
+                return false;
+            }
+
+            clearErrorStyles();
+            errorMessage.textContent = "";
+            return true;
+        }
+
+        // Apply error styles
+        function setErrorStyles() {
+            newPassword.classList.add("input-error");
+            confirmPassword.classList.add("input-error");
+            newPassword.classList.remove("input-success");
+            confirmPassword.classList.remove("input-success");
+        }
+
+        // Clear error styles
+        function clearErrorStyles() {
+            newPassword.classList.add("input-success");
+            confirmPassword.classList.add("input-success");
+            newPassword.classList.remove("input-error");
+            confirmPassword.classList.remove("input-error");
+        }
+
+        // Show popup box
+        function showPopup(message) {
+            popupMessage.textContent = message;
+            popupBox.style.display = "flex";
+        }
+
+        // Close popup box
+        popupCloseBtn.addEventListener("click", function() {
+            popupBox.style.display = "none";
         });
 
-        // Submit form validation
-        document.getElementById("password-change-form").addEventListener("submit", function(event) {
-            event.preventDefault();
-            if (newPassword.value === confirmPassword.value) {
-                alert("Password updated successfully!");
+        // Event listener for real-time validation
+        confirmPassword.addEventListener("input", validatePasswords);
+        newPassword.addEventListener("input", validatePasswords);
+
+        // Form submission validation
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Stop form submission initially
+            if (!validatePasswords()) {
+                showPopup("Please correct the errors before submitting.");
             } else {
-                alert("Please ensure the passwords match before submitting.");
+                // Submit the form manually after showing the success popup
+                showPopup("Processing request. Please wait...");
+
+                // Wait briefly before submitting to allow user to see the message
+                setTimeout(() => {
+                    form.submit();
+                }, 1000); // 1-second delay
             }
         });
     </script>
     <br>
     <?php
-    print_r($userDetails);
+    //print_r($userDetails);
     require "../shared/footer.php";
     ?>
 </body>

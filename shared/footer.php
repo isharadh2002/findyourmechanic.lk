@@ -27,10 +27,10 @@
             <div class="footer-section social">
                 <h2>Follow Us</h2>
                 <ul class="social-icons">
-                    <li><a href="#"><img src="../assets/SocialMediaIcons/YouTube.png" class="fa fa-facebook"></a></li>
-                    <li><a href="#"><img src="../assets/SocialMediaIcons/Facebook.png" class="fa fa-twitter"></a></li>
-                    <li><a href="#"><img src="../assets/SocialMediaIcons/Instagram.png" class="fa fa-instagram"></a></li>
-                    <li><a href="#"><img src="../assets/SocialMediaIcons/X.png" class="fa fa-linkedin"></a></li>
+                    <li><a href="https://www.youtube.com" target="_blank"><img src="../assets/SocialMediaIcons/YouTube.png" class="fa fa-facebook"></a></li>
+                    <li><a href="https://www.facebook.com" target="_blank"><img src="../assets/SocialMediaIcons/Facebook.png" class="fa fa-twitter"></a></li>
+                    <li><a href="https://www.instagram.com" target="_blank"><img src="../assets/SocialMediaIcons/Instagram.png" class="fa fa-instagram"></a></li>
+                    <li><a href="https://www.x.com" target="_blank"><img src="../assets/SocialMediaIcons/X.png" class="fa fa-linkedin"></a></li>
                 </ul>
             </div>
         </div>

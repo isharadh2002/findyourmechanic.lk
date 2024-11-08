@@ -4,6 +4,7 @@
     max-width: 1000px;
     margin: 20px auto;
     padding-bottom: 10px;
+    flex: 1;
 }
 .container h2 {
     color: #1e90ff;

@@ -8,7 +8,7 @@ if (isset($_POST["latitude"]) && isset($_POST["longitude"])) {
     $latitude = floatval($_POST["latitude"]);
     $longitude = floatval($_POST["longitude"]);
 
-    // Store the values in a file
+    // Store the values in a file//
     $file = fopen("location_data.txt", "a");
     fwrite($file, "Latitude: " . $latitude . ", Longitude: " . $longitude . "\n");
     fclose($file);

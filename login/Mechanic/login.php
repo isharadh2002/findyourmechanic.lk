@@ -58,7 +58,7 @@ require_once("header.php");
         }
       }
 
-      setInterval(changeBackground, 6000);
+      setInterval(changeBackground, 7000);
     }
     document.querySelector('body').addEventListener('onload', slidingBackground(event));
 

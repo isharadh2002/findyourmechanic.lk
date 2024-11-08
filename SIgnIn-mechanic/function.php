@@ -1,6 +1,6 @@
 <?php
 
-
+//hello user
 function isInputsEmpty($name, $email, $password, $contactNumber, $address, $specification, $description)
 {
     return empty($name) || empty($email) || empty($password) || empty($contactNumber) || empty($address) || empty($specification) || empty($description);

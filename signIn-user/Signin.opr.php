@@ -3,7 +3,7 @@ require_once("../shared/connect.php");
 require_once("function.php");
 
 if (isset($_POST['submitButton'])) {
-    // Gather POST data
+    // Gather POST data//
     $name = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];

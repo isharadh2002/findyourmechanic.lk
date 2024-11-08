@@ -1,5 +1,5 @@
 <?php
-
+//
 function isInputsEmpty($email, $password)
 {
     return empty($email) || empty($password);

@@ -38,19 +38,43 @@ require_once("header.php");
 
   </div>
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const msg = document.getElementById('msg');
+    function slidingBackground(e) {
+      let image1 = '../../Pic/automobile-3239764_1920.jpg';
+      let image2 = '../../Pic/man-holds-smartphone-his-hands-mock-up-phone-white-screen-background-car-man-holds-smartphone-his-217630203.webp';
+      let image3 = '../../Pic/Towing-in-Lakewood-WA.jpeg';
 
-    // Check if fields are empty
-    if (!email || !password) {
-      event.preventDefault(); // Prevent form submission
-      msg.style.display = 'block'; // Show error message
-    } else {
-      msg.style.display = 'none'; // Hide error message
+      let images = [image1, image2, image3];
+
+      let index = 0;
+
+      function changeBackground() {
+        const backgroundElement = document.querySelector('body');
+
+        if (backgroundElement) {
+          backgroundElement.style.backgroundImage = `url('${images[index]}')`;
+          index = (index + 1) % images.length;
+        } else {
+          console.error('Element with class .sliding-background not found.');
+        }
+      }
+
+      setInterval(changeBackground, 6000);
     }
-  });
+    document.querySelector('body').addEventListener('onload', slidingBackground(event));
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const msg = document.getElementById('msg');
+
+      // Check if fields are empty
+      if (!email || !password) {
+        event.preventDefault(); // Prevent form submission
+        msg.style.display = 'block'; // Show error message
+      } else {
+        msg.style.display = 'none'; // Hide error message
+      }
+    });
   </script>
   </body>
 

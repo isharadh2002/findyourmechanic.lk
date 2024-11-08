@@ -3,10 +3,22 @@ require_once("header-mec.php");
 
 
 ?>
-
-
-
 <div class="container">
+<div class="leftcontainer">
+
+
+<p style="color: white;
+    font-family: cursive;
+    font-size: 15vh;
+    font-weight: bolder;
+    text-align: center;
+    font-variant: all-petite-caps; ">Be <br> Register <br>For <br> Join With <br> Us <br>& <br>Enhance your <br>Future!... </p>
+
+
+</div>
+
+
+<div class="rightcontainer">
   <div class="formElements">
     <h1><u><b>Mechanics Details</b></u></h1>
     <hr>
@@ -101,6 +113,7 @@ require_once("header-mec.php");
     </form>
 
   </div>
+</div>
 </div>
 <script>
   function inputsRequire() {

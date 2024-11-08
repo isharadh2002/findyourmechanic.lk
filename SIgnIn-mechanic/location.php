@@ -93,7 +93,7 @@ if (isset($_POST["latitude"]) && isset($_POST["longitude"])) {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            margin: 5vh 15vh;
+            margin: 0vh 15vh;
 
 
         }
@@ -134,7 +134,9 @@ if (isset($_POST["latitude"]) && isset($_POST["longitude"])) {
                 <button onclick="stopTracking()">Stop Tracking</button>
             </div>
             <p id="status"></p>
-            <div id="map" style="width: 600px; height: 400px;"></div>
+            <div id="map" style="width: 645px;
+    height: 573px;
+    position: relative;"></div>
         </div>
     </div>
     <script>

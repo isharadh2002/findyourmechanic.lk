@@ -15,6 +15,12 @@ require_once("../shared/connect.php");
   <style>
     body {
       background-color: white;
+      background-image: url("../Pic/automobile-7600895_1920.jpg");
+      
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+  
       margin: 1vh;
       opacity: 1;
       max-width: 100%;

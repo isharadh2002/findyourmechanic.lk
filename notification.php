@@ -1,5 +1,5 @@
 <?php
-$massege_mail='';
+$massege_mail = '';
 if (isset($_POST['submitButton'])) {
 
     $fullName = $_POST['fullName'];
@@ -17,16 +17,12 @@ if (isset($_POST['submitButton'])) {
     $email_body  .= '<b>Messege :</b> {$textarea}';
     $header = '<b>Email From Findyourmechanic.lk....</b>';
 
-    $mail_sent=mail($to, $subject_email, $email_body, $header);
-    if($mail_sent){
+    $mail_sent = mail($to, $subject_email, $email_body, $header);
+    if ($mail_sent) {
 
-        $massege_mail='<p> The Mail was sen sucessfully!..............</p>';
-
-
-        
-    }else{
-        $massege_mail='<p> The Mail was not sen sucessfully!..............</p>';
-
+        $massege_mail = '<p> The Mail was sen sucessfully!..............</p>';
+    } else {
+        $massege_mail = '<p> The Mail was not sen sucessfully!..............</p>';
     }
 }
 
@@ -58,7 +54,25 @@ if (isset($_POST['submitButton'])) {
             min-height: 100vh;
             font-family: Arial, sans-serif;
             overflow: hidden;
-           
+
+
+        }
+
+        .container {
+            display: flex;
+            
+
+
+
+
+        }
+        .leftContent{
+
+            display: flex;
+            justify-content: center;
+            align-items: space-around;
+
+
         }
 
         /* Animated Gradient Background */
@@ -76,21 +90,21 @@ if (isset($_POST['submitButton'])) {
             }
         }
 
-        /* Form Container */
-        .container {
+        /* Form rightContent */
+        .rightContent {
             width: 100%;
             max-width: 400px;
             padding: 24px;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgb(144 202 243);
             border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);
             text-align: center;
             animation: fadeIn 1s ease;
         }
 
         .notification {
             font-size: 24px;
-            color: #333;
+            color: #2f4e8d;
             margin-bottom: 20px;
             font-weight: bold;
             animation: slideIn 0.8s ease forwards;
@@ -109,7 +123,7 @@ if (isset($_POST['submitButton'])) {
             }
         }
 
-        .inputContainer {
+        .inputrightContent {
             position: relative;
             display: flex;
             flex-direction: column;
@@ -117,7 +131,7 @@ if (isset($_POST['submitButton'])) {
             gap: 16px;
         }
 
-        .input-container__label {
+        .input-rightContent__label {
             position: absolute;
             top: 14px;
             left: 15px;
@@ -150,21 +164,16 @@ if (isset($_POST['submitButton'])) {
             box-shadow: 0 0 8px rgba(98, 0, 234, 0.3);
         }
 
-        .inputs:focus+.input-container__label,
-        .inputs:not(:placeholder-shown)+.input-container__label {
+        .inputs:focus+.input-rightContent__label+.input-rightContent__label {
             top: -10px;
             left: 10px;
             font-size: 14px;
             color: #6200ea;
         }
 
-        .inputs::placeholder {
-            color: transparent;
-        }
 
-        .inputs:focus::placeholder {
-            color: #aaa;
-        }
+
+
 
         .inputs:focus {
             animation: pulse 0.2s ease-in-out;
@@ -189,7 +198,7 @@ if (isset($_POST['submitButton'])) {
             padding: 12px;
             font-size: 16px;
             color: #fff;
-            background-color: #6200ea;
+            background-color: #2f4e8d;
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -208,21 +217,31 @@ if (isset($_POST['submitButton'])) {
 
 <body>
     <div class="container">
-        <?php echo $massege_mail;?>
-        <div class="notification">Notifications !</div>
-        <div class="form_elements">
-            <form action="notification.php" method="post">
-                <div class="inputContainer">
-                    <input type="text" name="fullName" class="inputs" placeholder="fullName...">
-                    <input type="text" name="email" class="inputs" placeholder="Email...">
-                    <input type="text" name="subject" class="inputs" placeholder="subject...">
-                    <textarea name="textArea" class="inputs" cols="30" rows="10" placeholder="Enter your Messege......"></textarea>
-                    <button class="submitButton">Send</button>
-                </div>
-            </form>
+        <div class="leftContent">
+            <p>Hello!....Notifications.php..............</p>
+
+
+
+
+
         </div>
+        <div class="rightContent">
+            <?php echo $massege_mail; ?>
+            <div class="notification">Notifications !</div>
+            <div class="form_elements">
+                <form action="notification.php" method="post">
+                    <div class="inputrightContent">
+                        <input type="text" name="fullName" class="inputs" placeholder="fullName...">
+                        <input type="text" name="email" class="inputs" placeholder="Email...">
+                        <input type="text" name="subject" class="inputs" placeholder="subject...">
+                        <textarea name="textArea" class="inputs" cols="30" rows="10" placeholder="Enter your Messege......"></textarea>
+                        <button class="submitButton">Send</button>
+                    </div>
+                </form>
+            </div>
 
 
+        </div>
     </div>
 </body>
 

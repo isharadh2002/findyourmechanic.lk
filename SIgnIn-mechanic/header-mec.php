@@ -16,6 +16,10 @@ require_once("../shared/connect.php");
   <style>
     body {
       background-color: white;
+      background-image: url("../Pic/pexels-markusspiske-2027045.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
       min-width: 1165px;
       margin: 1vh;
     }
@@ -65,36 +69,81 @@ require_once("../shared/connect.php");
       }
     }
 
-    .container {
 
-      width: 100%;
-      margin-top: 6vh;
-      margin-right: 14vh;
-      justify-content: right;
-      align-items: center;
-      display: flex;
-      float: inline-end;
-      margin-left: auto;
+
+    @media screen and (max-width: 96% 
+                      
+                                      ) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .leftcontainer,
+      .rightcontainer {
+        width: 90%;
+        margin: 0;
+      }
     }
+
+    .container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 20px;
+      margin: 6vh auto;
+      max-width: 1200px;
+    }
+
+    .leftcontainer {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .leftcontainer img {
+      flex: 1;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+    
+
+    .rightcontainer {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+
+
+
+
+
 
     .formElements {
       background-color: white;
-      
-      width: 30%;
+
+      width: 90%;
       height: auto;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
       border-style: outset;
       border-radius: 36px;
     }
-    .formElements h1{
+
+    .formElements h1 {
       color: #0295f1bd;
     }
 
-    
+
 
     form input[type='file'] {
       display: flex;
@@ -125,7 +174,7 @@ require_once("../shared/connect.php");
 
     input[type='submit'],
     [type='file'] {
-      background-color: #0295f1bd ;
+      background-color: #0295f1bd;
       align-items: center;
 
       color: white;

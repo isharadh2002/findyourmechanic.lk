@@ -29,7 +29,7 @@ body {
 
   .btn-add {
     padding: 12px 24px;
-    background-color: #5494da;
+    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -39,7 +39,7 @@ body {
   }
 
   .btn-add:hover {
-    background-color: #1750ac;
+    background-color: #0056b3;
   }
 
   /* Table Styles */
@@ -52,7 +52,7 @@ body {
   }
 
   .table-title {
-    background-color: #5494da;
+    background-color: #007bff;
     color: #fff;
     padding: 15px;
     font-size: 18px;
@@ -88,7 +88,7 @@ body {
 
   .view-btn {
     padding: 8px 15px;
-    background-color: #5494da;
+    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -98,5 +98,5 @@ body {
   }
 
   .view-btn:hover {
-    background-color: #1750ac;
+    background-color: #0056b3;
   }

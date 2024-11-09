@@ -1,8 +1,16 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 footer {
     background:linear-gradient(to right, #003396, #3373C4);
     color: white;
     padding: 40px 0;
     font-family: Arial, sans-serif;
+    margin-top: auto;
+    width: 100%;
 }
 
 .footer-container {
@@ -60,6 +68,7 @@ footer {
 .social-icons li {
     list-style: none;
     margin-right: 10px;
+    display: inline-block;
 }
 
 .social-icons li a {
@@ -67,8 +76,11 @@ footer {
     font-size: 18px;
     display: inline-block;
     padding: 2px;
+    margin: 2px;
     background-color: #555;
     border-radius: 50%;
+    max-width: 34px;
+    max-height: 34px;
 }
 
 .social-icons li a:hover {
@@ -90,4 +102,6 @@ footer {
 .fa{
     width: 30px;
     height: 30px;
+    padding: 0px;
+    margin: 0px;
 }

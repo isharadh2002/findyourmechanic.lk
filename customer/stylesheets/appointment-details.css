@@ -2,6 +2,7 @@
   width: 85%;
   max-width: 900px;
   margin: 40px auto;
+  margin-top: 100px;
   padding: 20px;
   background-color: #fff;
   border-radius: 12px;
@@ -24,7 +25,7 @@
 
 .btn-back {
   padding: 10px 20px;
-  background-color: #3498db;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -35,7 +36,7 @@
 }
 
 .btn-back:hover {
-  background-color: #2980b9;
+  background-color: #0056b3;
 }
 
 /* Detail Cards */

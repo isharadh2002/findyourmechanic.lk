@@ -1,6 +1,6 @@
 .content {
     padding: 50px; /* Adds space for the fixed navbar */
-    padding-top: 120px;
+    padding-top: 100px;
 }
 
 /* Welcome Section */
@@ -139,14 +139,6 @@
     padding: 0.5rem 1rem;
     border-radius: 4px;
     cursor: pointer;
-}
-
-footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #f9fafc;
-    color: #666;
-    font-size: 0.875rem;
 }
 
 .feedback button:hover {

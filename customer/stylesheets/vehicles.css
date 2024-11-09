@@ -30,6 +30,7 @@ table {
     border-spacing: 0; /* Removes spacing between cells */
     border-radius: 20px; /* Adjust this value as needed */
     overflow: hidden; /* Ensures the border-radius is applied to the entire table */
+    margin-bottom: 25px;
 }
 
 .vehicle-table {
@@ -60,10 +61,110 @@ table {
     background-color: #f9f9f9;
 }
 
-.vehicle-table tr:hover {
+.vehicle-table tbody tr:hover {
     background-color: #f1f1f1;
 }
 
 .vehicle-table td {
     color: #555;
+}
+
+#vehicles {
+    text-decoration: underline;
+}
+
+/* Popup Styles */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Centered vertically */
+    padding: 15px;
+    border: 1px solid #888;
+    min-width: 300px;
+    width: 600px; /* Smaller width */
+    text-align: center;
+    border-radius: 8px; /* Rounded corners */
+}
+
+.popup-content p{
+    font-size: 20px;
+    padding: 20px 10px;
+}
+
+.popup-content h2{
+    font-size: 30px;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Button Styles */
+.confirm-button, .cancel-button {
+    padding: 10px 25px; /* Padding */
+    margin: 10px 5px; /* Margins */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 16px; /* Font size */
+    transition: opacity 0.3s; /* Transition effect */
+}
+
+.confirm-button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+}
+
+.confirm-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.cancel-button {
+    background-color: #f44336; /* Red background */
+    color: white; /* White text */
+}
+
+.cancel-button:hover {
+    background-color: #da190b; /* Darker red on hover */
+}
+
+/* Button Styles */
+.remove-button {
+    background-color: #ff4d4d; /* Red background */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 10px 15px; /* Padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* No underline */
+    display: inline-block; /* Inline-block */
+    font-size: 16px; /* Font size */
+    margin: 4px 2px; /* Margins */
+    cursor: pointer; /* Pointer cursor */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Transition effect */
+}
+
+.remove-button:hover {
+    background-color: #d12b2b; /* Darker red on hover */
 }

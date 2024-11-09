@@ -1,3 +1,23 @@
+<?php
+require "../shared/connect.php";
+
+$userID = 3;
+$query = "SELECT * FROM `user` WHERE `user`.`UserID` = '$userID'";
+$result = mysqli_query($con, $query);
+$userInfo = array();
+
+if(mysqli_num_rows($result) == 1){
+    $userInfo = mysqli_fetch_assoc($result);
+    print_r($userInfo);
+}
+else{
+    die();
+}
+
+session_start();
+$_SESSION['UserID'] = $userID;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +27,7 @@
     <title>Customer Dashboard - Find Your Mechanic</title>
     <link rel="stylesheet" href="stylesheets/dashboard.css">
     <link rel="stylesheet" href="stylesheets/header.css">
+    <link rel="stylesheet" href="../stylesheets/footer.css">
     <style>
         #dashboard {
             text-decoration: underline;
@@ -24,7 +45,7 @@
     <main class="content">
         <!-- Welcome Section -->
         <section class="welcome-section">
-            <h1>Welcome, Customer!</h1>
+            <h1>Welcome, <?php echo $userInfo['Username'] ?>!</h1>
             <p>Your personalized dashboard is here to help manage your vehicle and service needs efficiently.</p>
         </section>
 
@@ -107,9 +128,9 @@
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Vehicle Mechanic App. All rights reserved.</p>
-    </footer>
+    <?php
+        require "../shared/footer.php";
+    ?>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 /* Settings Container */
 .settings-container {
-    max-width: 800px;
+    max-width: 1000px;
+    min-width: 600px;
     margin: 50px auto;
     padding: 50px;
     padding-top: 120px;
@@ -12,11 +13,22 @@
     margin-bottom: 30px;
 }
 
+.profile-logo{
+    display: flex;
+    width: 250px;
+    margin: auto;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
 .profile-picture {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     margin-bottom: 10px;
+    object-fit: cover;
+    border: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 .upload-btn {
@@ -26,6 +38,8 @@
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    height: 40px;
+    width: 100px;
 }
 
 .upload-btn:hover {
@@ -136,4 +150,48 @@ form input[type="password"] {
     font-size: 0.9em;
     margin-top: 1px;
     margin-bottom: 20px;
+}
+
+/* Popup Box Styles */
+.popup-box {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 300px;
+    width: 90%;
+}
+
+#popup-message {
+    font-size: 1em;
+    margin-bottom: 15px;
+}
+
+.popup-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.popup-btn:hover {
+    background-color: #0056b3;
 }

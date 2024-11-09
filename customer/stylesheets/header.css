@@ -49,3 +49,33 @@ body {
 .navbar nav ul li a:hover {
     text-decoration: underline;
 }
+
+/* Profile Section */
+.profile-section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: auto;
+    align-content: center;
+}
+
+.profile-section-header .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-section-header .logout-btn {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    background-color: #ff5252;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.profile-section-header .logout-btn:hover {
+    background-color: #ff3333;
+}

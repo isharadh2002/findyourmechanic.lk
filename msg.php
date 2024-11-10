@@ -150,6 +150,7 @@ if (isset($msg)) {
         <div class="button">
             <button name="nextpage" class="next-button"> Next ==></button>
         </div>
+        <img src="Pic/done.png" alt="SucessMasseg"/>
     </div>
 
 </body>

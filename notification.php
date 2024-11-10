@@ -60,19 +60,26 @@ if (isset($_POST['submitButton'])) {
 
         .container {
             display: flex;
-            
+
 
 
 
 
         }
-        .leftContent{
+
+        .leftContent {
 
             display: flex;
             justify-content: center;
             align-items: space-around;
+            margin: 0px 78px;
 
 
+        }
+
+        img {
+
+            width: auto;
         }
 
         /* Animated Gradient Background */
@@ -100,6 +107,7 @@ if (isset($_POST['submitButton'])) {
             box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);
             text-align: center;
             animation: fadeIn 1s ease;
+            margin: 0px 78px;
         }
 
         .notification {
@@ -218,7 +226,13 @@ if (isset($_POST['submitButton'])) {
 <body>
     <div class="container">
         <div class="leftContent">
-            <p>Hello!....Notifications.php..............</p>
+            <p><img src="Pic/mail (1).png" alt="Notificaions">
+        <br>Giving Feedback <br>
+            Comments 
+        <br>Reporting Issues <br>
+        
+        
+        </p>
 
 
 

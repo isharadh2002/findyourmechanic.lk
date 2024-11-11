@@ -26,8 +26,9 @@ require_once("login.opr.php");
         <br><br>
       </div>
 
-
+      <p style="text-align: center;">Already haven't an account? <a href="../../signIn-user/signup-User.php">SignUp.</a></p>
       <br>
+      <a href="" style="text-align: right;">Forget Password.</a>
 
       <p id="msg">The Value is empty</p>
       <br>

@@ -29,7 +29,7 @@ if (isset($_POST['submitButton'])) {
 
     // If no error, start session and store user ID
     session_start();
-    $_SESSION['userId'] = $userId;
+    $_SESSION['UserID'] = $userId;
 
     header("Location:../../msg.php?error=success");
     mysqli_close($con);

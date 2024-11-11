@@ -1,7 +1,8 @@
 <?php
 require "../shared/connect.php";
 
-$userID = 3;
+session_start();
+$userID = $_SESSION['UserID'];
 $query = "SELECT * FROM `user` WHERE `user`.`UserID` = '$userID'";
 $result = mysqli_query($con, $query);
 $userInfo = array();
@@ -14,8 +15,6 @@ else{
     die();
 }
 
-session_start();
-$_SESSION['UserID'] = $userID;
 ?>
 
 <!DOCTYPE html>

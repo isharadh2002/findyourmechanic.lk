@@ -45,30 +45,21 @@
         <input type="file" name="profilePicture" id="profilePicture" />
       </div>
 
+      <!--
       <div class="inputs">
         <label for="numberOfVehicles">Number Of Vehicles:</label>
         <input type="number" name="numberOfVehicles" id="numberOfVehicles" required />
       </div>
-      <br>
-
-
-
-
-
-
-
-      <br><br>
+      -->
+      
       <div class="center-message">
         <h1 id="afterSigninMsg">Helllo</h1>
       </div>
-
-      <br><br>
 
       <div class="inputs">
         <input type="submit" class="submitButton" name="submitButton" value="Sign In">
       </div>
 
-      <br><br>
     </form>
   </div>
 

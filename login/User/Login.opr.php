@@ -27,10 +27,29 @@ if (isset($_POST['submitButton'])) {
         exit();
     }
 
+    //Check for Password Matching
+    $Query = "SELECT * FROM user WHERE UserID = $userId";
+    $result = mysqli_query($con, $Query);
+    $row = mysqli_fetch_assoc($result);
+    print_r($row);
+    $hashedPassword = $row['Password'];
+
+    if(password_verify($password, $hashedPassword)){
+        echo "Successfully logged in";
+        header("Location:../../customer");
+    }
+    else{
+        echo "Invalid Password";
+    }
+
+    
+
+
     // If no error, start session and store user ID
     session_start();
-    $_SESSION['userId'] = $userId;
+    $_SESSION['UserID'] = $userId;
 
-    header("Location:../../msg.php?error=success");
+
+    //header("Location:../../customer");
     mysqli_close($con);
 }

@@ -38,7 +38,7 @@ if (isset($_POST['submitButton'])) {
     }
 
     insertDataUserTable($con, $name, $password, $usertype, $email, $contactNumber, $address);
-
+//
     $userId = getUserIDUserTable($con, $email);
     if (!$userId) {
         header("Location: ../msg.php?error=userRetrievalError");

@@ -25,8 +25,8 @@ require __DIR__ . "/shared/connect.php";
                 <span>Find Your Mechanic</span>
             </div>
             <div class="login-section">
-                <button onclick="window.location.href='login.php'">Sign In</button>
-                <button onclick="window.location.href='signup.php'">Register</button>
+                <button onclick="window.location.href='login/user/login.php'">Sign In</button>
+                <button onclick="window.location.href='signin-user/signup-User.php'">Register</button>
             </div>
         </div>
     </header>

@@ -5,7 +5,7 @@ function convertToSentenceCase($text)
     $text = strtolower($text);
 
     // Capitalize the first letter of the entire string
-    $text = ucfirst($text);
+    $text = ucwords($text); 
 
     return $text;
 }

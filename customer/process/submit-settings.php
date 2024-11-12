@@ -47,13 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if ($result && mysqli_num_rows($result) == 1) {
                 $existingDetails = mysqli_fetch_assoc($result);
-                $existingPassword = $existingDetails['Password'];
+                $existingHashedPassword = $existingDetails['Password'];
 
                 // Check if the old password matches
-                if ($oldPassword === $existingPassword) {
+                if (password_verify($oldPassword, $existingHashedPassword) || $oldPassword == $existingHashedPassword) {
                     // Check if new password and confirm password match
                     if ($newPassword === $confirmPassword) {
-                        $updatePasswordQuery = "UPDATE `user` SET `Password`='$newPassword' WHERE UserID = $UserID";
+                        $newHashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                        $updatePasswordQuery = "UPDATE `user` SET `Password`='$newHashedPassword' WHERE UserID = $UserID";
                         $updatePasswordResult = mysqli_query($con, $updatePasswordQuery);
 
                         if ($updatePasswordResult) {

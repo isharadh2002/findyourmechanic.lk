@@ -34,22 +34,17 @@ if (isset($_POST['submitButton'])) {
     print_r($row);
     $hashedPassword = $row['Password'];
 
-    if(password_verify($password, $hashedPassword)){
+    if (password_verify($password, $hashedPassword)) {
         echo "Successfully logged in";
+
+        // If no error, start session and store user ID
+        session_start();
+        $_SESSION['UserID'] = $userId;
+        mysqli_close($con);
+
         header("Location:../../customer");
-    }
-    else{
+    } else {
         echo "Invalid Password";
     }
-
     
-
-
-    // If no error, start session and store user ID
-    session_start();
-    $_SESSION['UserID'] = $userId;
-
-
-    //header("Location:../../customer");
-    mysqli_close($con);
 }

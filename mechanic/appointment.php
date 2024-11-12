@@ -150,16 +150,18 @@ if (isset($_SESSION['MechanicID'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appointment Management</title>
-    <?php require "../mechanic/headerMechanic.php"; ?>
     <link rel="stylesheet" href="../stylesheets/footer.css">
     <link rel="stylesheet" href="appointment.css">
+    <link rel="stylesheet" href="header.css">
 </head>
 
 <body>
 
+    <?php
+        require "header.php";
+    ?>
 
-
-    <div class="dashboard-container">
+    <div class="container">
         <h2 class="section-title">Appointment Management</h2>
 
         <div class="appointments">

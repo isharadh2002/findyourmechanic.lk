@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/82066cba-054a-462f-963b-6955cdc60321)
+!(https://github.com/isharadh2002/findyourmechanic.lk/blob/main/assets/FindYourMechanic_Circle.png)
 # FindYourMechanic
 
 FindYourMechanic is a web application that helps users find nearby vehicle mechanics in case of a vehicle breakdown. The application supports three levels of access: Admin, Mechanic, and Customer. 
@@ -131,10 +131,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 For any inquiries or support, please contact:
 
 ** Group 11 - Group Members**
-**SE/2021/001 - Isuru Ranasundara**
-**SE/2021/023 - Aswini Parameswaran**
-**SE/2021/027 - Ishara Dhanushan**  
-**SE/2021/045 - Gobinath E.**
+- **SE/2021/001 - Isuru Ranasundara**
+- **SE/2021/023 - Aswini Parameswaran**
+- **SE/2021/027 - Ishara Dhanushan**  
+- **SE/2021/045 - Gobinath E.**
 
 
 - GitHub: [@yourusername](https://github.com/yourusername)

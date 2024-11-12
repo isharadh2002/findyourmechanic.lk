@@ -1,5 +1,6 @@
-!(https://github.com/isharadh2002/findyourmechanic.lk/blob/main/assets/FindYourMechanic_Circle.png)
-# FindYourMechanic
+<img src="https://github.com/isharadh2002/findyourmechanic.lk/blob/main/assets/FindYourMechanic_Circle.png" alt="Alt Text" height="100">
+
+# Find Your Mechanic
 
 FindYourMechanic is a web application that helps users find nearby vehicle mechanics in case of a vehicle breakdown. The application supports three levels of access: Admin, Mechanic, and Customer. 
 
@@ -10,7 +11,6 @@ FindYourMechanic is a web application that helps users find nearby vehicle mecha
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -66,16 +66,16 @@ You can find the complete SQL script in the `database/` directory.
    git clone https://github.com/yourusername/findyourmechanic.git
    ```
 2. Import the database:
-   - Create a MySQL database (e.g., `findyourmechanic_db`).
+   - Create a MySQL database (e.g., `findyourmechanic`).
    - Import the SQL file located in `database/findyourmechanic.sql`.
 
 3. Configure the database connection:
-   - Update `db_config.php` with your MySQL database credentials.
+   - Update `shared/connect.php` with your MySQL database credentials.
    ```php
    $servername = "localhost";
    $username = "root";
    $password = "";
-   $dbname = "findyourmechanic_db";
+   $dbname = "findyourmechanic";
    ```
 
 4. Start your local server and open the application in your browser:
@@ -122,20 +122,16 @@ We welcome contributions to enhance the functionality and UI of FindYourMechanic
    ```
 5. Open a pull request.
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For any inquiries or support, please contact:
-
-** Group 11 - Group Members**
+## Group 11 - Group Members
 - **SE/2021/001 - Isuru Ranasundara**
 - **SE/2021/023 - Aswini Parameswaran**
 - **SE/2021/027 - Ishara Dhanushan**  
 - **SE/2021/045 - Gobinath E.**
 
+## Contact
+
+For any inquiries or support, please contact:
 
 - GitHub: [@yourusername](https://github.com/yourusername)
 - Email: your-email@example.com

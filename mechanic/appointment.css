@@ -1,0 +1,120 @@
+/* General Reset and Layout 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+
+/* Navbar */
+
+
+
+/* Dashboard Container 
+.dashboard-container {
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 2em;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 2em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    color: #0066cc;
+    font-weight: 600;
+    margin-bottom: 1.5em;
+    text-align: center;
+    font-size: 1.8em;
+}
+
+/* Appointment List 
+#appointment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+#appointment-list div {
+    background-color: #eaf3ff;
+    border-radius: 10px;
+    padding: 1.5em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+}
+
+#appointment-list h3 {
+    color: #004a99;
+    font-size: 1.4em;
+}
+
+#appointment-list p {
+    font-size: 1em;
+    color: #333;
+}
+
+#appointment-list button {
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    padding: 0.8em 1.5em;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#appointment-list button:hover {
+    background-color: #004a99;
+}
+
+ Footer Styles */
+
+
+ /* Appointment Tables */
+.appointments {
+    background-color: #eaf3ff;
+    border-radius: 10px;
+    padding: 1.5em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+}
+
+.appointments h3 {
+    color: #0066cc;
+    margin-bottom: 1em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 0.8em;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+td button {
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+td button:hover {
+    background-color: #004a99;
+}

@@ -7,10 +7,18 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);*/
 }
 
+.admin-container h1{
+    margin: auto;
+    text-align: center;
+}
+
+.admin-container h2{
+    text-align: left;
+}
+
 .admin-container h2,
 .admin-container h1 {
     color: #007bff;
-    text-align: left;
     margin-bottom: 10px;
 }
 
@@ -18,6 +26,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    margin: auto;
 }
 
 .appointments-table th,
@@ -101,6 +110,16 @@
     transition: background-color 0.3s ease;
 }
 
+.pagination a.active {
+    color: white;
+    background-color: #0077dd;
+}
+
+.pagination a.active:hover {
+    color: white;
+    background-color: #007bff;
+}
+
 .pagination a:hover {
     background-color: #007bff;
     color: #fff;
@@ -109,4 +128,122 @@
 .pagination a:disabled {
     color: #aaa;
     border-color: #aaa;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .admin-container {
+        padding: 10px;
+    }
+
+    .admin-container h1,
+    .admin-container h2 {
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    .appointments-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .appointments-table th,
+    .appointments-table td {
+        padding: 8px;
+        font-size: 1emem;
+    }
+
+    .btn {
+        padding: 8px 16px; /* Increased padding for better touch targets */
+        font-size: 14px; /* Increased from 12px */
+        margin-bottom: 5px;
+    }
+
+    /* Pagination for mobile */
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 10px;
+        font-size: 1em; /* Increased font size */
+    }
+
+    .pagination span,
+    .pagination a {
+        margin: 5px;
+        padding: 8px 12px; /* Increased padding */
+        font-size: 1em; /* Increased font size */
+    }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 480px) {
+
+    .admin-container h1,
+    .admin-container h2 {
+        font-size: 1.3em;
+    }
+
+    .btn {
+        padding: 3px 6px;
+        font-size: 10px;
+    }
+
+    .appointments-table th,
+    .appointments-table td {
+        padding: 6px;
+        font-size: 0.8em;
+    }
+
+    /* Hide or stack columns as necessary */
+    .appointments-table td:nth-child(4),
+    .appointments-table th:nth-child(4) {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Admin container alignment */
+    .admin-container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+
+    /* Table styling for responsiveness */
+    .appointments-table {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        overflow-x: auto;
+        /* Allow horizontal scroll on small screens */
+        border-collapse: collapse;
+    }
+
+    .appointments-table th,
+    .appointments-table td {
+        padding: 10px;
+        text-align: center;
+        min-width: 120px;
+        /* Minimum width to prevent text wrapping issues */
+    }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    .appointments-table {
+        max-width: 100%;
+        /* Use full width on mobile */
+    }
+
+    .appointments-table th,
+    .appointments-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
 }

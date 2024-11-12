@@ -11,7 +11,7 @@ if (isset($_SESSION['UserID']) && isset($_GET['appointment_id'])) {
     INNER JOIN `mechanic` ON `mechanic`.`MechanicID` = `appointment`.`MechanicID` INNER JOIN `user`
     ON `mechanic`.`UserID` = `user`.`UserID` WHERE `appointment`.`AppointmentID`= $appointmentID;";
     $result = mysqli_query($con, $query);
-    if (mysqli_num_rows($result) ==1) {
+    if (mysqli_num_rows($result) == 1) {
         $appointment = mysqli_fetch_assoc($result);
         //print_r($appointment);
         //echo "<br><br>";
@@ -42,15 +42,15 @@ function convertTimeTo12H($time24)
     <link rel="stylesheet" href="stylesheets/header.css">
     <link rel="stylesheet" href="stylesheets/appointment-details.css"> <!-- Link to main CSS file if you have one -->
     <style>
-        #StatusIndicator{
-            color: 
-            <?php 
+        #StatusIndicator {
+            color:
+                <?php
                 if ($appointment['Status'] === 'Completed') {
                     echo '#2ecc71'; // Green
                 } else {
                     echo '#e67e22'; // Amber
                 }
-            ?>;
+                ?>;
         }
     </style>
 </head>
@@ -94,6 +94,13 @@ function convertTimeTo12H($time24)
             <div>
                 <h3>Contact</h3>
                 <p><?php echo $appointment['WorkPhoneNumber']; ?></p>
+            </div>
+        </div>
+
+        <div class="detail-card">
+            <div>
+                <h3>Service Type</h3>
+                <p><?php echo $appointment['ServiceType']; ?></p>
             </div>
         </div>
 

@@ -1,10 +1,23 @@
 <?php
 session_start();
+require "../shared/connect.php";
 // Check if admin is logged in; redirect if not
 if (!isset($_SESSION['admin_logged_in'])) {
     //header("Location: ../login.php");
     //exit;
 }
+
+$usersQuery = "SELECT COUNT(*) FROM `user` WHERE UserType='customer';";
+$result = mysqli_query($con, $usersQuery);
+$userCount = mysqli_fetch_assoc($result)['COUNT(*)'];
+
+$mechanicsQuery = "SELECT COUNT(*) FROM `user` WHERE UserType='mechanic';";
+$result = mysqli_query($con, $mechanicsQuery);
+$mechanicsCount = mysqli_fetch_assoc($result)['COUNT(*)'];
+
+$appointmentQuery = "SELECT COUNT(*) FROM `appointment` WHERE Status!='Completed';";
+$result = mysqli_query($con, $appointmentQuery);
+$appointmentCount = mysqli_fetch_assoc($result)['COUNT(*)'];
 ?>
 
 <!DOCTYPE html>
@@ -37,15 +50,15 @@ if (!isset($_SESSION['admin_logged_in'])) {
             <div class="stats-grid">
                 <div class="stat-card">
                     <h3>Total Mechanics</h3>
-                    <p>45</p>
+                    <p><?php echo $mechanicsCount; ?></p>
                 </div>
                 <div class="stat-card">
                     <h3>Total Users</h3>
-                    <p>150</p>
+                    <p><?php echo $userCount; ?></p>
                 </div>
                 <div class="stat-card">
                     <h3>Pending Appointments</h3>
-                    <p>30</p>
+                    <p><?php echo $appointmentCount; ?></p>
                 </div>
             </div>
         </section>

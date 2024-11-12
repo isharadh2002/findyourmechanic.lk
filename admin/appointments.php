@@ -3,7 +3,7 @@
 require "../shared/connect.php";
 
 // Set pagination limits
-$limit = 3;
+$limit = 25;
 
 // Get the current page for pending and completed appointments
 $pagePending = isset($_GET['page_pending']) ? $_GET['page_pending'] : 1;
@@ -13,14 +13,14 @@ $offsetPending = ($pagePending - 1) * $limit;
 $offsetCompleted = ($pageCompleted - 1) * $limit;
 
 // Fetch pending appointments
-$sqlPending = "SELECT * FROM appointment inner join user on appointment.UserID = user.UserID inner join vehicle on vehicle.VehicleID = appointment.VehicleID WHERE  status = 'Pending' or status = 'Scheduled' order by appointment.AppointmentID ASC LIMIT $offsetPending, $limit";
-$sqlPendingMechanicDetails = "SELECT * FROM appointment inner join mechanic on appointment.MechanicID = mechanic.MechanicID inner join user on mechanic.UserID = user.UserID WHERE status = 'Pending' or status = 'Scheduled' order by appointment.AppointmentID ASC LIMIT $offsetPending, $limit";
+$sqlPending = "SELECT * FROM appointment inner join user on appointment.UserID = user.UserID inner join vehicle on vehicle.VehicleID = appointment.VehicleID WHERE  status = 'Pending' or status = 'Scheduled' order by appointment.AppointmentID DESC LIMIT $offsetPending, $limit";
+$sqlPendingMechanicDetails = "SELECT * FROM appointment inner join mechanic on appointment.MechanicID = mechanic.MechanicID inner join user on mechanic.UserID = user.UserID WHERE status = 'Pending' or status = 'Scheduled' order by appointment.AppointmentID DESC LIMIT $offsetPending, $limit";
 $resultPending = $con->query($sqlPending);
 $resultPendingMechanicDetails = $con->query($sqlPendingMechanicDetails);
 
 // Fetch completed appointments
-$sqlCompleted = "SELECT * FROM appointment inner join user on appointment.UserID = user.UserID inner join vehicle on vehicle.VehicleID = appointment.VehicleID WHERE status = 'Completed' order by appointment.AppointmentID ASC LIMIT $offsetCompleted, $limit";
-$sqlCompletedMechanicDetails = "SELECT * FROM appointment inner join mechanic on appointment.MechanicID = mechanic.MechanicID inner join user on mechanic.UserID = user.UserID WHERE status = 'Completed' ORDER BY appointment.AppointmentID ASC LIMIT $offsetCompleted, $limit";
+$sqlCompleted = "SELECT * FROM appointment inner join user on appointment.UserID = user.UserID inner join vehicle on vehicle.VehicleID = appointment.VehicleID WHERE status = 'Completed' order by appointment.AppointmentID DESC LIMIT $offsetCompleted, $limit";
+$sqlCompletedMechanicDetails = "SELECT * FROM appointment inner join mechanic on appointment.MechanicID = mechanic.MechanicID inner join user on mechanic.UserID = user.UserID WHERE status = 'Completed' ORDER BY appointment.AppointmentID DESC LIMIT $offsetCompleted, $limit";
 $resultCompleted = $con->query($sqlCompleted);
 $resultCompletedMechanicDetails = $con->query($sqlCompletedMechanicDetails);
 
@@ -72,10 +72,10 @@ $totalPagesCompleted = ceil($totalCompleted / $limit);
                         <tr>
                             <?php
                             $rowMechanicDetails = $resultPendingMechanicDetails->fetch_assoc();
-                            print_r($row);
-                            echo "<br><br>";
-                            print_r(($rowMechanicDetails));
-                            echo "<br><br>";
+                            //print_r($row);
+                            //echo "<br><br>";
+                            //print_r(($rowMechanicDetails));
+                            //echo "<br><br>";
                             ?>
                             <td><?= $row['AppointmentID'] ?></td>
                             <td><?= $row['Username'] ?></td>
@@ -100,15 +100,43 @@ $totalPagesCompleted = ceil($totalCompleted / $limit);
 
         <!-- Pending Appointments Pagination -->
         <div class="pagination">
-            <span>Records: <?= $totalPending ?></span>
-            <?php if ($pagePending > 1): ?>
-                <a href="?page_pending=1&page_completed=<?= $pageCompleted ?>">First</a>
-                <a href="?page_pending=<?= $pagePending - 1 ?>&page_completed=<?= $pageCompleted ?>">Previous</a>
-            <?php endif; ?>
 
-            <?php if ($pagePending < $totalPagesPending): ?>
-                <a href="?page_pending=<?= $pagePending + 1 ?>&page_completed=<?= $pageCompleted ?>">Next</a>
-                <a href="?page_pending=<?= $totalPagesPending ?>&page_completed=<?= $pageCompleted ?>">Last</a>
+            <span>Records: <?= $totalPending ?></span>
+
+            <?php
+            if ($totalPagesPending > 1):
+            ?>
+                <?php
+                // Determine the start and end page for pagination
+                $startPagePending = max(1, $pagePending - 2);
+                $endPagePending = min($totalPagesPending, $pagePending + 2);
+                if ($endPagePending - $startPagePending < 4) {
+                    if ($startPagePending == 1) {
+                        $endPagePending = min($startPagePending + 4, $totalPagesPending);
+                    } elseif ($endPagePending == $totalPagesPending) {
+                        $startPagePending = max($endPagePending - 4, 1);
+                    }
+                }
+                ?>
+
+                <?php if ($pagePending > 1): ?>
+                    <a href="?page_pending=1&page_completed=<?= $pageCompleted ?>">First</a>
+                    <a href="?page_pending=<?= $pagePending - 1 ?>&page_completed=<?= $pageCompleted ?>">Previous</a>
+                <?php endif; ?>
+
+                <?php for ($i = $startPagePending; $i <= $endPagePending; $i++): ?>
+                    <?php if ($i == $pagePending): ?>
+                        <!--<span class="current-page"><?= $i ?></span>-->
+                        <a href="?page_pending=<?= $i ?>&page_completed=<?= $pageCompleted ?>" class="active"><?= $i ?></a>
+                    <?php else: ?>
+                        <a href="?page_pending=<?= $i ?>&page_completed=<?= $pageCompleted ?>"><?= $i ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+
+                <?php if ($pagePending < $totalPagesPending): ?>
+                    <a href="?page_pending=<?= $pagePending + 1 ?>&page_completed=<?= $pageCompleted ?>">Next</a>
+                    <a href="?page_pending=<?= $totalPagesPending ?>&page_completed=<?= $pageCompleted ?>">Last</a>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
 
@@ -132,10 +160,10 @@ $totalPagesCompleted = ceil($totalCompleted / $limit);
                         <tr>
                             <?php
                             $rowMechanicDetails = $resultCompletedMechanicDetails->fetch_assoc();
-                            print_r($row);
-                            echo "<br><br>";
-                            print_r(($rowMechanicDetails));
-                            echo "<br><br>";
+                            //print_r($row);
+                            //echo "<br><br>";
+                            //print_r(($rowMechanicDetails));
+                            //echo "<br><br>";
                             ?>
                             <td><?= $row['AppointmentID'] ?></td>
                             <td><?= $row['Username'] ?></td>
@@ -161,16 +189,43 @@ $totalPagesCompleted = ceil($totalCompleted / $limit);
         <!-- Completed Appointments Pagination -->
         <div class="pagination">
             <span>Records: <?= $totalCompleted ?></span>
-            <?php if ($pageCompleted > 1): ?>
-                <a href="?page_completed=1&page_pending=<?= $pagePending ?>">First</a>
-                <a href="?page_completed=<?= $pageCompleted - 1 ?>&page_pending=<?= $pagePending ?>">Previous</a>
-            <?php endif; ?>
+            <?php
+            if ($totalPagesCompleted > 1):
+            ?>
+                <?php
+                // Determine the start and end page for pagination
+                $startPageCompleted = max(1, $pageCompleted - 2);
+                $endPageCompleted = min($totalPagesCompleted, $pageCompleted + 2);
+                if ($endPageCompleted - $startPageCompleted < 4) {
+                    if ($startPageCompleted == 1) {
+                        $endPageCompleted = min($startPageCompleted + 4, $totalPagesCompleted);
+                    } elseif ($endPageCompleted == $totalPagesCompleted) {
+                        $startPageCompleted = max($endPageCompleted - 4, 1);
+                    }
+                }
+                ?>
 
-            <?php if ($pageCompleted < $totalPagesCompleted): ?>
-                <a href="?page_completed=<?= $pageCompleted + 1 ?>&page_pending=<?= $pagePending ?>">Next</a>
-                <a href="?page_completed=<?= $totalPagesCompleted ?>&page_pending=<?= $pagePending ?>">Last</a>
+                <?php if ($pageCompleted > 1): ?>
+                    <a href="?page_completed=1&page_pending=<?= $pagePending ?>">First</a>
+                    <a href="?page_completed=<?= $pageCompleted - 1 ?>&page_pending=<?= $pagePending ?>">Previous</a>
+                <?php endif; ?>
+
+                <?php for ($i = $startPageCompleted; $i <= $endPageCompleted; $i++): ?>
+                    <?php if ($i == $pageCompleted): ?>
+                        <!--<span class="current-page"><?= $i ?></span>-->
+                        <a href="?page_completed=<?= $i ?>&page_pending=<?= $pagePending ?>" class="active"><?= $i ?></a>
+                    <?php else: ?>
+                        <a href="?page_completed=<?= $i ?>&page_pending=<?= $pagePending ?>"><?= $i ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+
+                <?php if ($pageCompleted < $totalPagesCompleted): ?>
+                    <a href="?page_completed=<?= $pageCompleted + 1 ?>&page_pending=<?= $pagePending ?>">Next</a>
+                    <a href="?page_completed=<?= $totalPagesCompleted ?>&page_pending=<?= $pagePending ?>">Last</a>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
+
     </div>
 
     <?php //include '../footer.php'; 

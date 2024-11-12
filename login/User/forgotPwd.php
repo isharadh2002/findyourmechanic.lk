@@ -1,3 +1,57 @@
+<?php
+
+// forgot_password.php
+
+// Process the form when submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    
+    // Connect to the database
+    $conn = mysqli_connect('localhost', 'username', 'password', 'database');
+    if (!$conn) {
+        die("Database connection failed: " . mysqli_connect_error());
+    }
+    
+    // Check if the email exists
+    $sql = "SELECT id FROM users WHERE email = '$email'";
+    $result = mysqli_query($conn, $sql);
+    
+    if (mysqli_num_rows($result) > 0) {
+        // Generate a unique token and set expiry (1 hour from now)
+        $token = bin2hex(random_bytes(50));
+        $expiry = date("Y-m-d H:i:s", strtotime('+1 hour'));
+        
+        // Store token and expiry in the database
+        $update_sql = "UPDATE users SET reset_token = '$token', reset_token_expiry = '$expiry' WHERE email = '$email'";
+        if (mysqli_query($conn, $update_sql)) {
+            // Send email with reset link
+            $resetLink = "http://findyourmechanic.com/reset_password.php?token=$token";
+            $subject = "Password Reset Request";
+            $message = "Click on this link to reset your password: $resetLink";
+            $headers = "From: no-reply@findyourmechanic.com";
+            
+            if (mail($email, $subject, $message, $headers)) {
+                echo "Password reset link has been sent to your email.";
+            } else {
+                echo "Failed to send the email.";
+            }
+        } else {
+            echo "Error updating reset token.";
+        }
+    } else {
+        echo "No account found with that email.";
+    }
+    
+    mysqli_close($conn);
+}
+?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,7 +100,7 @@
         /* Left content area */
         .left-content {
             width: 45%;
-            padding: 20px;
+           
             color: #fff;
             /* Text color for better contrast on gradient */
         }
@@ -160,10 +214,11 @@
             color: #1054e6;
         }
 
-        h2 {
+       .formcontainer h2 {
 
             font-size: 29px;
         }
+        
     </style>
 </head>
 
@@ -172,7 +227,8 @@
         <div class="diagonal-section"></div>
         <div class="content">
             <div class="left-content">
-                <h1>Welcome to Our Site</h1>
+                <h2 style="font-size:58px;">Welcome to </h2><h1 style="font-size: 61px;"> findyourmechanic.lk !...</h1>
+                <p style="text-align: center;font-size: 57px;">So, You can reset <br> your password from <br> here......</p>
 
             </div>
             <div class="right-content">

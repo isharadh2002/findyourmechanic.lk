@@ -33,7 +33,7 @@ if (isset($_POST['submitButton'])) {
     }
 
     if (emailExists($con, $email, $name) > 0) {
-        header("Location: ../msg.php?error=UserEmailExists");
+        header("Location: ../msg.php?error=UserEmailExistsSign");
         exit();
     }
 
@@ -52,14 +52,10 @@ if (isset($_POST['submitButton'])) {
         exit();
     }
 
-    /*if (!updateVehicleTable($con, $userId, $registrationNumber, $brandName, $modelName)) {
-        
-        header("Location: ../msg.php?success=mechanicRegistrationSuccess");
-    }*/
+    
     session_start();
-    $_SESSION['noOfVehicles'] = $noOfVehicle;
-    $_SESSION['userId'] = $userId;
+    
     mysqli_close($con);
-    header('Location:vehicles.php?userid=.$userid.$noof=.$noOfVehicles');
+    header('Location:../msg.php?error=sucess');
     exit();
 }

@@ -5,25 +5,26 @@ if (isset($_POST['submitButton'])) {
     $fullName = $_POST['fullName'];
     $email = $_POST['email'];
     $subject = $_POST['subject'];
-    $textArea = $_POST['textArea '];
+    $textArea = $_POST['textArea'];
+    $header=$fullName;
+    $header.='<br>';
+    $header.='From - ';
+    $header.=$email;
 
-
-    $to = 'findyourmechanic.lk@gmail.com';
-    $subject_email = 'Massege from web site';
-    $email_body   = 'Messege from notification panel in the findyourmechanic web site:';
-    $email_body  .= '<b>From :</b> {$fullName} ';
-    $email_body  .= '<b>Email :</b> {$email}';
-    $email_body  .= '<b>Subject :</b> {$subject}';
-    $email_body  .= '<b>Messege :</b> {$textarea}';
-    $header = '<b>Email From Findyourmechanic.lk....</b>';
-
-    $mail_sent = mail($to, $subject_email, $email_body, $header);
+    
+    
+                
+                
+    $mail_sent = mail($email, $subject, $textArea, $header);
     if ($mail_sent) {
 
-        $massege_mail = '<p> The Mail was sen sucessfully!..............</p>';
+        $massege_mail = '<p class="sucessMsg"> The Mail was sent sucessfully!..............</p>';
+  
     } else {
-        $massege_mail = '<p> The Mail was not sen sucessfully!..............</p>';
+        $massege_mail = '<p class="notSucessmsg"> The Mail was not sent sucessfully!..............</p>';
+      
     }
+    
 }
 
 
@@ -80,7 +81,7 @@ if (isset($_POST['submitButton'])) {
             width: 60%;
             /* Adjust to control width of colored area */
             height: 100%;
-            background: linear-gradient(135deg, #064edd, #b0b9fc);
+            background: linear-gradient(135deg, #64afdc, #03082c);
             /* Gradient colors */
             clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
             /* Creates the angled cut */
@@ -88,8 +89,8 @@ if (isset($_POST['submitButton'])) {
         }
 
         /* Content styling */
-        
-        
+
+
 
         .container {
             display: flex;
@@ -116,10 +117,11 @@ if (isset($_POST['submitButton'])) {
             align-items: center;
             margin-right: 28px;
         }
-        .rightContent{
+
+        .rightContent {
             position: fixed;
-             right: 0;
-             justify-content: space-between;
+            right: 0;
+            justify-content: space-between;
         }
 
         .leftContent {
@@ -297,6 +299,24 @@ if (isset($_POST['submitButton'])) {
 
 
         }
+        .notSucessMsg .sucessMsg{
+            text-align: center;
+
+            
+        }
+        .notSucessmsg{
+            background-color: orange;
+            color: white;
+            font-size: larger;
+
+        }
+        .sucessMsg{
+
+            
+           color: white;;
+           background-color: green;
+           font-size: larger;
+        }
     </style>
 </head>
 
@@ -324,7 +344,7 @@ if (isset($_POST['submitButton'])) {
         </div>
         <div class="rightContent">
             <div class="notificationContainer">
-                <?php echo $massege_mail; ?>
+                
                 <div class="notification">Notifications !</div>
                 <div class="form_elements">
                     <form action="notification.php" method="post">
@@ -333,13 +353,14 @@ if (isset($_POST['submitButton'])) {
                             <input type="text" name="email" class="inputs" placeholder="Email...">
                             <input type="text" name="subject" class="inputs" placeholder="subject...">
                             <textarea name="textArea" class="inputs" cols="30" rows="10" placeholder="Enter your Messege......"></textarea>
-                            <button class="submitButton">Send</button>
+                            <button class="submitButton" name="submitButton">Send</button>
                         </div>
                     </form>
                 </div>
 
 
             </div>
+            <?php echo $massege_mail; ?>
         </div>
     </div>
 </body>

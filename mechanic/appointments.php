@@ -2,7 +2,10 @@
 // Start session and check if the mechanic is logged in
 session_start();
 if (!isset($_SESSION['MechanicID'])) {
-    header('Location: ../');
+    echo "<script>
+    window.alert('You are not logged in');
+    window.location.href = '../';
+</script>";
     exit();
 }
 
@@ -168,7 +171,7 @@ if (mysqli_num_rows($result) > 0) {
                             <p><strong>Status:</strong> <span class="status-label"><?= htmlspecialchars($appointment['Status']) ?></span></p>
                         </div>
                         <div class="status-change">
-                            <form method="POST" action="update_appointment_status.php">
+                            <form method="POST" action="process/update_appointment_status.php">
                                 <input type="hidden" name="appointment_id" value="<?= $appointment['AppointmentID'] ?>">
                                 <select name="status" class="status-select">
                                     <option value="Scheduled" <?= $appointment['Status'] == 'Scheduled' ? 'selected' : '' ?>>Scheduled</option>

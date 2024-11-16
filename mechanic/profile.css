@@ -1,34 +1,47 @@
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
+
+.container {
+    margin-top: 125px;
+}
+
 .dashboard-container {
-    width: 80%;
+    width: 1000px;
+    max-width: 80%;
     margin: 20px auto;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px #ccc;
 }
+
 .section-title {
     font-size: 24px;
     margin-bottom: 20px;
 }
+
 .form-group {
     margin-bottom: 15px;
 }
+
 label {
     font-weight: bold;
 }
-input[type="text"], input[type="email"], input[type="file"], input[type="number"] {
+
+input[type="text"],
+input[type="email"],
+input[type="file"],
+input[type="number"] {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
+
 button {
     background-color: #28a745;
     color: white;
@@ -37,6 +50,46 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+
 button:hover {
     background-color: #218838;
+}
+
+/*CSS for upload profile picture section*/
+.profile-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-logo {
+    display: flex;
+    width: 250px;
+    margin: auto;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    object-fit: cover;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.upload-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 40px;
+    width: 100px;
+}
+
+.upload-btn:hover {
+    background-color: #0056b3;
 }

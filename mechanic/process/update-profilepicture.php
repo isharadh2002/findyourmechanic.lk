@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $targetPath = $targetDir . $newFileName;
 
                 // Check if the user already has a profile picture
-                $sql = "SELECT ProfilePicture FROM customer WHERE UserID = ?";
+                $sql = "SELECT ProfilePicture FROM mechanic WHERE UserID = ?";
                 $stmt = $con->prepare($sql);
                 $stmt->bind_param('i', $UserID);
                 $stmt->execute();
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $relativePath = "uploads/profilePictures/" . $newFileName;  // Path relative to the root
 
                     // Update the profile picture in the database
-                    $sql = "UPDATE customer SET ProfilePicture = ? WHERE UserID = ?";
+                    $sql = "UPDATE mechanic SET ProfilePicture = ? WHERE UserID = ?";
                     $stmt = $con->prepare($sql);
                     $stmt->bind_param('si', $relativePath, $UserID);
 
@@ -187,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     Your file has been uploaded successfully!
                 </div>
                 <div class="modal-footer">
-                    <a href="../settings.php" class="btn">Go to Dashboard</a>
+                    <a href="../profile.php" class="btn">Go to Dashboard</a>
                 </div>
             </div>
         </div>
@@ -204,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     There was an error processing your file. Please try again.
                 </div>
                 <div class="modal-footer">
-                    <a href="../settings.php" class="btn">Try Again</a>
+                    <a href="../profile.php" class="btn">Try Again</a>
                 </div>
             </div>
         </div>

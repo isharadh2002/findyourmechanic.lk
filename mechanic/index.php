@@ -1,17 +1,27 @@
+<?php
+require_once "../shared/connect.php";
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mechanic Dashboard</title>
-    <link rel="stylesheet" href="../stylesheets/header.css">
+    <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="../stylesheets/footer.css">
    <link rel="stylesheet" href="index.css">
+   <link rel="icon" href="../assets/FindYourMechanic_Circle.png">
 </head>
 <body>
 
+    <?php
+        require_once "header.php";
+    ?>
+
     <!-- Navbar -->
-    <div class="navbar">
+    <!--<div class="navbar">
         <h1>Mechanic Dashboard</h1>
         <div class="nav-links">
             <a href="/findyourmechanic/mechanic/appointment.php">Appointments</a>
@@ -19,7 +29,7 @@
             <a href='/findyourmechanic/mechanic/service.php'>Services</a>
             <a href="/findyourmechanic/mechanic/profile.php">Profile</a>
         </div>
-    </div>
+    </div>-->
 
     <!-- Content Section -->
     <div class="content">

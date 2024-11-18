@@ -1,23 +1,13 @@
 <?php
-
 require_once("../../shared/connect.php");
-if (isset($_POST['resend'])) {
-    $email = $_POST['email'];
-    $qry = "SELECT UserID FROM user WHERE Email = ?";
 
+if (isset($_POST['resend'])) {
+    $email = trim($_POST['email']);
+    $qry = "SELECT UserID FROM user WHERE Email = ?";
     $stmt = mysqli_stmt_init($con);
 
-
-
-
-
     if (!mysqli_stmt_prepare($stmt, $qry)) {
-        echo "  <script>
-        alert('Error Occurred...');
-        
-
-        
-        </script>";
+        echo "<script>alert('Error Occurred while preparing the statement...');</script>";
         exit();
     }
 
@@ -25,77 +15,47 @@ if (isset($_POST['resend'])) {
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    if ($row = mysqli_fetch_assoc($result) > 0) {
-
+    if ($row = mysqli_fetch_assoc($result)) {
         $token = bin2hex(random_bytes(50));
         $expiry = date("Y-m-d H:i:s", strtotime('+1 hour'));
+        mysqli_stmt_close($stmt);
 
-
-        $update_sql = "UPDATE user SET reset_token = '{$token}', reset_token_expiry = '{$expiry}' WHERE email = '}{$email}'}";
-
-        if (mysqli_prepare($con, $update_sql)) {
-
-            mysqli_stmt_bind_param($stmt, 'sss', $email,$token,$expiry);
-            mysqli_stmt_execute($stmt);
-            $updatedresult = mysqli_stmt_get_result($stmt);
-            
-            $resetLink = "http://findyourmechanic.com/reset_password.php?token=$token";
-            $subject = "Password Reset Request";
-            $message = "Click on this link to reset your password: $resetLink";
-            $headers = "From: no-reply@findyourmechanic.lk";
-
-            if (mail($email, $subject, $message, $headers)) {
-                echo "<script>
-       alert('The password resetting link was sent...'');
+        $update_sql = "UPDATE user SET Password = ?, reset_token_expiry = ? WHERE Email = ?";
         
-        </script>";
+        $update_stmt=mysqli_stmt_init($con);
+        if (mysqli_stmt_prepare($update_stmt, $update_sql)) {
+            mysqli_stmt_bind_param($update_stmt, 'sss', $token, $expiry, $email);
+            if (mysqli_stmt_execute($update_stmt)) {
+                $resetLink = "http://findyourmechanic.com/reset_password.php?token={$token}";
+                $subject = "Password Reset Request";
+                $message = "Click on this link to reset your password: {$resetLink}\n\nThis link will expire in 1 hour.";
+                $headers = "From: no-reply@findyourmechanic.lk";
+
+                if (mail($email, $subject, $message, $headers)) {
+                    echo "<script>alert('The password reset link has been sent to your email.');</script>";
+                } else {
+                    echo "<script>alert('Failed to send the email. Please try again later.');</script>";
+                }
             } else {
-                echo "<script>
-        alert('Failed to send a email...'');
-        
-        </script>";
+                echo "<script>alert('Error updating reset token.');</script>";
             }
         } else {
-            echo "<script>
-        alert('Error uploading resend token...'');
-        
-        </script>";
+            echo "<script>alert('Error preparing update statement.');</script>";
         }
-    } else {
-        echo "<script>
-        alert('There is not any account from entered email...');
+
         
-        </script>";
+    } else {
+        echo "<script>alert('No account found for the entered email.');</script>";
     }
-    mysqli_stmt_close($stmt);
+
+    mysqli_stmt_close($update_stmt);
     mysqli_close($con);
 }
 ?>
+
+
+
+
 
 
 
@@ -303,18 +263,14 @@ if (isset($_POST['resend'])) {
     </div>
     <script>
         function buttonBehavior() {
-            let email = document.getElementById('email').value;
-            const emailFormat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if (email.match(emailFormat)) {
+    const email = document.getElementById('email').value.trim();
+    const emailFormat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-                document.getElementById("resend").disabled = false;
-
-            } else {
-                document.getElementById("resend").disabled = true;
-            }
+    document.getElementById('resend').disabled = !email.match(emailFormat);
+}
 
 
-        }
+        
     </script>
 </body>
 

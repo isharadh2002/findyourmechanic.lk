@@ -1,48 +1,99 @@
 <?php
 
-// forgot_password.php
-
-// Process the form when submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+require_once("../../shared/connect.php");
+if (isset($_POST['resend'])) {
     $email = $_POST['email'];
-    
-    // Connect to the database
-    $conn = mysqli_connect('localhost', 'username', 'password', 'database');
-    if (!$conn) {
-        die("Database connection failed: " . mysqli_connect_error());
+    $qry = "SELECT UserID FROM user WHERE Email = ?";
+
+    $stmt = mysqli_stmt_init($con);
+
+
+
+
+
+    if (!mysqli_stmt_prepare($stmt, $qry)) {
+        echo "  <script>
+        alert('Error Occurred...');
+        
+
+        
+        </script>";
+        exit();
     }
-    
-    // Check if the email exists
-    $sql = "SELECT id FROM users WHERE email = '$email'";
-    $result = mysqli_query($conn, $sql);
-    
-    if (mysqli_num_rows($result) > 0) {
-        // Generate a unique token and set expiry (1 hour from now)
+
+    mysqli_stmt_bind_param($stmt, 's', $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    if ($row = mysqli_fetch_assoc($result) > 0) {
+
         $token = bin2hex(random_bytes(50));
         $expiry = date("Y-m-d H:i:s", strtotime('+1 hour'));
-        
-        // Store token and expiry in the database
-        $update_sql = "UPDATE users SET reset_token = '$token', reset_token_expiry = '$expiry' WHERE email = '$email'";
-        if (mysqli_query($conn, $update_sql)) {
-            // Send email with reset link
+
+
+        $update_sql = "UPDATE user SET reset_token = '{$token}', reset_token_expiry = '{$expiry}' WHERE email = '}{$email}'}";
+
+        if (mysqli_prepare($con, $update_sql)) {
+
+            mysqli_stmt_bind_param($stmt, 'sss', $email,$token,$expiry);
+            mysqli_stmt_execute($stmt);
+            $updatedresult = mysqli_stmt_get_result($stmt);
+            
             $resetLink = "http://findyourmechanic.com/reset_password.php?token=$token";
             $subject = "Password Reset Request";
             $message = "Click on this link to reset your password: $resetLink";
-            $headers = "From: no-reply@findyourmechanic.com";
-            
+            $headers = "From: no-reply@findyourmechanic.lk";
+
             if (mail($email, $subject, $message, $headers)) {
-                echo "Password reset link has been sent to your email.";
+                echo "<script>
+       alert('The password resetting link was sent...'');
+        
+        </script>";
             } else {
-                echo "Failed to send the email.";
+                echo "<script>
+        alert('Failed to send a email...'');
+        
+        </script>";
             }
         } else {
-            echo "Error updating reset token.";
+            echo "<script>
+        alert('Error uploading resend token...'');
+        
+        </script>";
         }
     } else {
-        echo "No account found with that email.";
+        echo "<script>
+        alert('There is not any account from entered email...');
+        
+        </script>";
     }
-    
-    mysqli_close($conn);
+    mysqli_stmt_close($stmt);
+    mysqli_close($con);
 }
 ?>
 
@@ -100,7 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         /* Left content area */
         .left-content {
             width: 45%;
-           
+
             color: #fff;
             /* Text color for better contrast on gradient */
         }
@@ -183,7 +234,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background-color: #106e7f;
         }
 
-       #resend:disabled {
+        #resend:disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }
@@ -214,11 +265,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: #1054e6;
         }
 
-       .formcontainer h2 {
+        .formcontainer h2 {
 
             font-size: 29px;
         }
-        
     </style>
 </head>
 
@@ -227,16 +277,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="diagonal-section"></div>
         <div class="content">
             <div class="left-content">
-                <h2 style="font-size:58px;">Welcome to </h2><h1 style="font-size: 61px;"> findyourmechanic.lk !...</h1>
+                <h2 style="font-size:58px;">Welcome to hello </h2>
+                <h1 style="font-size: 61px;"> findyourmechanic.lk !...</h1>
                 <p style="text-align: center;font-size: 57px;">So, You can reset <br> your password from <br> here......</p>
 
             </div>
             <div class="right-content">
                 <div class="formcontainer">
                     <h2>Reset Your Password</h2>
-                    <form action="forgotPwd.php" method="post">
+                    <form action="forgotPwdnew.php" method="post">
 
-                        <input type="email" name="email" id="email"  placeholder="E-mail...">
+                        <input type="email" name="email" id="email" placeholder="E-mail..." oninput="buttonBehavior();">
                         <small>(Enter your E-mail of having Account)</small>
                         <br><br>
                         <button name="resend" id="resend" disabled>Resend</button><br><br>
@@ -252,11 +303,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <script>
         function buttonBehavior() {
-            let email = document.getElementsByTagName("input").value;
-            if (email.match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/')) {
+            let email = document.getElementById('email').value;
+            const emailFormat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (email.match(emailFormat)) {
 
-                document.getElementById('resend').disabled = false;
+                document.getElementById("resend").disabled = false;
 
+            } else {
+                document.getElementById("resend").disabled = true;
             }
 
 

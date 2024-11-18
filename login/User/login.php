@@ -28,12 +28,12 @@ require_once("login.opr.php");
 
       <p style="text-align: center;">Already haven't an account? <a href="../../signIn-user/signup-User.php">SignUp.</a></p>
       <br>
-      <a href="" style="text-align: right;">Forget Password.</a>
+      <a href="forgotPwd.php" style="text-align: right;">Forget Password.</a>
 
       <p id="msg">The Value is empty</p>
       <br>
 
-      <button type="submit" class="submitButton" name="submitButton" onclick="onclic('email','password');">LogIn</button>
+      <button type="submit" class="submitButton" name="submitButton" onclick="onclick('email','password');">LogIn</button>
 
     </form>
 

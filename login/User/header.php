@@ -82,6 +82,7 @@ require_once("../../shared/connect.php");
       box-shadow: 2vh;
       border-style: outset;
       border-radius: 36px;
+      background-color: #fff;
     }
 
     .formElements h1 {

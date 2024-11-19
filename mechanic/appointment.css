@@ -75,7 +75,9 @@
 
  Footer Styles */
 
-
+.container{
+    margin-top: 125px;
+}
  /* Appointment Tables */
 .appointments {
     background-color: #eaf3ff;

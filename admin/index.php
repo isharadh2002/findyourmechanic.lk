@@ -30,9 +30,6 @@ $appointmentCount = mysqli_fetch_assoc($result)['COUNT(*)'];
     <link rel="icon" href="../assets/FindYourMechanic_Circle.png">
     <link rel="stylesheet" href="stylesheets/index.css">
     <link rel="stylesheet" href="stylesheets/sidebar.css">
-    <style>
-        
-    </style>
 </head>
 
 <body>

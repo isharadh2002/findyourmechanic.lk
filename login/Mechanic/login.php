@@ -75,6 +75,7 @@ require_once("header.php");
         msg.style.display = 'none'; // Hide error message
       }
     });
+    changeBackground();
   </script>
   </body>
 

@@ -1,4 +1,13 @@
 <?php
+function promptingImage($msg)
+{
+
+    echo "<script>
+
+            promptingPicJs({$msg});
+    
+        </script>";
+}
 
 function errorMassege()
 {
@@ -25,45 +34,63 @@ function sucessMassege()
 $msg = $_GET['error'];
 if (isset($msg)) {
 
+    //error---> 0 & Sucess---> 1
     switch ($msg) {
         case 'emptyInputs':
             errorMassege();
+            promptingImage(0);
             break;
         case 'invalidInputs':
             errorMassege();
+            promptingImage(0);
             break;
         case 'UserEmailNOTExists':
             errorMassege();
+            promptingImage(0);
             break;
         case 'success':
             sucessMassege();
+            promptingImage(1);
             break;
         case 'db_error':
             errorMassege();
+            promptingImage(0);
             break;
         case 'db_st_error':
             errorMassege();
+            promptingImage(0);
             break;
         case 'db_st_error_Mechanic':
             errorMassege();
+            promptingImage(0);
             break;
         case 'execution_error':
             errorMassege();
+            promptingImage(0);
             break;
         case 'db_st_errorVehicle':
             errorMassege();
+            promptingImage(0);
             break;
-        case 'UserEmailExists':
+        case 'UserEmailExistsSign':
+            errorMassege();
+            promptingImage(0);
+            break;
+        case 'UserEmailExistsLogin':
             sucessMassege();
+            promptingImage(1);
             break;
         case 'userRetrievalError':
             errorMassege();
-            break;
+            promptingImage(0);
+            break;;
         case 'fileUploadError':
             errorMassege();
+            promptingImage(0);
             break;
         case 'mechanicRegistrationSuccess':
             sucessMassege();
+            promptingImage(1);
             break;
         default:
             echo '<script>
@@ -143,6 +170,7 @@ if (isset($msg)) {
 <body>
 
     <!-- Message container with success message and button -->
+    <img alt="picture_in_page" class="msgPic">
     <div class="message-container">
         <div class="message-text">Sign-in successful! Welcome back.
 
@@ -150,8 +178,33 @@ if (isset($msg)) {
         <div class="button">
             <button name="nextpage" class="next-button"> Next ==></button>
         </div>
+        <img src="Pic/done.png" alt="SucessMasseg" />
     </div>
+    <script>
+        addEventListener('onLoad',
+        function promptingPicJs(number) {
+            //filling by image paths
+            let images = ['', ''];
+            document.getElementsByTagName('img').src = '';
+            if (number === 0) {
 
+                document.getElementsByTagName('img').src = images[0];
+                return;
+            } else if (number === 1) {
+                document.getElementsByTagName('img').src = images[1];
+                return;
+            } else {
+
+
+                alert('There may be some bugs.');
+            }
+
+
+            return;
+
+        }
+    );
+    </script>
 </body>
 
 </html>

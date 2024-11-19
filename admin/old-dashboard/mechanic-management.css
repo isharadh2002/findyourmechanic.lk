@@ -1,0 +1,55 @@
+.user-table {
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+    margin-top: 25px;
+    padding: 25px;
+    border-radius: 10px;
+    background-color: #ffdddd;
+}
+
+.table-heading,
+.table-data {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-width: 100px;
+    width: 200px;
+}
+
+.email {
+    min-width: 200px;
+}
+
+.address {
+    min-width: 200px;
+}
+
+.approve-btn,
+.disapprove-btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #3373c4;
+    /* Button background color */
+    color: white;
+    /* Text color */
+    text-align: center;
+    text-decoration: none;
+    /* Remove underline */
+    border-radius: 10px;
+    /* Rounded corners */
+    border: none;
+    cursor: pointer;
+    /* Pointer cursor on hover */
+}
+
+.approve-btn:hover,
+.disapprove-btn:hover{
+    background-color: #003396;
+    /* Darker shade on hover */
+}
+
+a {
+    color: inherit; /* Inherit the color from the parent element */
+    text-decoration: none; /* Remove underline */
+}

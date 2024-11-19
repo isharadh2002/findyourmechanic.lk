@@ -6,7 +6,7 @@ function isInputsEmpty($name, $email, $password, $contactNumber, $address)
 }
 function invalidUsername($name)
 {
-    return !preg_match('/^[a-zA-Z0-9_]*$/', $name);
+    return !preg_match('/^[a-zA-Z0-9_ ]*$/', $name);
 }
 
 function invalidEmail($email)
@@ -23,7 +23,6 @@ function inValidResponse($name, $email, $contactNumber)
 {
     return invalidUsername($name) || invalidEmail($email) || invalidContactNumber($contactNumber);
 }
-
 
 function emailExists($con, $email, $name)
 {
@@ -50,7 +49,6 @@ function insertDataUserTable($con, $name, $password, $usertype, $email, $contact
         header("Location:../msg.php?error=db_st_error");
         exit();
     }
-
 
     mysqli_stmt_bind_param($stmt, 'ssssss', $name, $hashedPwd, $usertype, $email, $contactNumber, $address);
     mysqli_stmt_execute($stmt);
@@ -80,17 +78,17 @@ function getUserIDUserTable($con, $email)
     return false;
 }
 
-function updateCustomerTable($con, $userId, $noOfVehicle, $profilePicturePath)
+function updateCustomerTable($con, $userId, $profilePicturePath)
 {
-    $qry = "INSERT INTO customer (UserID, NoOfVehicles,ProfilePicture) VALUES (?, ?, ?);";
+    $qry = "INSERT INTO customer (UserID, NoOfVehicles,ProfilePicture) VALUES (?, 0, ?);";
     $stmt = mysqli_stmt_init($con);
 
     if (!mysqli_stmt_prepare($stmt, $qry)) {
         header("Location: ../msg.php?error=db_st_error_Mechanic");
         exit();
     }
-
-    mysqli_stmt_bind_param($stmt, 'iis', $userId, $noOfVehicle, $profilePicturePath);
+    $relativePath = substr($profilePicturePath, 3);
+    mysqli_stmt_bind_param($stmt, 'is', $userId, $relativePath);
     if (!mysqli_stmt_execute($stmt)) {
         error_log("Execution failed: " . mysqli_stmt_error($stmt));
         header("Location: ../msg.php?error=execution_error");

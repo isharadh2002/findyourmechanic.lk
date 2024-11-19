@@ -1,6 +1,7 @@
 <?php
 require_once("../shared/connect.php");
 require_once("function.php");
+print_r($_POST);
 
 if (isset($_POST['submitButton'])) {
     // Gather POST data//
@@ -11,29 +12,31 @@ if (isset($_POST['submitButton'])) {
     $address = $_POST['address'];
     $usertype = 'customer';
     $profilePicture = $_FILES['profilePicture'];
-    $noOfVehicle = $_POST['numberOfVehicles'];
+    //$noOfVehicle = $_POST['numberOfVehicles'];
 
 
 
     // Upload profile picture and cover photo
-    $uploadDir = 'uploads/'; // Ensure this directory exists and is writable
+    $uploadDir = '../uploads/profilePictures/'; // Ensure this directory exists and is writable
 
 
     $profilePicturePath =  $uploadDir . basename($profilePicture['name']);
 
 
     if (isInputsEmpty($name, $email, $password, $contactNumber, $address, $profilePicture)) {
-        header("Location: ../msg.php?error=emptyInputs");
+        header("Location: ../msg.php?error=emptyInputs&message=InputsEmpty");
         exit();
     }
 
     if (inValidResponse($name, $email, $contactNumber)) {
-        header("Location: ../msg.php?error=invalidInputs");
+        header("Location: ../msg.php?error=invalidInputs&message=invalidResponse");
         exit();
     }
 
     if (emailExists($con, $email, $name) > 0) {
-        header("Location: ../msg.php?error=UserEmailExistsSign");
+
+        header("Location: ../msg.php?error=UserEmailExists&message=emailExists");
+
         exit();
     }
 
@@ -46,7 +49,7 @@ if (isset($_POST['submitButton'])) {
     }
 
     if ($profilePicture && move_uploaded_file($profilePicture['tmp_name'], $profilePicturePath)) {
-        updateCustomerTable($con, $userId, $noOfVehicle, $profilePicturePath);
+        updateCustomerTable($con, $userId, $profilePicturePath);
     } else {
         header("Location: ../msg.php?error=fileUploadError");
         exit();
@@ -54,8 +57,12 @@ if (isset($_POST['submitButton'])) {
 
     
     session_start();
-    
+
+    //$_SESSION['noOfVehicles'] = $noOfVehicle;
+    $_SESSION['UserID'] = $userId;
+    $_SESSION['UserType'] = $usertype;
     mysqli_close($con);
+<<<<<<< HEAD
     header('Location:../msg.php?error=sucess');
     if (isset($_POST['submitButton'])) {
 
@@ -83,5 +90,12 @@ if (isset($_POST['submitButton'])) {
         }
         
     }
+=======
+    //header('Location:vehicles.php?userid=.$userid.$noof=.$noOfVehicles');
+    if(strcasecmp($usertype, "customer")==0){
+        header("location:customer");
+    }
+
+>>>>>>> 7e9843fd19d93e8d75c8198b8c92083d0e718c03
     exit();
 }

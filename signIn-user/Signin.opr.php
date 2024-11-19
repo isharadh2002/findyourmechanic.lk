@@ -62,7 +62,6 @@ if (isset($_POST['submitButton'])) {
     $_SESSION['UserID'] = $userId;
     $_SESSION['UserType'] = $usertype;
     mysqli_close($con);
-<<<<<<< HEAD
     header('Location:../msg.php?error=sucess');
     if (isset($_POST['submitButton'])) {
 
@@ -90,12 +89,5 @@ if (isset($_POST['submitButton'])) {
         }
         
     }
-=======
-    //header('Location:vehicles.php?userid=.$userid.$noof=.$noOfVehicles');
-    if(strcasecmp($usertype, "customer")==0){
-        header("location:customer");
-    }
-
->>>>>>> 7e9843fd19d93e8d75c8198b8c92083d0e718c03
     exit();
 }

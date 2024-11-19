@@ -55,9 +55,19 @@ if (isset($_POST['submitButton'])) {
         session_start();
         $_SESSION['UserID'] = $userId;
         $_SESSION['MechanicID'] = $mechanicID;
+        mysqli_close($con);
+
+        // If "Remember Me" is checked
+        if (isset($_POST['remember'])) {
+            setcookie('email_m', $email, time() + (86400 * 30), "/"); // 30 days
+            setcookie('password_m', $password, time() + (86400 * 30), "/"); // 30 days
+        } else {
+            // Clear cookies if "Remember Me" is unchecked
+            setcookie('email_m', '', time() - 3600, "/");
+            setcookie('password_m', '', time() - 3600, "/");
+        }
 
         header("Location:../../mechanic");
-        mysqli_close($con);
     } else {
         echo "Invalid Password";
         //echo "<br><br>".password_hash('Gobi1234', PASSWORD_DEFAULT);

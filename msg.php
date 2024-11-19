@@ -31,8 +31,11 @@ function sucessMassege()
     </script>';
     exit();
 }
+
+
+
 $msg = $_GET['error'];
-if (isset($msg)) {
+if (!empty($msg)) {
 
     //error---> 0 & Sucess---> 1
     switch ($msg) {
@@ -114,11 +117,14 @@ if (isset($msg)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign-In Success Message</title>
     <style>
-        /* Basic styling */
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: content-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         body {
@@ -132,7 +138,7 @@ if (isset($msg)) {
             color: #48e139;
         }
 
-        /* Success message styling */
+       
         .message-container {
             max-width: 600px;
             padding: 45px 45px;
@@ -141,14 +147,12 @@ if (isset($msg)) {
             box-shadow: 0 4px 7px rgba(0, 0, 0, 0);
         }
 
-        /* Message text */
         .message-text {
             font-size: 2em;
             font-weight: bold;
             margin-bottom: 70px;
         }
 
-        /* Button styling */
         .next-button {
             font-size: 1em;
             padding: 10px 20px;
@@ -168,9 +172,9 @@ if (isset($msg)) {
 </head>
 
 <body>
+<img src="Pic/done.png" alt="SucessMasseg" />
 
-    <!-- Message container with success message and button -->
-    <img alt="picture_in_page" class="msgPic">
+   
     <div class="message-container">
         <div class="message-text">Sign-in successful! Welcome back.
 
@@ -178,13 +182,12 @@ if (isset($msg)) {
         <div class="button">
             <button name="nextpage" class="next-button"> Next ==></button>
         </div>
-        <img src="Pic/done.png" alt="SucessMasseg" />
+        
     </div>
     <script>
         addEventListener('onLoad',
         function promptingPicJs(number) {
-            //filling by image paths
-            let images = ['', ''];
+            let images = ['Pic/error.png', 'Pic/done.png'];
             document.getElementsByTagName('img').src = '';
             if (number === 0) {
 

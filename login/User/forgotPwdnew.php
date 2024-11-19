@@ -1,50 +1,78 @@
 <?php
+require_once("../../shared/connect.php");
 
-// forgot_password.php
+if (isset($_POST['resend'])) {
+    //verify email exists
+    $email = trim($_POST['email']);
+    $qry = "SELECT UserID FROM user WHERE Email = ?";
+    $stmt = mysqli_stmt_init($con);
 
-// Process the form when submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    
-    // Connect to the database
-    $conn = mysqli_connect('localhost', 'username', 'password', 'database');
-    if (!$conn) {
-        die("Database connection failed: " . mysqli_connect_error());
+    if (!mysqli_stmt_prepare($stmt, $qry)) {
+        echo "<script>alert('Error Occurred while preparing the statement...');</script>";
+        exit();
     }
-    
-    // Check if the email exists
-    $sql = "SELECT id FROM users WHERE email = '$email'";
-    $result = mysqli_query($conn, $sql);
-    
-    if (mysqli_num_rows($result) > 0) {
-        // Generate a unique token and set expiry (1 hour from now)
-        $token = bin2hex(random_bytes(50));
+
+    mysqli_stmt_bind_param($stmt, 's', $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($result)) {
+        $token = bin2hex(rand(100000,999999));
         $expiry = date("Y-m-d H:i:s", strtotime('+1 hour'));
+        mysqli_stmt_close($stmt);
+            //Update the database
+        $update_sql = "UPDATE user SET Password = ?, reset_token_expiry = ? WHERE Email = ?";
         
-        // Store token and expiry in the database
-        $update_sql = "UPDATE users SET reset_token = '$token', reset_token_expiry = '$expiry' WHERE email = '$email'";
-        if (mysqli_query($conn, $update_sql)) {
-            // Send email with reset link
-            $resetLink = "http://findyourmechanic.com/reset_password.php?token=$token";
-            $subject = "Password Reset Request";
-            $message = "Click on this link to reset your password: $resetLink";
-            $headers = "From: no-reply@findyourmechanic.com";
-            
-            if (mail($email, $subject, $message, $headers)) {
-                echo "Password reset link has been sent to your email.";
+        $update_stmt=mysqli_stmt_init($con);
+        if (mysqli_stmt_prepare($update_stmt, $update_sql)) {
+            mysqli_stmt_bind_param($update_stmt, 'sss', $token, $expiry, $email);
+            if (mysqli_stmt_execute($update_stmt)) {
+                $resetLink = "This is the OTP to request to resent the password: {$token}";
+                $subject = "Password Reset Request";
+                $message = "The OTP is expired in 30 Minutes";
+                $headers = "From: no-reply@findyourmechanic.lk";
+                //mailing 
+                if (mail($email, $subject, $message, $headers)) {
+                    echo "<script>alert('The password reset link has been sent to your email.');</script>";
+                } else {
+                    echo "<script>alert('Failed to send the email. Please try again later.');</script>";
+                }
             } else {
-                echo "Failed to send the email.";
+                echo "<script>alert('Error updating reset token.');</script>";
             }
         } else {
-            echo "Error updating reset token.";
+            echo "<script>alert('Error preparing update statement.');</script>";
         }
+
+        
     } else {
-        echo "No account found with that email.";
+        echo "<script>alert('No account found for the entered email.');
+
+        </script>";
+
     }
-    
-    mysqli_close($conn);
+
+    mysqli_stmt_close($update_stmt);
+
+
+    //OTP configuration
+    if(isset($_POST['OTP_Submit'])){
+        $otp_number=$_POST['OTP'];
+        if($otp === $token){
+            echo '<script>
+                    otpButtonBehavior();
+            
+            </script>';
+
+        }
+    }
+    mysqli_close($con);
 }
 ?>
+
+
+
+
 
 
 
@@ -60,7 +88,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        /* Full-page container */
         .page {
             position: relative;
             width: 100vw;
@@ -70,10 +97,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             justify-content: center;
             align-items: center;
             background-color: #ffffff;
-            /* Right side background color */
         }
 
-        /* Diagonal color section */
         .diagonal-section {
             position: absolute;
             top: 0;
@@ -86,23 +111,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             z-index: 1;
         }
 
-        /* Content styling */
         .content {
             position: relative;
             z-index: 2;
-            /* Ensures content appears on top */
             width: 90%;
             display: flex;
             justify-content: space-between;
             color: #333;
         }
 
-        /* Left content area */
         .left-content {
             width: 45%;
-           
+
             color: #fff;
-            /* Text color for better contrast on gradient */
         }
 
         .left-content h1 {
@@ -114,19 +135,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-size: 1.2em;
         }
 
-        /* Right content area */
+       
         .right-content {
             width: 45%;
             padding: 20px;
             color: #333;
-            /* Dark text color for the white background */
+          
         }
 
         .right-content p {
             font-size: 1.2em;
         }
 
-        /* Basic form styling */
+        
 
 
         .formcontainer {
@@ -139,7 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 8px;
         }
 
-        /* Form styling */
+      
         form {
             display: flex;
             flex-direction: column;
@@ -148,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-        input[type="email"] {
+        input {
             padding: 12px;
             font-size: 16px;
             border: 1px solid #ccc;
@@ -160,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
 
-        input[type="email"]:focus {
+        input:focus {
             border-color: #007bff;
             outline: none;
             background-color: #fff;
@@ -177,18 +198,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin: 3px 0px;
         }
 
         button:hover {
             background-color: #106e7f;
         }
 
-       #resend:disabled {
+        #resend:disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }
 
-        /* Form feedback */
+        
         input:invalid {
             border-color: #dc3545;
         }
@@ -197,7 +219,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-color: #28a745;
         }
 
-        /* Responsive design */
+       
         @media (max-width: 600px) {
             .container {
                 padding: 15px;
@@ -214,11 +236,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: #1054e6;
         }
 
-       .formcontainer h2 {
+        .formcontainer h2 {
 
             font-size: 29px;
         }
-        
     </style>
 </head>
 
@@ -227,21 +248,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="diagonal-section"></div>
         <div class="content">
             <div class="left-content">
-                <h2 style="font-size:58px;">Welcome to </h2><h1 style="font-size: 61px;"> findyourmechanic.lk !...</h1>
+                <h2 style="font-size:58px;">Welcome to hello </h2>
+                <h1 style="font-size: 61px;"> findyourmechanic.lk !...</h1>
                 <p style="text-align: center;font-size: 57px;">So, You can reset <br> your password from <br> here......</p>
 
             </div>
             <div class="right-content">
                 <div class="formcontainer">
                     <h2>Reset Your Password</h2>
-                    <form action="forgotPwd.php" method="post">
+                    <form action="forgotPwdnew.php" method="post">
+                        
 
-                        <input type="email" name="email" id="email"  placeholder="E-mail...">
+                        <input type="email" name="email" id="email" placeholder="E-mail..." oninput="resendButtonBehavior();">
                         <small>(Enter your E-mail of having Account)</small>
                         <br><br>
-                        <button name="resend" id="resend" disabled>Resend</button><br><br>
-                        <small>Once,Reset your Password go back and login...</small><br>
-                        <button name="back" id="back">Login</button>
+                        <button name="resend" id="resend" disabled>Resend OTP</button><br><br>
+                        <small>Once,You Had The OTP Please Enter In Following...</small><br>
+
+                        <input type="OTP" name="OTP" id="OTP" placeholder="OTP..." oninput="otpButtonBehavior();">
+                        <button name="OTP_Submit" id="OTP_Submit">Submit OTP</button>
+                        <button name="next" id="next" disabled >Next</button>
 
                     </form>
 
@@ -251,16 +277,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
     <script>
-        function buttonBehavior() {
-            let email = document.getElementsByTagName("input").value;
-            if (email.match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/')) {
-
-                document.getElementById('resend').disabled = false;
-
-            }
-
+        function refresh(e){
+            
 
         }
+        function resendButtonBehavior() {
+    const email = document.getElementById('email').value.trim();
+    const emailFormat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    document.getElementById('resend').disabled = !email.match(emailFormat);
+}
+
+function otpButtonBehavior() {
+   
+    
+
+    document.getElementById('next').disabled=false;
+    alert("You can Go to Next Page Now!");
+}
+
+
+        
     </script>
 </body>
 

@@ -4,7 +4,7 @@ require_once("../../shared/connect.php");
 require_once("function.php");
 //
 if (isset($_POST['submitButton'])) {
-    // Gather POST data
+    // Gather Posting data
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -30,6 +30,7 @@ if (isset($_POST['submitButton'])) {
     // If no error, start session and store user ID
     session_start();
     $_SESSION['userId'] = $userId;
+    
 
     header("Location:../../msg.php?error=success");
     mysqli_close($con);

@@ -61,6 +61,32 @@ if (isset($_POST['submitButton'])) {
     } else {
         header("Location: Signin-mec.php?error=fileUploadError");
     }
+    if (isset($_POST['submitButton'])) {
+
+       
+        
+        $subject = "SignIn successFul";
+        $textArea = "You Sign In Process Is Successfully Completed!...";
+        $header=$name;
+        $header.='<br>';
+        $header.='From :- FindYourMechanic.lk (Vehicle Repairing Service)';
+        
+    
+        
+        
+                    
+                    
+        $mail_sent = mail($email, $subject, $textArea, $header);
+        if ($mail_sent) {
+    
+            $massege_mail = '<script> console.log("The Mail was sent successfully!..............");</script>';
+      
+        } else {
+            $massege_mail = '<script> console.log("The Mail was not sent successfully!..............");</script>';
+          
+        }
+        
+    }
     /* session_start();
 
     // Check if the file was uploaded

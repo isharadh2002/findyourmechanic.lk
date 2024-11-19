@@ -34,12 +34,14 @@ if (isset($_POST['submitButton'])) {
     }
 
     if (emailExists($con, $email, $name) > 0) {
+
         header("Location: ../msg.php?error=UserEmailExists&message=emailExists");
+
         exit();
     }
 
     insertDataUserTable($con, $name, $password, $usertype, $email, $contactNumber, $address);
-
+//
     $userId = getUserIDUserTable($con, $email);
     if (!$userId) {
         header("Location: ../msg.php?error=userRetrievalError");
@@ -53,11 +55,9 @@ if (isset($_POST['submitButton'])) {
         exit();
     }
 
-    /*if (!updateVehicleTable($con, $userId, $registrationNumber, $brandName, $modelName)) {
-        
-        header("Location: ../msg.php?success=mechanicRegistrationSuccess");
-    }*/
+    
     session_start();
+
     //$_SESSION['noOfVehicles'] = $noOfVehicle;
     $_SESSION['UserID'] = $userId;
     $_SESSION['UserType'] = $usertype;
@@ -66,5 +66,6 @@ if (isset($_POST['submitButton'])) {
     if(strcasecmp($usertype, "customer")==0){
         header("location:customer");
     }
+
     exit();
 }

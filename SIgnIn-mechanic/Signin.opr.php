@@ -30,7 +30,7 @@ if (isset($_POST['submitButton'])) {
     }
 
     if (emailExists($con, $email, $name) > 0) {
-        header("Location: Signin-mec.php?error=UserEmailExists");
+        header("Location: Signin-mec.php?error=UserEmailExistsSign");
         exit();
     }
 

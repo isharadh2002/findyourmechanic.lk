@@ -19,7 +19,7 @@ require_once("../../shared/connect.php");
   <style>
     body {
       min-width: 1165px;
-      margin: 1vh;
+      padding: 3px;
       width: 100%;
       height: 100vh;
       background-size: cover;

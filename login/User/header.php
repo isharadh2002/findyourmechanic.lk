@@ -12,9 +12,14 @@ require_once("../../shared/connect.php");
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Log In|User</title>
   <style>
-    body {
+   body {
       min-width: 1165px;
-      margin: 1vh;
+      padding: 3px;
+      width: 100%;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1s ease-in-out;
     }
 
     ul {
@@ -76,6 +81,11 @@ require_once("../../shared/connect.php");
       }
     }
 
+    
+
+    
+
+
     .container {
       width: 100%;
       margin-top: 6vh;
@@ -91,6 +101,7 @@ require_once("../../shared/connect.php");
       height: auto;
       display: flex;
       justify-content: center;
+      background-color: white;
       align-items: center;
       flex-direction: column;
       box-shadow: 2vh;
@@ -152,6 +163,7 @@ require_once("../../shared/connect.php");
     .submitButton:hover {
       background-color: #0295f1e6;
     }
+    
   </style>
 
 </head>

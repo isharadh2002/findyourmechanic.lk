@@ -2,6 +2,7 @@
 require_once("../../shared/connect.php");
 
 if (isset($_POST['resend'])) {
+    //verify email exists
     $email = trim($_POST['email']);
     $qry = "SELECT UserID FROM user WHERE Email = ?";
     $stmt = mysqli_stmt_init($con);
@@ -16,21 +17,21 @@ if (isset($_POST['resend'])) {
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        $token = bin2hex(random_bytes(50));
+        $token = bin2hex(rand(100000,999999));
         $expiry = date("Y-m-d H:i:s", strtotime('+1 hour'));
         mysqli_stmt_close($stmt);
-
+            //Update the database
         $update_sql = "UPDATE user SET Password = ?, reset_token_expiry = ? WHERE Email = ?";
         
         $update_stmt=mysqli_stmt_init($con);
         if (mysqli_stmt_prepare($update_stmt, $update_sql)) {
             mysqli_stmt_bind_param($update_stmt, 'sss', $token, $expiry, $email);
             if (mysqli_stmt_execute($update_stmt)) {
-                $resetLink = "http://findyourmechanic.com/reset_password.php?token={$token}";
+                $resetLink = "This is the OTP to request to resent the password: {$token}";
                 $subject = "Password Reset Request";
-                $message = "Click on this link to reset your password: {$resetLink}\n\nThis link will expire in 1 hour.";
+                $message = "The OTP is expired in 30 Minutes";
                 $headers = "From: no-reply@findyourmechanic.lk";
-
+                //mailing 
                 if (mail($email, $subject, $message, $headers)) {
                     echo "<script>alert('The password reset link has been sent to your email.');</script>";
                 } else {
@@ -49,6 +50,19 @@ if (isset($_POST['resend'])) {
     }
 
     mysqli_stmt_close($update_stmt);
+
+
+    //OTP configuration
+    if(isset($_POST['OTP_Submit'])){
+        $otp_number=$_POST['OTP'];
+        if($otp === $token){
+            echo '<script>
+                    otpButtonBehavior();
+            
+            </script>';
+
+        }
+    }
     mysqli_close($con);
 }
 ?>
@@ -71,7 +85,6 @@ if (isset($_POST['resend'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        /* Full-page container */
         .page {
             position: relative;
             width: 100vw;
@@ -81,10 +94,8 @@ if (isset($_POST['resend'])) {
             justify-content: center;
             align-items: center;
             background-color: #ffffff;
-            /* Right side background color */
         }
 
-        /* Diagonal color section */
         .diagonal-section {
             position: absolute;
             top: 0;
@@ -97,23 +108,19 @@ if (isset($_POST['resend'])) {
             z-index: 1;
         }
 
-        /* Content styling */
         .content {
             position: relative;
             z-index: 2;
-            /* Ensures content appears on top */
             width: 90%;
             display: flex;
             justify-content: space-between;
             color: #333;
         }
 
-        /* Left content area */
         .left-content {
             width: 45%;
 
             color: #fff;
-            /* Text color for better contrast on gradient */
         }
 
         .left-content h1 {
@@ -125,19 +132,19 @@ if (isset($_POST['resend'])) {
             font-size: 1.2em;
         }
 
-        /* Right content area */
+       
         .right-content {
             width: 45%;
             padding: 20px;
             color: #333;
-            /* Dark text color for the white background */
+          
         }
 
         .right-content p {
             font-size: 1.2em;
         }
 
-        /* Basic form styling */
+        
 
 
         .formcontainer {
@@ -150,7 +157,7 @@ if (isset($_POST['resend'])) {
             border-radius: 8px;
         }
 
-        /* Form styling */
+      
         form {
             display: flex;
             flex-direction: column;
@@ -159,7 +166,7 @@ if (isset($_POST['resend'])) {
 
 
 
-        input[type="email"] {
+        input {
             padding: 12px;
             font-size: 16px;
             border: 1px solid #ccc;
@@ -171,7 +178,7 @@ if (isset($_POST['resend'])) {
         }
 
 
-        input[type="email"]:focus {
+        input:focus {
             border-color: #007bff;
             outline: none;
             background-color: #fff;
@@ -188,6 +195,7 @@ if (isset($_POST['resend'])) {
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin: 3px 0px;
         }
 
         button:hover {
@@ -199,7 +207,7 @@ if (isset($_POST['resend'])) {
             cursor: not-allowed;
         }
 
-        /* Form feedback */
+        
         input:invalid {
             border-color: #dc3545;
         }
@@ -208,7 +216,7 @@ if (isset($_POST['resend'])) {
             border-color: #28a745;
         }
 
-        /* Responsive design */
+       
         @media (max-width: 600px) {
             .container {
                 padding: 15px;
@@ -246,13 +254,17 @@ if (isset($_POST['resend'])) {
                 <div class="formcontainer">
                     <h2>Reset Your Password</h2>
                     <form action="forgotPwdnew.php" method="post">
+                        
 
-                        <input type="email" name="email" id="email" placeholder="E-mail..." oninput="buttonBehavior();">
+                        <input type="email" name="email" id="email" placeholder="E-mail..." oninput="resendButtonBehavior();">
                         <small>(Enter your E-mail of having Account)</small>
                         <br><br>
-                        <button name="resend" id="resend" disabled>Resend</button><br><br>
-                        <small>Once,Reset your Password go back and login...</small><br>
-                        <button name="back" id="back">Login</button>
+                        <button name="resend" id="resend" disabled>Resend OTP</button><br><br>
+                        <small>Once,You Had The OTP Please Enter In Following...</small><br>
+
+                        <input type="OTP" name="OTP" id="OTP" placeholder="OTP..." oninput="otpButtonBehavior();">
+                        <button name="OTP_Submit" id="OTP_Submit">Submit OTP</button>
+                        <button name="next" id="next" disabled >Next</button>
 
                     </form>
 
@@ -262,11 +274,19 @@ if (isset($_POST['resend'])) {
         </div>
     </div>
     <script>
-        function buttonBehavior() {
+        function resendButtonBehavior() {
     const email = document.getElementById('email').value.trim();
     const emailFormat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     document.getElementById('resend').disabled = !email.match(emailFormat);
+}
+
+function otpButtonBehavior() {
+   
+    
+
+    document.getElementById('next').disabled=false;
+    alert("You can Go to Next Page Now!");
 }
 
 

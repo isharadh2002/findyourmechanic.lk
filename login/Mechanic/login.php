@@ -31,6 +31,9 @@ require_once("header.php");
       </div>
 
       <br>
+      <p style="text-align: center;">Already haven't an account? <a href="../../SIgnIn-mechanic/SignIn-mec.php">SignUp.</a></p>
+      <br>
+      <a href="forgotPwdnew.php" style="text-align: right;">Forget Password.</a>
 
       <p id="msg">The Value is empty</p>
       <br>

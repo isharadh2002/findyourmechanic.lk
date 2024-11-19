@@ -62,10 +62,32 @@ if (isset($_POST['submitButton'])) {
     $_SESSION['UserID'] = $userId;
     $_SESSION['UserType'] = $usertype;
     mysqli_close($con);
-    //header('Location:vehicles.php?userid=.$userid.$noof=.$noOfVehicles');
-    if(strcasecmp($usertype, "customer")==0){
-        header("location:customer");
-    }
+    header('Location:../msg.php?error=sucess');
+    if (isset($_POST['submitButton'])) {
 
+       
+        
+        $subject = "SignIn successFul";
+        $textArea = "You Sign In Process Is Successfully Completed!...";
+        $header=$name;
+        $header.='<br>';
+        $header.='From :- FindYourMechanic.lk (Vehicle Repairing Service)';
+        $header.=$email;
+    
+        
+        
+                    
+                    
+        $mail_sent = mail($email, $subject, $textArea, $header);
+        if ($mail_sent) {
+    
+            $massege_mail = '<script> console.log("The Mail was sent successfully!..............");</script>';
+      
+        } else {
+            $massege_mail = '<script> console.log("The Mail was not sent successfully!..............");</script>';
+          
+        }
+        
+    }
     exit();
 }

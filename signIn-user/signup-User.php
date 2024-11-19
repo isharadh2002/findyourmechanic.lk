@@ -45,6 +45,18 @@
         <input type="file" name="profilePicture" id="profilePicture" />
       </div>
 
+<<<<<<< HEAD
+      
+      <br>
+
+
+
+
+
+
+
+      <br><br>
+=======
       <!--
       <div class="inputs">
         <label for="numberOfVehicles">Number Of Vehicles:</label>
@@ -52,6 +64,7 @@
       </div>
       -->
       
+>>>>>>> 7e9843fd19d93e8d75c8198b8c92083d0e718c03
       <div class="center-message">
         <h1 id="afterSigninMsg">Helllo</h1>
       </div>

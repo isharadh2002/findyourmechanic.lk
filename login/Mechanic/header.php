@@ -59,6 +59,19 @@ require_once("../../shared/connect.php");
       background-color: #0295f1bd;
     }
 
+    .remeberContainer{
+      display:flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .remeberContainer input[type="checkbox"]{
+      margin: 0px;
+    }
+
+    .remeberContainer label{
+      min-width: 100px;
+    }
 
     @media screen and (max-width: 400px) {
       ul.navigation {

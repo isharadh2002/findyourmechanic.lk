@@ -13,7 +13,7 @@ require_once("header.php");
       <br>
       <div class="inputs">
         <label for="email">E-Mail:</label>
-        <input type="text" name="email" id="email" required pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/" />
+        <input type="text" name="email" id="email" required pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/" value="<?php echo isset($_COOKIE['email_m']) ? $_COOKIE['email_m'] : ''; ?>"/>
         <br>
 
 
@@ -21,10 +21,14 @@ require_once("header.php");
       <br><br>
       <div class="inputs">
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required />
+        <input type="password" name="password" id="password" required value="<?php echo isset($_COOKIE['password_m']) ? $_COOKIE['password_m'] : ''; ?>"/>
         <br><br>
       </div>
 
+      <div class="remeberContainer">
+        <label for="remeberMe">Remember me</label>
+        <input type="checkbox" name="remember" id="remember" <?php echo isset($_COOKIE['email_m']) ? 'checked' : ''; ?>>
+      </div>
 
       <br>
 

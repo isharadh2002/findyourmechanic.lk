@@ -14,7 +14,7 @@ require_once("login.opr.php");
       <br>
       <div class="inputs">
         <label for="email">E-Mail:</label>
-        <input type="text" name="email" id="email" required pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/" />
+        <input type="text" name="email" id="email" required pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/" value="<?php echo isset($_COOKIE['email']) ? $_COOKIE['email'] : ''; ?>"/>
         <br>
 
 
@@ -22,8 +22,13 @@ require_once("login.opr.php");
       <br><br>
       <div class="inputs">
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required />
+        <input type="password" name="password" id="password" required value="<?php echo isset($_COOKIE['password']) ? $_COOKIE['password'] : ''; ?>"/>
         <br><br>
+      </div>
+
+      <div class="remeberContainer">
+        <label for="remeberMe">Remember me</label>
+        <input type="checkbox" name="remember" id="remember" <?php echo isset($_COOKIE['email']) ? 'checked' : ''; ?>>
       </div>
 
       <p style="text-align: center;">Already haven't an account? <a href="../../signIn-user/signup-User.php">SignUp.</a></p>

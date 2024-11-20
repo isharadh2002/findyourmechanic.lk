@@ -248,9 +248,9 @@ if (isset($_POST['resend'])) {
         <div class="diagonal-section"></div>
         <div class="content">
             <div class="left-content">
-                <h2 style="font-size:58px;">Welcome to hello </h2>
+                <h2 style="font-size:58px;">Welcome to </h2>
                 <h1 style="font-size: 61px;"> findyourmechanic.lk !...</h1>
-                <p style="text-align: center;font-size: 57px;">So, You can reset <br> your password from <br> here......</p>
+                <p style="text-align: center;font-size: 57px;">You can reset <br> your password from <br> here......</p>
 
             </div>
             <div class="right-content">

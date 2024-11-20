@@ -44,8 +44,8 @@ else{
             <li><a href="settings.php" id="settings">Account Settings</a></li>
             -->
             <li><a href="appointments.php">Appointments</a></li>
-            <li><a href="payment.php">Payments</a></li>
-            <li><a href="service.php">Services</a></li>
+            <!--<li><a href="payment.php">Payments</a></li>
+            <li><a href="service.php">Services</a></li>-->
             <li><a href="profile.php">Profile Settings</a></li>
         </ul>
     </nav>

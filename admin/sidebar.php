@@ -1,3 +1,20 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if(isset($_SESSION['UserID'] , $_SESSION['AdminID'])){
+    $UserID = $_SESSION['UserID'];
+    $AdminID = $_SESSION['AdminID'];
+}
+else{
+    echo "<script>
+    window.alert('You are not logged in.');
+    window.location.href='login.php';
+</script>";
+}
+?>
+
 <!-- Sidebar Navigation -->
 <aside class="sidebar">
     <div class="image-container">
@@ -14,3 +31,4 @@
         </ul>
     </nav>
 </aside>
+

@@ -67,7 +67,7 @@ else{
                     <h3>Registered Vehicle</h3>
                     <p><strong>Model:</strong> Toyota Corolla 2020</p>
                     <p><strong>License Plate:</strong> ABC-1234</p>
-                    <button onclick="window.location.href='#'">Manage Vehicle</button>
+                    <button onclick="window.location.href='vehicles.php'">Manage Vehicle</button>
                 </div>
                 <div class="card appointment-card">
                     <h3>Upcoming Appointment</h3>
@@ -76,12 +76,12 @@ else{
                     </div>
                     <p><strong>Date:</strong> 2024-11-05</p>
                     <p><strong>Mechanic:</strong> John Doe</p>
-                    <button onclick="window.location.href='#'">View Appointment</button>
+                    <button onclick="window.location.href='appointments'">View Appointment</button>
                 </div>
                 <div class="card request-card">
                     <h3>Request Service</h3>
                     <p>Need assistance? Book a service with a nearby mechanic.</p>
-                    <button onclick="window.location.href='#'">Request Now</button>
+                    <button onclick="window.location.href='add-appointment.php'">Request Now</button>
                 </div>
             </div>
         </section>

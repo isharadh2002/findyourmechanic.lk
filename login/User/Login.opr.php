@@ -3,9 +3,7 @@
 require_once("../../shared/connect.php");
 require_once("function.php");
 
-print_r($_POST);
-echo "<br><br>";
-//
+
 if (isset($_POST['submitButton'])) {
     // Gather Posting data
     $email = $_POST['email'];

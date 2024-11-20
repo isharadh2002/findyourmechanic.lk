@@ -61,20 +61,20 @@
 }
 
 .btn-view {
-    background-color: #28a745;
+    background-color: #007bff;
 }
 
 .btn-view:hover {
-    background-color: #218838;
+    background-color: #004bff;
 }
 
 .btn-edit {
-    background-color: #ffc107;
-    color: #212529;
+    background-color: #007bff;
+    
 }
 
 .btn-edit:hover {
-    background-color: #e0a800;
+    background-color: #004bff;
 }
 
 .btn-delete {

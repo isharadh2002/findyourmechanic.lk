@@ -17,7 +17,7 @@ if (isset($_POST['resend'])) {
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        $token = bin2hex(rand(100000,999999));
+        $token = bin2hex(random_bytes(4)); // Generates an 8-character OTP securely.
         $expiry = date("Y-m-d H:i:s", strtotime('+1 hour'));
         mysqli_stmt_close($stmt);
             //Update the database
@@ -267,6 +267,8 @@ if (isset($_POST['resend'])) {
 
                         <input type="OTP" name="OTP" id="OTP" placeholder="OTP..." oninput="otpButtonBehavior();">
                         <button name="OTP_Submit" id="OTP_Submit">Submit OTP</button>
+                        <input type="Npasword" name="Npasword" id="Npasword" placeholder="New Password..." oninput="otpButtonBehavior();">
+                        <button name="Submit" id="Submit">Submit</button>
                         <button name="next" id="next" disabled >Next</button>
 
                     </form>

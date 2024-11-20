@@ -27,13 +27,14 @@ if (isset($_POST['resend'])) {
         if (mysqli_stmt_prepare($update_stmt, $update_sql)) {
             mysqli_stmt_bind_param($update_stmt, 'sss', $token, $expiry, $email);
             if (mysqli_stmt_execute($update_stmt)) {
-                $resetLink = "This is the OTP to request to resent the password: {$token}";
+                $resetLink = "This is the OTP to request to resent the password: ";
                 $subject = "Password Reset Request";
-                $message = "The OTP is expired in 30 Minutes";
+                $message = "The OTP is expired in 30 Minutes OTP:{$token}";
                 $headers = "From: no-reply@findyourmechanic.lk";
                 //mailing 
                 if (mail($email, $subject, $message, $headers)) {
-                    echo "<script>alert('The password reset link has{$token} been sent to your email.');</script>";
+                    echo "<script>alert('The password reset link has been sent to your email.');
+                    console.log('{$token}');</script>";
                 } else {
                     echo "<script>alert('Failed to send the email. Please try again later.');</script>";
                 }

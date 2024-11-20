@@ -35,6 +35,7 @@ if (isset($_POST['submitButton'])) {
     print_r($row);
     $hashedPassword = $row['Password'];
 
+
     if (password_verify($password, $hashedPassword) || $password == $hashedPassword) {
         echo "Successfully logged in";
 

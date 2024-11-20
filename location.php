@@ -158,7 +158,7 @@
                 }
             };
             xhr.send(`latitude=${latitude}&longitude=${longitude}`);
-            sendLocationToAnotherPage(latitude,longitude);
+           // sendLocationToAnotherPage(latitude,longitude);
         }
         function sendLocationToAnotherPage(latitude,longitude){
 
@@ -176,7 +176,7 @@
             document.getElementById("status").innerText = errorMessages[error.code] || "Unknown error.";
         }
 
-        // Initialize map with default coordinates
+        
         initMap(0, 0);
 
 

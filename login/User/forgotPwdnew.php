@@ -66,6 +66,39 @@ if (isset($_POST['resend'])) {
 
         }
     }
+    if(isset($_POST['submit'])){
+        $newPassword=$_POST['Npassword'];
+        $stmt=mysqli_stmt_init($con);
+        $qry="UPDATE TABLE `user` SET Password=?";
+        if (!mysqli_stmt_prepare($stmt, $qry)) {
+            header("Location:../msg.php?error=db_error");
+            exit();
+        
+    
+        mysqli_stmt_bind_param($stmt, 's', $newPassword);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        mysqli_stmt_close($stmt);
+        $final= mysqli_num_rows($result);
+        if($final){
+            echo "<script>
+            alert('The password reset was completed');
+            </script>";
+        }else{
+            
+            echo "<script>
+            alert('The password reset was not completed...There may Be Some Errors...');
+            </script>";
+        }
+    }
+
+
+
+
+
+
+
+    }
     mysqli_close($con);
 }
 ?>

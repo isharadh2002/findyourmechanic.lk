@@ -3,9 +3,7 @@
 require_once("../../shared/connect.php");
 require_once("function.php");
 
-print_r($_POST);
-echo "<br><br>";
-//
+
 if (isset($_POST['submitButton'])) {
     // Gather Posting data
     $email = $_POST['email'];
@@ -30,10 +28,13 @@ if (isset($_POST['submitButton'])) {
         exit();
     }
 
-    // If no error, start session and store user ID
-    session_start();
-    $_SESSION['userId'] = $userId;
-    
+    //Check for Password Matching
+    $Query = "SELECT * FROM user WHERE UserID = $userId";
+    $result = mysqli_query($con, $Query);
+    $row = mysqli_fetch_assoc($result);
+    print_r($row);
+    $hashedPassword = $row['Password'];
+
 
     if (password_verify($password, $hashedPassword) || $password == $hashedPassword) {
         echo "Successfully logged in";

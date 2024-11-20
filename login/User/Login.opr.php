@@ -2,6 +2,9 @@
 
 require_once("../../shared/connect.php");
 require_once("function.php");
+
+print_r($_POST);
+echo "<br><br>";
 //
 if (isset($_POST['submitButton'])) {
     // Gather Posting data
@@ -39,6 +42,16 @@ if (isset($_POST['submitButton'])) {
         session_start();
         $_SESSION['UserID'] = $userId;
         mysqli_close($con);
+
+         // If "Remember Me" is checked
+         if (isset($_POST['remember'])) {
+            setcookie('email', $email, time() + (86400 * 30), "/"); // 30 days
+            setcookie('password', $password, time() + (86400 * 30), "/"); // 30 days
+        } else {
+            // Clear cookies if "Remember Me" is unchecked
+            setcookie('email', '', time() - 3600, "/");
+            setcookie('password', '', time() - 3600, "/");
+        }
 
         header("Location:../../customer");
     } else {

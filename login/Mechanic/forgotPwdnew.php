@@ -2,13 +2,12 @@
 require_once("../../shared/connect.php");
 
 if (isset($_POST['resend'])) {
-    //verify email exists
     $email = trim($_POST['email']);
     $qry = "SELECT UserID FROM user WHERE Email = ?";
     $stmt = mysqli_stmt_init($con);
 
     if (!mysqli_stmt_prepare($stmt, $qry)) {
-        echo "<script>alert('Error Occurred while preparing the statement...');</script>";
+        echo "<script>alert('Error occurred while preparing the statement.');</script>";
         exit();
     }
 
@@ -17,23 +16,22 @@ if (isset($_POST['resend'])) {
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        $token = bin2hex(rand(100000,999999));
-        $expiry = date("Y-m-d H:i:s", strtotime('+1 hour'));
-        mysqli_stmt_close($stmt);
-            //Update the database
+        $token = bin2hex(random_bytes(4)); // Secure 8-character OTP
+        $expiry = date("Y-m-d H:i:s", strtotime('+30 minutes'));
+
         $update_sql = "UPDATE user SET Password = ?, reset_token_expiry = ? WHERE Email = ?";
-        
-        $update_stmt=mysqli_stmt_init($con);
+        $update_stmt = mysqli_stmt_init($con);
+
         if (mysqli_stmt_prepare($update_stmt, $update_sql)) {
             mysqli_stmt_bind_param($update_stmt, 'sss', $token, $expiry, $email);
+
             if (mysqli_stmt_execute($update_stmt)) {
-                $resetLink = "This is the OTP to request to resent the password: {$token}";
                 $subject = "Password Reset Request";
-                $message = "The OTP is expired in 30 Minutes";
+                $message = "Your OTP for resetting the password is: {$token}. It will expire in 30 minutes.";
                 $headers = "From: no-reply@findyourmechanic.lk";
-                //mailing 
+
                 if (mail($email, $subject, $message, $headers)) {
-                    echo "<script>alert('The password reset link has been sent to your email.');</script>";
+                    echo "<script>alert('An OTP has been sent to your email.'); console.log('{$token}');</script>";
                 } else {
                     echo "<script>alert('Failed to send the email. Please try again later.');</script>";
                 }
@@ -43,27 +41,55 @@ if (isset($_POST['resend'])) {
         } else {
             echo "<script>alert('Error preparing update statement.');</script>";
         }
-
-        
     } else {
         echo "<script>alert('No account found for the entered email.');</script>";
     }
 
-    mysqli_stmt_close($update_stmt);
+    mysqli_stmt_close($stmt);
+    mysqli_close($con);
+}
 
+// Handle OTP Verification
+if (isset($_POST['OTP_Submit'])) {
+    $otp = trim($_POST['OTP']);
+    $qry = "SELECT Password, reset_token_expiry FROM user WHERE Email = ?";
+    $stmt = mysqli_stmt_init($con);
 
-    //OTP configuration
-    if(isset($_POST['OTP_Submit'])){
-        $otp_number=$_POST['OTP'];
-        if($otp === $token){
-            echo '<script>
-                    otpButtonBehavior();
-            
-            </script>';
+    if (mysqli_stmt_prepare($stmt, $qry)) {
+        mysqli_stmt_bind_param($stmt, 's', $_POST['email']);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
 
+        if ($row = mysqli_fetch_assoc($result)) {
+            if ($row['Password'] === $otp && strtotime($row['reset_token_expiry']) > time()) {
+                echo "<script>alert('OTP verified successfully. You may now reset your password.');</script>";
+            } else {
+                echo "<script>alert('Invalid or expired OTP.');</script>";
+            }
+        } else {
+            echo "<script>alert('Error verifying OTP.');</script>";
         }
     }
-    mysqli_close($con);
+    mysqli_stmt_close($stmt);
+}
+
+// Handle Password Reset
+if (isset($_POST['submit'])) {
+    $newPassword = password_hash(trim($_POST['Npassword']), PASSWORD_BCRYPT);
+    $email = trim($_POST['email']);
+    $update_sql = "UPDATE user SET Password = ? WHERE Email = ?";
+    $stmt = mysqli_stmt_init($con);
+
+    if (mysqli_stmt_prepare($stmt, $update_sql)) {
+        mysqli_stmt_bind_param($stmt, 'ss', $newPassword, $email);
+
+        if (mysqli_stmt_execute($stmt)) {
+            echo "<script>alert('Password has been reset successfully.');</script>";
+        } else {
+            echo "<script>alert('Error resetting password.');</script>";
+        }
+    }
+    mysqli_stmt_close($stmt);
 }
 ?>
 
@@ -132,19 +158,19 @@ if (isset($_POST['resend'])) {
             font-size: 1.2em;
         }
 
-       
+
         .right-content {
             width: 45%;
             padding: 20px;
             color: #333;
-          
+
         }
 
         .right-content p {
             font-size: 1.2em;
         }
 
-        
+
 
 
         .formcontainer {
@@ -157,7 +183,7 @@ if (isset($_POST['resend'])) {
             border-radius: 8px;
         }
 
-      
+
         form {
             display: flex;
             flex-direction: column;
@@ -207,7 +233,7 @@ if (isset($_POST['resend'])) {
             cursor: not-allowed;
         }
 
-        
+
         input:invalid {
             border-color: #dc3545;
         }
@@ -216,7 +242,7 @@ if (isset($_POST['resend'])) {
             border-color: #28a745;
         }
 
-       
+
         @media (max-width: 600px) {
             .container {
                 padding: 15px;
@@ -245,7 +271,7 @@ if (isset($_POST['resend'])) {
         <div class="diagonal-section"></div>
         <div class="content">
             <div class="left-content">
-                <h2 style="font-size:58px;">Welcome to</h2>
+                <h2 style="font-size:58px;">Welcome to </h2>
                 <h1 style="font-size: 61px;"> findyourmechanic.lk !...</h1>
                 <p style="text-align: center;font-size: 57px;">You can reset <br> your password from <br> here......</p>
 
@@ -254,7 +280,7 @@ if (isset($_POST['resend'])) {
                 <div class="formcontainer">
                     <h2>Reset Your Password</h2>
                     <form action="forgotPwdnew.php" method="post">
-                        
+
 
                         <input type="email" name="email" id="email" placeholder="E-mail..." oninput="resendButtonBehavior();">
                         <small>(Enter your E-mail of having Account)</small>
@@ -262,9 +288,11 @@ if (isset($_POST['resend'])) {
                         <button name="resend" id="resend" disabled>Resend OTP</button><br><br>
                         <small>Once,You Had The OTP Please Enter In Following...</small><br>
 
-                        <input type="OTP" name="OTP" id="OTP" placeholder="OTP..." oninput="otpButtonBehavior();">
-                        <button name="OTP_Submit" id="OTP_Submit">Submit OTP</button>
-                        <button name="next" id="next" disabled >Next</button>
+                        <input type="OTP" name="OTP" id="OTP" placeholder="OTP...">
+                        <button name="OTP_Submit" id="OTP_Submit" onclick="otpButtonBehavior();">Submit OTP</button>
+                        <input type="Npasword" name="Npasword" id="Npasword" placeholder="New Password..." oninput="otpButtonBehavior();">
+                        <button name="Submit" id="Submit">Submit</button>
+                        <button name="next" id="next" onclick="window.location.href='login.php';">Next</button>
 
                     </form>
 
@@ -275,22 +303,20 @@ if (isset($_POST['resend'])) {
     </div>
     <script>
         function resendButtonBehavior() {
-    const email = document.getElementById('email').value.trim();
-    const emailFormat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const email = document.getElementById('email').value.trim();
+            const emailFormat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            document.getElementById('resend').disabled = !email.match(emailFormat);
+        }
 
-    document.getElementById('resend').disabled = !email.match(emailFormat);
-}
-
-function otpButtonBehavior() {
-   
-    
-
-    document.getElementById('next').disabled=false;
-    alert("You can Go to Next Page Now!");
-}
-
-
-        
+        function otpButtonBehavior() {
+            const otp = document.getElementById('OTP').value.trim();
+            if (otp) {
+                document.getElementById('next').disabled = false;
+                alert("OTP verified. You can proceed to the next step.");
+            } else {
+                alert("Please enter a valid OTP.");
+            }
+        }
     </script>
 </body>
 

@@ -33,7 +33,7 @@ if (isset($_POST['resend'])) {
                 $headers = "From: no-reply@findyourmechanic.lk";
                 //mailing 
                 if (mail($email, $subject, $message, $headers)) {
-                    echo "<script>alert('The password reset link has been sent to your email.');</script>";
+                    echo "<script>alert('The password reset link has{$token} been sent to your email.');</script>";
                 } else {
                     echo "<script>alert('Failed to send the email. Please try again later.');</script>";
                 }

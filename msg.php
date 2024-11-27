@@ -53,11 +53,6 @@ if (!empty($msg)) {
                   </script>';
             break;
         }
-        if(isset($_POST("nextPage"))){
-
-            header("Location:index.php");
-        }
-            }
         
 
 ?>

@@ -53,12 +53,12 @@ if (!empty($msg)) {
                   </script>';
             break;
         }
-        if(isset($_POST("name"))){
+        if(isset($_POST("nextPage"))){
 
             header("Location:index.php");
         }
             }
-
+        
 
 ?>
 <!DOCTYPE html>
@@ -124,7 +124,7 @@ if (!empty($msg)) {
     <img id="status-image" src="Pic/done.png" alt="Status Image" />
     <div class="message-container">
         <div id="message-text_style" ><p id="massage-text"></p></div>
-        <button name="nextpage" class="next-button">Next &rarr;</button>
+       <a href="index.php"> <button name="nextpage" class="next-button">Next &rarr;</button></a>
     </div>
     <script>
         function promptingPicJs(number) {

@@ -52,8 +52,14 @@ if (!empty($msg)) {
                     document.getElementById("message-text").innerHTML = "Oops! Something went wrong.";
                   </script>';
             break;
-    }
-}
+        }
+        if(isset($_POST("name"))){
+
+            header("Location:index.php");
+        }
+            }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
